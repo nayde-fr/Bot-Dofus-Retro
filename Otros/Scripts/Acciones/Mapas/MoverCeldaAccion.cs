@@ -25,6 +25,11 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Mapas
                 case ResultadoMovimientos.MISMA_CELDA:
                     return resultado_hecho;
 
+                case ResultadoMovimientos.MONSTER_ON_SUN:
+                    cuenta.logger.log_normal("MOVE", "Un monstre bloque le passage attente de 5 secondes");
+                    Task.Delay(5000);
+                    return proceso(cuenta);
+
                 default:
                     return resultado_fallado;
             }
