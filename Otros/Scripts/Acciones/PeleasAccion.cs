@@ -38,7 +38,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
                     switch (test)
                     {
                         case ResultadoMovimientos.EXITO:
-                            cuenta.logger.log_informacion("SCRIPT", $"Mouvent vers un groupes à la cellule : {grupo_monstruo.celda.cellId}, monstres total: {grupo_monstruo.get_Total_Monstruos}, niveaux du groupe: {grupo_monstruo.get_Total_Nivel_Grupo}");
+                            cuenta.logger.log_informacion("SCRIPT", $"Mouvement vers un groupes à la cellule : {grupo_monstruo.celda.cellId}, monstres total: {grupo_monstruo.get_Total_Monstruos}, niveaux du groupe: {grupo_monstruo.get_Total_Nivel_Grupo}");
                         return resultado_procesado;
                             
                         case ResultadoMovimientos.PATHFINDING_ERROR:
