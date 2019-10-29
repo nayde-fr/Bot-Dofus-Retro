@@ -89,7 +89,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
                 celdas_teleport.Remove(celda);
             }
 
-            cuenta.logger.log_Peligro("MOUVEMENT", "Aucune cellule de destination trouvée, utiliser la méthode : TOP|BOTTOM|RIGHT|LEFT");
+            cuenta.logger.log_Peligro("MOUVEMENT", "Aucune cellule de destination trouvée, utiliser les cell Id");
             return false;
         }
 
@@ -98,7 +98,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
             if (celda_destino.cellId < 0 || celda_destino.cellId > mapa.mapCells.Length)
                 return ResultadoMovimientos.FALLO;
 
-            if (cuenta.Is_Busy() || actual_path != null || personaje.inventario.porcentaje_pods >= 100)
+            if (cuenta.Is_Busy() || actual_path != null || personaje.inventario.porcentaje_pods >= 98)
                 return ResultadoMovimientos.FALLO;
 
             if (celda_destino.cellId == personaje.celda.cellId)

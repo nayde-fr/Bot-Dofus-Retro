@@ -47,7 +47,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
                         continue;
 
                         default:
-                            cuenta.script.detener_Script("C'est trompé de groupes" + test);
+                            cuenta.script.detener_Script("C'est trompé de groupes " + test);
                         return resultado_fallado;
                     }
                 }
