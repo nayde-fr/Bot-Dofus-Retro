@@ -95,23 +95,38 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
 
         public ResultadoMovimientos get_Mover_A_Celda(Cell celda_destino, List<Cell> celdas_no_permitidas, bool detener_delante = false, byte distancia_detener = 0)
         {
-            if (celda_destino.cellId < 0 || celda_destino.cellId > mapa.mapCells.Length)
-                return ResultadoMovimientos.FALLO;
+            actual_path = null;
 
-            if (cuenta.Is_Busy() || actual_path != null || personaje.inventario.porcentaje_pods >= 98)
+            if (celda_destino.cellId < 0 || celda_destino.cellId > mapa.mapCells.Length)
+            {
+                cuenta.logger.log_Error("ERROR", $"Account is busy {cuenta.Is_Busy()} actual Path : {actual_path != null} pods percentage : {personaje.inventario.porcentaje_pods}");
                 return ResultadoMovimientos.FALLO;
+            }
+
+            if (cuenta.Is_Busy() || actual_path != null || personaje.inventario.porcentaje_pods >= 100)
+            {
+                cuenta.logger.log_Error("ERROR", $"Account is busy {cuenta.Is_Busy()} actual Path : {actual_path != null} pods percentage : {personaje.inventario.porcentaje_pods}");
+                return ResultadoMovimientos.FALLO;
+            }
 
             if (celda_destino.cellId == personaje.celda.cellId)
                 return ResultadoMovimientos.MISMA_CELDA;
 
+            if (celdas_no_permitidas.Contains(celda_destino) || celdas_no_permitidas.Contains(personaje.celda))
+                return ResultadoMovimientos.MONSTER_ON_SUN;
+
             if (celda_destino.cellType == CellTypes.NOT_WALKABLE && celda_destino.interactiveObject == null)
+            {
+                cuenta.logger.log_Error("ERROR", $"Cell is not walkable");
                 return ResultadoMovimientos.FALLO;
+            }
 
             if (celda_destino.cellType == CellTypes.INTERACTIVE_OBJECT && celda_destino.interactiveObject == null)
+            {
+                cuenta.logger.log_Error("ERROR", $"Cell is interactive object");
                 return ResultadoMovimientos.FALLO;
+            }
 
-            if (celdas_no_permitidas.Contains(celda_destino))
-                return ResultadoMovimientos.MONSTER_ON_SUN;
 
             List<Cell> path_temporal = pathfinder.get_Path(personaje.celda, celda_destino, celdas_no_permitidas, detener_delante, distancia_detener);
 
@@ -123,7 +138,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
 
             if (detener_delante && path_temporal.Count == 1 && path_temporal[0].cellId == personaje.celda.cellId)
                 return ResultadoMovimientos.MISMA_CELDA;
-            
+
             if (detener_delante && path_temporal.Count == 2 && path_temporal[0].cellId == personaje.celda.cellId && path_temporal[1].cellId == celda_destino.cellId)
                 return ResultadoMovimientos.MISMA_CELDA;
 
@@ -156,12 +171,12 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
             switch (resultado)
             {
                 case ResultadoMovimientos.EXITO:
-                        cuenta.logger.log_informacion("MOUVEMENT", $"{mapa.GetCoordinates} changement de map via la cellule {celda.cellId} ");
-                return true;
+                    cuenta.logger.log_informacion("MOUVEMENT", $"{mapa.GetCoordinates} changement de map via la cellule {celda.cellId} ");
+                    return true;
 
                 default:
-                        cuenta.logger.log_Error("MOUVEMENT", $"Chemin vers {celda.cellId} résultat échoué ou bloqué : {resultado}");
-                return false;
+                    cuenta.logger.log_Error("MOUVEMENT", $"Chemin vers {celda.cellId} résultat échoué ou bloqué : {resultado}");
+                    return false;
             }
         }
 

@@ -43,7 +43,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
                             
                         case ResultadoMovimientos.PATHFINDING_ERROR:
                         case ResultadoMovimientos.MISMA_CELDA:
-                            cuenta.logger.log_Peligro("SCRIPT", "Le chemin vers le groupe de monstres est bloqué.");
+                            cuenta.logger.log_Peligro("SCRIPT", "Le chemin vers le groupe de monstres est bloqué. " + test);
                         continue;
 
                         default:
