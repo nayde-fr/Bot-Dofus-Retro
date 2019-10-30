@@ -1,5 +1,4 @@
-﻿using Bot_Dofus_1._29._1.Comun.Network;
-using Bot_Dofus_1._29._1.Otros.Enums;
+﻿using Bot_Dofus_1._29._1.Otros.Enums;
 using Bot_Dofus_1._29._1.Otros.Game;
 using Bot_Dofus_1._29._1.Otros.Grupos;
 using Bot_Dofus_1._29._1.Otros.Peleas;
@@ -8,6 +7,7 @@ using Bot_Dofus_1._29._1.Utilities.Config;
 using Bot_Dofus_1._29._1.Utilities.Logs;
 using System;
 using System.Net;
+using Bot_Dofus_1._29._1.Common.Network;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1

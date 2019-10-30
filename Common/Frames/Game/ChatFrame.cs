@@ -1,17 +1,17 @@
-﻿using Bot_Dofus_1._29._1.Comun.Frames.Transporte;
-using Bot_Dofus_1._29._1.Comun.Network;
+﻿using Bot_Dofus_1._29._1.Common.Frames.Transport;
+using Bot_Dofus_1._29._1.Common.Network;
 
-namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
+namespace Bot_Dofus_1._29._1.Common.Frames.Game
 {
     internal class ChatFrame : Frame
     {
-        [PaqueteAtributo("cC+")]
+        [Packet("cC+")]
         public void get_Agregar_Canal(TcpClient cliente, string paquete) => cliente.account.game.character.agregar_Canal_Personaje(paquete.Substring(3));
 
-        [PaqueteAtributo("cC-")]
+        [Packet("cC-")]
         public void get_Eliminar_Canal(TcpClient cliente, string paquete) => cliente.account.game.character.eliminar_Canal_Personaje(paquete.Substring(3));
 
-        [PaqueteAtributo("cMK")]
+        [Packet("cMK")]
         public void get_Mensajes_Chat(TcpClient cliente, string paquete)
         {
             string[] separador = paquete.Substring(3).Split('|');

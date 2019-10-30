@@ -1,8 +1,7 @@
-﻿using Bot_Dofus_1._29._1.Comun.Frames.Transporte;
+﻿using Bot_Dofus_1._29._1.Comun.Frames.Transport;
 using Bot_Dofus_1._29._1.Comun.Network;
 using Bot_Dofus_1._29._1.Otros;
 using Bot_Dofus_1._29._1.Otros.Enums;
-using System.Threading.Tasks;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
     web: http://www.salesprendes.com
 */
 
-namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
+namespace Bot_Dofus_1._29._1.Comun.Frames.Game
 {
     internal class ServidorSeleccionFrame : Frame
     {

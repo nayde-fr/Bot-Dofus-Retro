@@ -1,10 +1,10 @@
-﻿using Bot_Dofus_1._29._1.Comun.Frames.Transporte;
-using Bot_Dofus_1._29._1.Comun.Network;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Bot_Dofus_1._29._1.Common.Frames.Transport;
+using Bot_Dofus_1._29._1.Common.Network;
 using Bot_Dofus_1._29._1.Otros;
 using Bot_Dofus_1._29._1.Otros.Enums;
 using Bot_Dofus_1._29._1.Otros.Mapas.Entidades;
-using System.Collections.Generic;
-using System.Linq;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -14,11 +14,11 @@ using System.Linq;
     web: http://www.salesprendes.com
 */
 
-namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
+namespace Bot_Dofus_1._29._1.Common.Frames.Game
 {
     class NPCFrame : Frame
     {
-        [PaqueteAtributo("DCK")]
+        [Packet("DCK")]
         public void get_Dialogo_Creado(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.account;
@@ -27,7 +27,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             cuenta.game.character.hablando_npc_id = sbyte.Parse(paquete.Substring(3));
         }
 
-        [PaqueteAtributo("DQ")]
+        [Packet("DQ")]
         public void get_Lista_Respuestas(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.account;

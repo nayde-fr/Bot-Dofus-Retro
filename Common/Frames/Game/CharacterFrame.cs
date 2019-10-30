@@ -1,14 +1,13 @@
-﻿using Bot_Dofus_1._29._1.Comun.Frames.Transporte;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using Bot_Dofus_1._29._1.Comun.Frames.Transport;
 using Bot_Dofus_1._29._1.Comun.Network;
 using Bot_Dofus_1._29._1.Otros;
 using Bot_Dofus_1._29._1.Otros.Enums;
 using Bot_Dofus_1._29._1.Otros.Game.Character;
 using Bot_Dofus_1._29._1.Otros.Game.Character.Jobs;
 using Bot_Dofus_1._29._1.Otros.Mapas.Entidades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -18,7 +17,7 @@ using System.Threading;
     web: http://www.salesprendes.com
 */
 
-namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
+namespace Bot_Dofus_1._29._1.Comun.Frames.Game
 {
     class PersonajeFrame : Frame
     {

@@ -1,8 +1,8 @@
-﻿using Bot_Dofus_1._29._1.Comun.Frames.Transporte;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Bot_Dofus_1._29._1.Common.Frames.Transport;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -68,15 +68,15 @@ namespace Bot_Dofus_1._29._1.Interfaces
             string paquete = lista_paquetes[listView.FocusedItem.Index];
             treeView.Nodes.Clear();
 
-            if (PaqueteRecibido.metodos.Count == 0)
+            if (PacketReceiver.handlers.Count == 0)
                 return;
 
-            foreach (PaqueteDatos metodo in PaqueteRecibido.metodos)
+            foreach (PacketHandler metodo in PacketReceiver.handlers)
             {
-                if (paquete.StartsWith(metodo.nombre_paquete))
+                if (paquete.StartsWith(metodo.PacketIdentifier))
                 {
-                    treeView.Nodes.Add(metodo.nombre_paquete);
-                    treeView.Nodes[0].Nodes.Add(paquete.Remove(0, metodo.nombre_paquete.Length));
+                    treeView.Nodes.Add(metodo.PacketIdentifier);
+                    treeView.Nodes[0].Nodes.Add(paquete.Remove(0, metodo.PacketIdentifier.Length));
                     treeView.Nodes[0].Expand();
                     break;
                 }

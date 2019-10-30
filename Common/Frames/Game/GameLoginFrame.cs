@@ -1,4 +1,4 @@
-﻿using Bot_Dofus_1._29._1.Comun.Frames.Transporte;
+﻿using Bot_Dofus_1._29._1.Comun.Frames.Transport;
 using Bot_Dofus_1._29._1.Comun.Network;
 
 /*
@@ -9,7 +9,7 @@ using Bot_Dofus_1._29._1.Comun.Network;
     web: http://www.salesprendes.com
 */
 
-namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
+namespace Bot_Dofus_1._29._1.Comun.Frames.Game
 {
     class AutentificacionJuego : Frame
     {

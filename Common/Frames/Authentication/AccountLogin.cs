@@ -1,10 +1,9 @@
-﻿using Bot_Dofus_1._29._1.Comun.Frames.Transporte;
-using Bot_Dofus_1._29._1.Comun.Network;
+﻿using Bot_Dofus_1._29._1.Common.Frames.Transport;
+using Bot_Dofus_1._29._1.Common.Network;
 using Bot_Dofus_1._29._1.Otros;
 using Bot_Dofus_1._29._1.Otros.Enums;
 using Bot_Dofus_1._29._1.Otros.Game.Server;
 using Bot_Dofus_1._29._1.Utilities.Crypto;
-using System.Threading.Tasks;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -14,11 +13,11 @@ using System.Threading.Tasks;
     web: http://www.salesprendes.com
 */
 
-namespace Bot_Dofus_1._29._1.Comun.Frames.LoginCuenta
+namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
 {
     public class AccountLogin : Frame
     {
-        [PaqueteAtributo("HC")]
+        [Packet("HC")]
         public void GetWelcomeKeyAsync(TcpClient prmClient, string prmPacket)
         {
             Account account = prmClient.account;
@@ -26,18 +25,18 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginCuenta
             account.accountState = AccountStates.CONNECTED;
             account.welcomeKey = prmPacket.Substring(2);
 
-            prmClient.SendPacket("1.30");
+            prmClient.SendPacket("1.29");
             prmClient.SendPacket(prmClient.account.accountConfig.accountUsername + "\n" + Hash.Crypt_Password(prmClient.account.accountConfig.accountPassword, prmClient.account.welcomeKey));
             prmClient.SendPacket("Af");
         }
 
-        [PaqueteAtributo("Ad")]
+        [Packet("Ad")]
         public void GetNickname(TcpClient prmClient, string prmPacket) => prmClient.account.nickname = prmPacket.Substring(2);
 
-        [PaqueteAtributo("Af")]
+        [Packet("Af")]
         public void GetLoginQueue(TcpClient prmClient, string prmPacket) => prmClient.account.logger.log_informacion("File d'attente", "Position " + prmPacket[2] + "/" + prmPacket[4]);
 
-        [PaqueteAtributo("AH")]
+        [Packet("AH")]
         public void GetServerState(TcpClient prmClient, string prmPacket)
         {
             Account account = prmClient.account;
@@ -69,14 +68,14 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginCuenta
                 prmClient.SendPacket("Ax");
         }
 
-        [PaqueteAtributo("AQ")]
+        [Packet("AQ")]
         public void GetSecretQuestion(TcpClient prmClient, string prmPacket)
         {
             if (prmClient.account.game.server.serverState == ServerStates.ONLINE)
                 prmClient.SendPacket("Ax", true);
         }
 
-        [PaqueteAtributo("AxK")]
+        [Packet("AxK")]
         public void GetServerList(TcpClient prmClient, string prmPacket)
         {
             Account account = prmClient.account;
@@ -106,7 +105,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginCuenta
                 prmClient.SendPacket($"AX{account.game.server.serverId}", true);
         }
 
-        [PaqueteAtributo("AXK")]
+        [Packet("AXK")]
         public void GetServerSelection(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.gameTicket = prmPacket.Substring(14);

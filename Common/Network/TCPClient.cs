@@ -1,6 +1,4 @@
-﻿using Bot_Dofus_1._29._1.Comun.Frames.Transporte;
-using Bot_Dofus_1._29._1.Otros;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -8,6 +6,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Bot_Dofus_1._29._1.Common.Frames.Transport;
+using Bot_Dofus_1._29._1.Otros;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -17,7 +17,7 @@ using System.Threading.Tasks;
     web: http://www.salesprendes.com
 */
 
-namespace Bot_Dofus_1._29._1.Comun.Network
+namespace Bot_Dofus_1._29._1.Common.Network
 {
     public class TcpClient : IDisposable
     {
@@ -108,7 +108,7 @@ namespace Bot_Dofus_1._29._1.Comun.Network
                         _isWaitingPacket = false;
                     }
 
-                    PaqueteRecibido.Recibir(this, packet);
+                    PacketReceiver.Receive(this, packet);
                 }
 
                 if (IsConnected())

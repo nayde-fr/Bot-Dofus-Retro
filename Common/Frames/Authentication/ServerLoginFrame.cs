@@ -1,6 +1,6 @@
-﻿using Bot_Dofus_1._29._1.Comun.Frames.Transporte;
+﻿using System.Text;
+using Bot_Dofus_1._29._1.Comun.Frames.Transport;
 using Bot_Dofus_1._29._1.Comun.Network;
-using System.Text;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -10,7 +10,7 @@ using System.Text;
     web: http://www.salesprendes.com
 */
 
-namespace Bot_Dofus_1._29._1.Comun.Frames.Autentificacion
+namespace Bot_Dofus_1._29._1.Comun.Frames.Authentication
 {
     class AutentificacionLogin : Frame
     {
