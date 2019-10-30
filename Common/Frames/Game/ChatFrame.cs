@@ -6,10 +6,10 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     internal class ChatFrame : Frame
     {
         [Packet("cC+")]
-        public void get_Agregar_Canal(TcpClient cliente, string paquete) => cliente.account.game.character.agregar_Canal_Personaje(paquete.Substring(3));
+        public void get_Agregar_Canal(TcpClient cliente, string paquete) => cliente.account.game.CharacterClass.agregar_Canal_Personaje(paquete.Substring(3));
 
         [Packet("cC-")]
-        public void get_Eliminar_Canal(TcpClient cliente, string paquete) => cliente.account.game.character.eliminar_Canal_Personaje(paquete.Substring(3));
+        public void get_Eliminar_Canal(TcpClient cliente, string paquete) => cliente.account.game.CharacterClass.eliminar_Canal_Personaje(paquete.Substring(3));
 
         [Packet("cMK")]
         public void get_Mensajes_Chat(TcpClient cliente, string paquete)

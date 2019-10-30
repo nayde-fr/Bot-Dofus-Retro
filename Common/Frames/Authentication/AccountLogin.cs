@@ -1,8 +1,9 @@
 ﻿using Bot_Dofus_1._29._1.Common.Frames.Transport;
 using Bot_Dofus_1._29._1.Common.Network;
-using Bot_Dofus_1._29._1.Otros;
-using Bot_Dofus_1._29._1.Otros.Enums;
-using Bot_Dofus_1._29._1.Otros.Game.Server;
+using Bot_Dofus_1._29._1.Game.Enums;
+using Bot_Dofus_1._29._1.Game.Server;
+using Bot_Dofus_1._29._1.Managers;
+using Bot_Dofus_1._29._1.Managers.Accounts;
 using Bot_Dofus_1._29._1.Utilities.Crypto;
 
 /*
@@ -22,7 +23,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
         {
             Account account = prmClient.account;
 
-            account.accountState = AccountStates.CONNECTED;
+            account.accountState = AccountState.CONNECTED;
             account.welcomeKey = prmPacket.Substring(2);
 
             prmClient.SendPacket("1.29");
@@ -41,7 +42,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
         {
             Account account = prmClient.account;
             string[] serverList = prmPacket.Substring(2).Split('|');
-            GameServer server = account.game.server;
+            GameServer server = account.game.Server;
             bool firstTime = true;
 
             foreach(string sv in serverList)
@@ -49,7 +50,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
                 string[] separator = sv.Split(';');
 
                 int id = int.Parse(separator[0]);
-                ServerStates serverState = (ServerStates)byte.Parse(separator[1]);
+                ServerState serverState = (ServerState)byte.Parse(separator[1]);
                 string serverName = account.accountConfig.server;
 
                 // Add Method to take name with Id
@@ -57,21 +58,21 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
                 if (id == account.accountConfig.Get_Server_ID())
                 {
                     server.RefreshData(id, serverName, serverState);
-                    account.logger.log_informacion("LOGIN", $"Le serveur {serverName} est {account.game.server.GetState(serverState)}");
+                    account.logger.log_informacion("LOGIN", $"Le serveur {serverName} est {account.game.Server.GetState(serverState)}");
 
-                    if (serverState != ServerStates.ONLINE)
+                    if (serverState != ServerState.ONLINE)
                         firstTime = false;
                 }
             }
 
-            if(!firstTime && server.serverState == ServerStates.ONLINE)
+            if(!firstTime && server.serverState == ServerState.ONLINE)
                 prmClient.SendPacket("Ax");
         }
 
         [Packet("AQ")]
         public void GetSecretQuestion(TcpClient prmClient, string prmPacket)
         {
-            if (prmClient.account.game.server.serverState == ServerStates.ONLINE)
+            if (prmClient.account.game.Server.serverState == ServerState.ONLINE)
                 prmClient.SendPacket("Ax", true);
         }
 
@@ -88,12 +89,12 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
                 string[] _loc10_ = loc5[counter].Split(',');
                 int serverId = int.Parse(_loc10_[0]);
 
-                if (serverId == account.game.server.serverId)
+                if (serverId == account.game.Server.serverId)
                 {
-                    if(account.game.server.serverState == ServerStates.ONLINE)
+                    if(account.game.Server.serverState == ServerState.ONLINE)
                     {
                         picked = true;
-                        account.game.character.evento_Servidor_Seleccionado();
+                        account.game.CharacterClass.evento_Servidor_Seleccionado();
                     }
                     else
                         account.logger.log_Error("LOGIN", "Serveur non accessible lorsque celui-ci se reconnectera");
@@ -102,7 +103,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
             }
 
             if(picked)
-                prmClient.SendPacket($"AX{account.game.server.serverId}", true);
+                prmClient.SendPacket($"AX{account.game.Server.serverId}", true);
         }
 
         [Packet("AXK")]

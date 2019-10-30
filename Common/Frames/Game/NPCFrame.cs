@@ -2,9 +2,10 @@
 using System.Linq;
 using Bot_Dofus_1._29._1.Common.Frames.Transport;
 using Bot_Dofus_1._29._1.Common.Network;
-using Bot_Dofus_1._29._1.Otros;
-using Bot_Dofus_1._29._1.Otros.Enums;
-using Bot_Dofus_1._29._1.Otros.Mapas.Entidades;
+using Bot_Dofus_1._29._1.Game.Enums;
+using Bot_Dofus_1._29._1.Game.Mapas.Entidades;
+using Bot_Dofus_1._29._1.Managers;
+using Bot_Dofus_1._29._1.Managers.Accounts;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -23,8 +24,8 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         {
             Account cuenta = cliente.account;
 
-            cuenta.accountState = AccountStates.DIALOG;
-            cuenta.game.character.hablando_npc_id = sbyte.Parse(paquete.Substring(3));
+            cuenta.accountState = AccountState.DIALOG;
+            cuenta.game.CharacterClass.hablando_npc_id = sbyte.Parse(paquete.Substring(3));
         }
 
         [Packet("DQ")]
@@ -35,8 +36,8 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             if (!cuenta.Is_In_Dialog())
                 return;
 
-            IEnumerable<Npcs> npcs = cuenta.game.map.lista_npcs();
-            Npcs npc = npcs.ElementAt((cuenta.game.character.hablando_npc_id * -1) - 1);
+            IEnumerable<Npcs> npcs = cuenta.game.Map.lista_npcs();
+            Npcs npc = npcs.ElementAt((cuenta.game.CharacterClass.hablando_npc_id * -1) - 1);
 
             if (npc != null)
             {
@@ -49,7 +50,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
                 foreach (string respuesta in respuestas_disponibles)
                     npc.respuestas.Add(short.Parse(respuesta));
 
-                cuenta.game.character.evento_Dialogo_Recibido();
+                cuenta.game.CharacterClass.evento_Dialogo_Recibido();
             }
         }
     }

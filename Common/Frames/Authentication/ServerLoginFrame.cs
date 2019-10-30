@@ -1,6 +1,6 @@
 ﻿using System.Text;
-using Bot_Dofus_1._29._1.Comun.Frames.Transport;
-using Bot_Dofus_1._29._1.Comun.Network;
+using Bot_Dofus_1._29._1.Common.Frames.Transport;
+using Bot_Dofus_1._29._1.Common.Network;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -10,46 +10,46 @@ using Bot_Dofus_1._29._1.Comun.Network;
     web: http://www.salesprendes.com
 */
 
-namespace Bot_Dofus_1._29._1.Comun.Frames.Authentication
+namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
 {
-    class AutentificacionLogin : Frame
+    class ServerLoginFrame : Frame
     {
-        [PaqueteAtributo("AlEf")]
+        [Packet("AlEf")]
         public void WrongCredentialsError(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.logger.log_Error("LOGIN", "Connexion rejetée. Nom de compte ou mot de passe incorrect.");
             prmClient.account.Disconnect();
         }
 
-        [PaqueteAtributo("AlEa")]
+        [Packet("AlEa")]
         public void AlreadyConnectedError(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.logger.log_Error("LOGIN", "Déjà connecté. Essayez encore une fois.");
             prmClient.account.Disconnect();
         }
 
-        [PaqueteAtributo("AlEv")]
+        [Packet("AlEv")]
         public void WrongVersionError(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.logger.log_Error("LOGIN", "La version %1 de Dofus que vous avez installée n'est pas compatible avec ce serveur. Pour jouer, installez la version %2. Le client DOFUS sera fermé.");
             prmClient.account.Disconnect();
         }
 
-        [PaqueteAtributo("AlEb")]
+        [Packet("AlEb")]
         public void AccountBannedError(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.logger.log_Error("LOGIN", "Connexion rejetée. Votre compte a été banni.");
             prmClient.account.Disconnect();
         }
 
-        [PaqueteAtributo("AlEd")]
+        [Packet("AlEd")]
         public void AlreadyConnectingError(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.logger.log_Error("LOGIN", "Ce compte est déjà connecté à un serveur de jeu. Veuillez réessayer.");
             prmClient.account.Disconnect();
         }
 
-        [PaqueteAtributo("AlEk")]
+        [Packet("AlEk")]
         public void AccountTempBannedError(TcpClient prmClient, string prmPacket)
         {
             string[] ban_Informations = prmPacket.Substring(3).Split('|');

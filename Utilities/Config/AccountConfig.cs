@@ -1,5 +1,4 @@
-﻿using Bot_Dofus_1._29._1.Controles.ControlMapa;
-using System.IO;
+﻿using System.IO;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -50,6 +49,8 @@ namespace Bot_Dofus_1._29._1.Utilities.Config
         {
             switch (server)
             {
+                case "Amakna":
+                    return 1;
                 case "Eratz":
                     return 601;
                 case "Henual":

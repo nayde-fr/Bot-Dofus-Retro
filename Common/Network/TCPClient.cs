@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Bot_Dofus_1._29._1.Common.Frames.Transport;
-using Bot_Dofus_1._29._1.Otros;
+using Bot_Dofus_1._29._1.Managers;
+using Bot_Dofus_1._29._1.Managers.Accounts;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1

@@ -1,14 +1,14 @@
-﻿using Bot_Dofus_1._29._1.Forms;
-using Bot_Dofus_1._29._1.Otros.Game.Character.Spells;
-using Bot_Dofus_1._29._1.Otros.Mapas.Interactivo;
-using Bot_Dofus_1._29._1.Otros.Scripts.Manejadores;
-using Bot_Dofus_1._29._1.Utilities.Config;
+﻿using Bot_Dofus_1._29._1.Utilities.Config;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Bot_Dofus_1._29._1.Common.Frames.Transport;
+using Bot_Dofus_1._29._1.Game.Character.Spells;
+using Bot_Dofus_1._29._1.Game.Mapas.Interactivo;
+using Bot_Dofus_1._29._1.Scripts.Manejadores;
+using Bot_Dofus_1._29._1.UserInterface.Forms;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -31,7 +31,7 @@ namespace Bot_Dofus_1._29._1
             {
                 GlobalConfig.Load_All_Accounts();
                 LuaManejadorScript.inicializar_Funciones();
-                XElement.Parse(Properties.Resources.interactivos).Descendants("SKILL").ToList().ForEach(i => new ObjetoInteractivoModelo(i.Element("nombre").Value, i.Element("gfx").Value, bool.Parse(i.Element("caminable").Value), i.Element("habilidades").Value, bool.Parse(i.Element("recolectable").Value)));
+                XElement.Parse(Properties.Resources.interactivos).Descendants("SKILL").ToList().ForEach(i => new InteractiveObjectModel(i.Element("nombre").Value, i.Element("gfx").Value, bool.Parse(i.Element("caminable").Value), i.Element("habilidades").Value, bool.Parse(i.Element("recolectable").Value)));
                 PacketReceiver.Initialize();
             }).ContinueWith(t =>
             {

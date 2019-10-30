@@ -12,10 +12,8 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Transport
 {
     class PacketAttribute : Attribute
     {
-        private string paquete;
+        public PacketAttribute(string identifier) => Identifier = identifier;
 
-        public PacketAttribute(string _paquete) => Paquete = _paquete;
-
-        public string Paquete { get => paquete; set => paquete = value; }
+        public string Identifier { get; set; }
     }
 }
