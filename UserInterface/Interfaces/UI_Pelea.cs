@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Bot_Dofus_1._29._1.Otros;
+using Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos;
+using Bot_Dofus_1._29._1.Otros.Game.Character.Spells;
+using Bot_Dofus_1._29._1.Otros.Mapas;
+using Bot_Dofus_1._29._1.Otros.Mapas.Entidades;
+using Bot_Dofus_1._29._1.Otros.Peleas.Configuracion;
+using Bot_Dofus_1._29._1.Otros.Peleas.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Bot_Dofus_1._29._1.Game.Character.Spells;
-using Bot_Dofus_1._29._1.Game.Mapas;
-using Bot_Dofus_1._29._1.Game.Mapas.Entidades;
-using Bot_Dofus_1._29._1.Managers;
-using Bot_Dofus_1._29._1.Managers.Accounts;
-using Bot_Dofus_1._29._1.Managers.Fights.Configuracion;
-using Bot_Dofus_1._29._1.Managers.Fights.Enums;
-using Bot_Dofus_1._29._1.Managers.Movements;
 
-namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
+namespace Bot_Dofus_1._29._1.Interfaces
 {
     public partial class UI_Pelea : UserControl
     {
@@ -23,7 +22,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
             cuenta = _cuenta;
 
             refrescar_Lista_Hechizos();
-            cuenta.Game.Character.hechizos_actualizados += actualizar_Agregar_Lista_Hechizos;
+            cuenta.game.character.hechizos_actualizados += actualizar_Agregar_Lista_Hechizos;
         }
 
         private void UI_Pelea_Load(object sender, EventArgs e)
@@ -47,7 +46,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
         {
             comboBox_lista_hechizos.DisplayMember = "nombre";
             comboBox_lista_hechizos.ValueMember = "id";
-            comboBox_lista_hechizos.DataSource = cuenta.Game.Character.hechizos.Values.ToList();
+            comboBox_lista_hechizos.DataSource = cuenta.game.character.hechizos.Values.ToList();
 
             comboBox_lista_hechizos.SelectedIndex = 0;
         }
@@ -103,27 +102,27 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Map mapa = cuenta.Game.Map;
+            Map mapa = cuenta.game.map;
 
-            List<Monstruos> monstruos = cuenta.Game.Map.lista_monstruos();
+            List<Monstruos> monstruos = cuenta.game.map.lista_monstruos();
 
             if (monstruos.Count > 0)
             {
-                Cell celda_actual = cuenta.Game.Character.Cell, celda_monstruo_destino = monstruos[0].Cell;
+                Cell celda_actual = cuenta.game.character.celda, celda_monstruo_destino = monstruos[0].celda;
 
                 if (celda_actual.cellId != celda_monstruo_destino.cellId & celda_monstruo_destino.cellId > 0)
                 {
                     cuenta.logger.log_informacion("UI_PELEAS", "Monstruo encontrado en la casilla " + celda_monstruo_destino.cellId);
 
-                    switch (cuenta.Game.manager.MovementManager.get_Mover_A_Celda(celda_monstruo_destino, new List<Cell>()))
+                    switch (cuenta.game.manager.movimientos.get_Mover_A_Celda(celda_monstruo_destino, new List<Cell>()))
                     {
-                        case MovementResult.OK:
+                        case ResultadoMovimientos.EXITO:
                             cuenta.logger.log_informacion("UI_PELEAS", "Desplazando para comenzar el combate");
                         break;
 
-                        case MovementResult.SAME_CELL:
-                        case MovementResult.FAILED:
-                        case MovementResult.PATHFINDING_ERROR:
+                        case ResultadoMovimientos.MISMA_CELDA:
+                        case ResultadoMovimientos.FALLO:
+                        case ResultadoMovimientos.PATHFINDING_ERROR:
                             cuenta.logger.log_Error("UI_PELEAS", "El monstruo no esta en la casilla selecciona");
                         break;
                     }

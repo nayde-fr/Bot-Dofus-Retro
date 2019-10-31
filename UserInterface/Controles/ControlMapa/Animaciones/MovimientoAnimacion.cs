@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Text;
 using System.Threading;
-using Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Celdas;
+using System.Threading.Tasks;
 
-namespace Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Animaciones
+namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Animaciones
 {
     class MovimientoAnimacion : IDisposable
     {

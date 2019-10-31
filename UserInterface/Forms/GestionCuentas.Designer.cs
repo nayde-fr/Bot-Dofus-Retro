@@ -114,7 +114,7 @@
             this.ListaCuentas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ListaCuentas.Name = "ListaCuentas";
             this.ListaCuentas.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ListaCuentas.Size = new System.Drawing.Size(455, 362);
+            this.ListaCuentas.Size = new System.Drawing.Size(453, 354);
             this.ListaCuentas.TabIndex = 0;
             this.ListaCuentas.Text = "Liste des comptes";
             this.ListaCuentas.UseVisualStyleBackColor = true;
@@ -131,7 +131,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.00565F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.99435F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(449, 354);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(447, 346);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tableLayoutPanel2
@@ -142,12 +142,12 @@
             this.tableLayoutPanel2.Controls.Add(this.pictureBox_informacion, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label_informacionClickCuentas, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 311);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 304);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(443, 40);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(441, 39);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // pictureBox_informacion
@@ -156,7 +156,7 @@
             this.pictureBox_informacion.Image = global::Bot_Dofus_1._29._1.Properties.Resources.informacion;
             this.pictureBox_informacion.Location = new System.Drawing.Point(3, 3);
             this.pictureBox_informacion.Name = "pictureBox_informacion";
-            this.pictureBox_informacion.Size = new System.Drawing.Size(38, 34);
+            this.pictureBox_informacion.Size = new System.Drawing.Size(38, 33);
             this.pictureBox_informacion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox_informacion.TabIndex = 0;
             this.pictureBox_informacion.TabStop = false;
@@ -167,7 +167,7 @@
             this.label_informacionClickCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_informacionClickCuentas.Location = new System.Drawing.Point(47, 0);
             this.label_informacionClickCuentas.Name = "label_informacionClickCuentas";
-            this.label_informacionClickCuentas.Size = new System.Drawing.Size(393, 40);
+            this.label_informacionClickCuentas.Size = new System.Drawing.Size(391, 39);
             this.label_informacionClickCuentas.TabIndex = 1;
             this.label_informacionClickCuentas.Text = "Clic droit pour connecter/modifier/supprimer un compte\\r\\r\\double clic sur un com" +
     "pte pour le connecter";
@@ -187,7 +187,7 @@
             this.listViewCuentas.Location = new System.Drawing.Point(3, 4);
             this.listViewCuentas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listViewCuentas.Name = "listViewCuentas";
-            this.listViewCuentas.Size = new System.Drawing.Size(443, 300);
+            this.listViewCuentas.Size = new System.Drawing.Size(441, 293);
             this.listViewCuentas.TabIndex = 1;
             this.listViewCuentas.UseCompatibleStateImageBehavior = false;
             this.listViewCuentas.View = System.Windows.Forms.View.Details;
@@ -310,7 +310,7 @@
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(464, 42);
             this.tableLayoutPanel4.TabIndex = 2;
             // 
@@ -489,6 +489,15 @@
             this.comboBox_Servidor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Servidor.FormattingEnabled = true;
             this.comboBox_Servidor.Location = new System.Drawing.Point(3, 15);
+            "Clustus",
+            "Nabur",
+            "Arty",
+            "Algathe",
+            "Hogmeiser",
+            "Droupik",
+            "Bilby",
+            "Ayuto",
+            "Issering"});
             this.comboBox_Servidor.Name = "comboBox_Servidor";
             this.comboBox_Servidor.Size = new System.Drawing.Size(263, 25);
             this.comboBox_Servidor.TabIndex = 6;
@@ -559,7 +568,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(455, 362);
+            this.tabPage1.Size = new System.Drawing.Size(453, 354);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Ajouter plusieurs comptes";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -596,7 +605,7 @@
             // 
             // GestionCuentas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 461);
             this.Controls.Add(this.tabControlPrincipalCuentas);

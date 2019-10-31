@@ -1,4 +1,4 @@
-﻿namespace Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Animaciones
+﻿namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Animaciones
 {
     public enum TipoAnimaciones
     {

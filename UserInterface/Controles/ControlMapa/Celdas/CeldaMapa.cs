@@ -2,7 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Linq;
 
-namespace Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Celdas
+namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
 {
     public class CeldaMapa
     {

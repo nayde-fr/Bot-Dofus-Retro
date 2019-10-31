@@ -33,9 +33,14 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.checkBox_mensajes_debug = new System.Windows.Forms.CheckBox();
             this.boton_opciones_guardar = new System.Windows.Forms.Button();
+            this.textBox_puerto_servidor = new System.Windows.Forms.TextBox();
+            this.label_puerto_servidor = new System.Windows.Forms.Label();
+            this.textBox_ip_servidor = new System.Windows.Forms.TextBox();
+            this.label_ip_conexion = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -50,7 +55,8 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 272);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(382, 264);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox1
@@ -71,7 +77,7 @@
             this.tableLayoutPanel2.Controls.Add(this.checkBox_mensajes_debug, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 21);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 25);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -104,12 +110,58 @@
             this.boton_opciones_guardar.TabIndex = 2;
             this.boton_opciones_guardar.Text = "Sauvegarder";
             this.boton_opciones_guardar.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel3.Controls.Add(this.textBox_puerto_servidor, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label_puerto_servidor, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox_ip_servidor, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label_ip_conexion, 0, 0);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(370, 71);
+            // 
+            // textBox_puerto_servidor
+            // 
+            this.textBox_puerto_servidor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_puerto_servidor.Location = new System.Drawing.Point(168, 35);
+            this.textBox_puerto_servidor.MaxLength = 5;
+            this.textBox_puerto_servidor.Name = "textBox_puerto_servidor";
+            this.textBox_puerto_servidor.Size = new System.Drawing.Size(199, 29);
+            this.textBox_puerto_servidor.TabIndex = 3;
+            // 
+            // label_puerto_servidor
+            // 
+            this.label_puerto_servidor.AutoSize = true;
+            this.label_puerto_servidor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label_puerto_servidor.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.label_puerto_servidor.Location = new System.Drawing.Point(3, 32);
+            this.label_puerto_servidor.Name = "label_puerto_servidor";
+            this.label_puerto_servidor.Size = new System.Drawing.Size(159, 30);
+            this.label_puerto_servidor.TabIndex = 2;
+            this.label_puerto_servidor.Text = "Port:";
+            this.label_puerto_servidor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBox_ip_servidor
+            // 
+            this.textBox_ip_servidor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_ip_servidor.Location = new System.Drawing.Point(168, 3);
+            this.textBox_ip_servidor.MaxLength = 35;
+            this.textBox_ip_servidor.Name = "textBox_ip_servidor";
+            this.textBox_ip_servidor.Size = new System.Drawing.Size(199, 29);
+            this.textBox_ip_servidor.TabIndex = 1;
+            // 
+            // label_ip_conexion
+            // 
+            this.label_ip_conexion.AutoSize = true;
+            this.label_ip_conexion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label_ip_conexion.Location = new System.Drawing.Point(3, 0);
+            this.label_ip_conexion.Name = "label_ip_conexion";
+            this.label_ip_conexion.Size = new System.Drawing.Size(159, 32);
+            this.label_ip_conexion.TabIndex = 0;
+            this.label_ip_conexion.Text = "IP Serveur:";
+            this.label_ip_conexion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Opciones
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 272);
+            this.ClientSize = new System.Drawing.Size(382, 264);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -126,6 +178,8 @@
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -137,5 +191,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.CheckBox checkBox_mensajes_debug;
         private System.Windows.Forms.Button boton_opciones_guardar;
+        private System.Windows.Forms.Label label_ip_conexion;
+        private System.Windows.Forms.TextBox textBox_ip_servidor;
+        private System.Windows.Forms.Label label_puerto_servidor;
+        private System.Windows.Forms.TextBox textBox_puerto_servidor;
     }
 }

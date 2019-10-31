@@ -106,6 +106,8 @@
     <Compile Include="UserInterface\Controles\LayoutPanel\FlowLayoutPanelBuffered.cs">
       <SubType>Component</SubType>
     </Compile>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserInterface\Controles\ProgresBar\ProgresBar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -143,6 +145,17 @@
     <Compile Include="UserInterface\Interfaces\UI_Hechizos.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Interfaces\UI_Hechizos.Designer.cs">
+      <DependentUpon>UI_Hechizos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\UI_Inventario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfaces\UI_Inventario.Designer.cs">
+      <DependentUpon>UI_Inventario.cs</DependentUpon>
+    </Compile>
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserInterface\Interfaces\UI_Hechizos.Designer.cs">
       <DependentUpon>UI_Hechizos.cs</DependentUpon>
     </Compile>
@@ -159,6 +172,17 @@
       <DependentUpon>UI_Mapa.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\Interfaces\UI_Oficios.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfaces\UI_Oficios.Designer.cs">
+      <DependentUpon>UI_Oficios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\UI_Pelea.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Interfaces\UI_Pelea.Designer.cs">
+      <DependentUpon>UI_Pelea.cs</DependentUpon>
+    </Compile>
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserInterface\Interfaces\UI_Oficios.Designer.cs">
@@ -321,6 +345,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Forms\Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaces\UI_Hechizos.resx">
+      <DependentUpon>UI_Hechizos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaces\UI_Inventario.resx">
+      <DependentUpon>UI_Inventario.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Interfaces\UI_Hechizos.resx">
@@ -523,6 +554,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\razas\41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\razas\50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\razas\51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\razas\60.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\razas\50.png" />
