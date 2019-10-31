@@ -37,20 +37,20 @@ namespace Bot_Dofus_1._29._1.Scripts.Api
 
         public bool moverCelda(short celda_id)
         {
-            if (celda_id < 0 || celda_id > cuenta.game.Map.mapCells.Length)
+            if (celda_id < 0 || celda_id > cuenta.Game.Map.mapCells.Length)
                 return false;
 
-            if (!cuenta.game.Map.GetCellFromId(celda_id).IsWalkable() || cuenta.game.Map.GetCellFromId(celda_id).isInLineOfSight)
+            if (!cuenta.Game.Map.GetCellFromId(celda_id).IsWalkable() || cuenta.Game.Map.GetCellFromId(celda_id).isInLineOfSight)
                 return false;
 
             manejador_acciones.enqueue_Accion(new MoverCeldaAccion(celda_id), true);
             return true;
         }
 
-        public bool enCelda(short celda_id) => cuenta.game.CharacterClass.celda.cellId == celda_id;
-        public bool enMapa(string coordenadas) => cuenta.game.Map.esta_En_Mapa(coordenadas);
-        public string actualMapa() => cuenta.game.Map.mapId.ToString();
-        public string actualPosicion() => cuenta.game.Map.GetCoordinates;
+        public bool enCelda(short celda_id) => cuenta.Game.Character.Cell.cellId == celda_id;
+        public bool enMapa(string coordenadas) => cuenta.Game.Map.esta_En_Mapa(coordenadas);
+        public string actualMapa() => cuenta.Game.Map.mapId.ToString();
+        public string actualPosicion() => cuenta.Game.Map.GetCoordinates;
 
         #region Zona Dispose
         ~MapaApi() => Dispose(false);

@@ -11,7 +11,7 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
     {
         public GameServer Server { get; private set; }
         public Map Map { get; private set; }
-        public Character CharacterClass { get; private set; }
+        public Character Character { get; private set; }
         public CharacterManager manager { get; private set; }
         public Pelea fight { get; private set; }
         private bool _disposed = false;
@@ -20,8 +20,8 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
         {
             Server = new GameServer();
             Map = new Map();
-            CharacterClass = new Character(prmAccount);
-            manager = new CharacterManager(prmAccount, Map, CharacterClass);
+            Character = new Character(prmAccount);
+            manager = new CharacterManager(prmAccount, Map, Character);
             fight = new Pelea(prmAccount);
         }
 
@@ -34,7 +34,7 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
             Map.Clear();
             manager.Clear();
             fight.Clear();
-            CharacterClass.Clear();
+            Character.Clear();
             Server.Clear();
         }
 
@@ -45,7 +45,7 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
                 if (disposing)
                 {
                     Map.Dispose();
-                    CharacterClass.Dispose();
+                    Character.Dispose();
                     manager.Dispose();
                     fight.Dispose();
                     Server.Dispose();
@@ -53,7 +53,7 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
 
                 Server = null;
                 Map = null;
-                CharacterClass = null;
+                Character = null;
                 manager = null;
                 fight = null;
                 _disposed = true;

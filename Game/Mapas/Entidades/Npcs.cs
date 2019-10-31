@@ -4,9 +4,9 @@ namespace Bot_Dofus_1._29._1.Game.Mapas.Entidades
 {
     public class Npcs : Entidad
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int npc_modelo_id { get; private set; }
-        public Cell celda { get; set; }
+        public Cell Cell { get; set; }
 
         public short pregunta { get; set; }
         public List<short> respuestas { get; set; }
@@ -14,9 +14,9 @@ namespace Bot_Dofus_1._29._1.Game.Mapas.Entidades
 
         public Npcs(int _id, int _npc_modelo_id, Cell _celda)
         {
-            id = _id;
+            Id = _id;
             npc_modelo_id = _npc_modelo_id;
-            celda = _celda;
+            Cell = _celda;
         }
 
         #region Zona Dispose
@@ -29,7 +29,7 @@ namespace Bot_Dofus_1._29._1.Game.Mapas.Entidades
             {
                 respuestas?.Clear();
                 respuestas = null;
-                celda = null;
+                Cell = null;
                 disposed = true;
             }
         }

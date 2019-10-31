@@ -4,7 +4,7 @@ namespace Bot_Dofus_1._29._1.Game.Mapas.Entidades
 {
     public interface Entidad : IDisposable
     {
-        int id { get; set; }
-        Cell celda { get; set; }
+        int Id { get; set; }
+        Cell Cell { get; set; }
     }
 }

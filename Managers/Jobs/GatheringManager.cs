@@ -10,6 +10,7 @@ using Bot_Dofus_1._29._1.Game.Mapas;
 using Bot_Dofus_1._29._1.Game.Mapas.Interactivo;
 using Bot_Dofus_1._29._1.Game.Mapas.Movimiento.Mapas;
 using Bot_Dofus_1._29._1.Managers.Accounts;
+using Bot_Dofus_1._29._1.Managers.Characters;
 using Bot_Dofus_1._29._1.Managers.Movements;
 
 /*
@@ -69,7 +70,7 @@ namespace Bot_Dofus_1._29._1.Managers.Jobs
         private Dictionary<short, InteractiveObject> get_Interactivos_Utilizables(List<short> elementos_ids)
         {
             Dictionary<short, InteractiveObject> elementos_utilizables = new Dictionary<short, InteractiveObject>();
-            Character personaje = account.game.CharacterClass;
+            Character personaje = account.Game.Character;
 
             InventoryObject arma = personaje.inventario.get_Objeto_en_Posicion(InventorySlots.WEAPON);
             byte distancia_arma = 1;
@@ -86,7 +87,7 @@ namespace Bot_Dofus_1._29._1.Managers.Jobs
                 if (!interactivo.IsUsable || !interactivo.Model.recolectable)
                     continue;
 
-                List<Cell> path = pathfinder.get_Path(personaje.celda, interactivo.Cell, map.celdas_ocupadas(), true, distancia_arma);
+                List<Cell> path = pathfinder.get_Path(personaje.Cell, interactivo.Cell, map.celdas_ocupadas(), true, distancia_arma);
 
                 if (path == null || path.Count == 0)
                     continue;
@@ -113,12 +114,12 @@ namespace Bot_Dofus_1._29._1.Managers.Jobs
         {
             gatheredInteractive = interactivo.Value;
             byte distancia_detener = 1;
-            InventoryObject arma = account.game.CharacterClass.inventario.get_Objeto_en_Posicion(InventorySlots.WEAPON);
+            InventoryObject arma = account.Game.Character.inventario.get_Objeto_en_Posicion(InventorySlots.WEAPON);
 
             if(arma != null)
                 distancia_detener = get_Distancia_herramienta(arma.id_modelo);
             
-            switch (account.game.manager.MovementManager.get_Mover_A_Celda(gatheredInteractive.Cell, map.celdas_ocupadas(), true, distancia_detener))
+            switch (account.Game.manager.MovementManager.get_Mover_A_Celda(gatheredInteractive.Cell, map.celdas_ocupadas(), true, distancia_detener))
             {
                 case MovementResult.OK:
                 case MovementResult.SAME_CELL:
@@ -137,7 +138,7 @@ namespace Bot_Dofus_1._29._1.Managers.Jobs
             {
                 foreach (short habilidad in gatheredInteractive.Model.habilidades)
                 {
-                    if (account.game.CharacterClass.get_Skills_Recoleccion_Disponibles().Contains(habilidad))
+                    if (account.Game.Character.get_Skills_Recoleccion_Disponibles().Contains(habilidad))
                         account.connexion.SendPacket("GA500" + gatheredInteractive.Cell.cellId + ";" + habilidad);
                 }
             }
@@ -150,7 +151,7 @@ namespace Bot_Dofus_1._29._1.Managers.Jobs
             if (gatheredInteractive == null)
                 return;
 
-            if (!correcto && account.game.manager.MovementManager.actual_path != null)
+            if (!correcto && account.Game.manager.MovementManager.actual_path != null)
                 evento_Recoleccion_Acabada(GatheringResult.FAILED, gatheredInteractive.Cell.cellId);
         }
 
@@ -159,7 +160,7 @@ namespace Bot_Dofus_1._29._1.Managers.Jobs
             if (gatheredInteractive == null || gatheredInteractive.Cell.cellId != celda_id)
                 return;
 
-            if (account.game.CharacterClass.id != id_personaje)
+            if (account.Game.Character.Id != id_personaje)
             {
                 isStolen = true;
                 account.logger.log_informacion("INFORMATION", "Un personnage a volé votre ressource.");
@@ -187,7 +188,7 @@ namespace Bot_Dofus_1._29._1.Managers.Jobs
 
         private void EventoMapActualizado()
         {
-            pathfinder.set_Mapa(account.game.Map);
+            pathfinder.set_Mapa(account.Game.Map);
             ungatherableInteractives.Clear();
         }
 

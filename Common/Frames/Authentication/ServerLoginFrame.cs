@@ -14,42 +14,42 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
 {
     class ServerLoginFrame : Frame
     {
-        [Packet("AlEf")]
+        [PacketHandler("AlEf")]
         public void WrongCredentialsError(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.logger.log_Error("LOGIN", "Connexion rejetée. Nom de compte ou mot de passe incorrect.");
             prmClient.account.Disconnect();
         }
 
-        [Packet("AlEa")]
+        [PacketHandler("AlEa")]
         public void AlreadyConnectedError(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.logger.log_Error("LOGIN", "Déjà connecté. Essayez encore une fois.");
             prmClient.account.Disconnect();
         }
 
-        [Packet("AlEv")]
+        [PacketHandler("AlEv")]
         public void WrongVersionError(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.logger.log_Error("LOGIN", "La version %1 de Dofus que vous avez installée n'est pas compatible avec ce serveur. Pour jouer, installez la version %2. Le client DOFUS sera fermé.");
             prmClient.account.Disconnect();
         }
 
-        [Packet("AlEb")]
+        [PacketHandler("AlEb")]
         public void AccountBannedError(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.logger.log_Error("LOGIN", "Connexion rejetée. Votre compte a été banni.");
             prmClient.account.Disconnect();
         }
 
-        [Packet("AlEd")]
+        [PacketHandler("AlEd")]
         public void AlreadyConnectingError(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.logger.log_Error("LOGIN", "Ce compte est déjà connecté à un serveur de jeu. Veuillez réessayer.");
             prmClient.account.Disconnect();
         }
 
-        [Packet("AlEk")]
+        [PacketHandler("AlEk")]
         public void AccountTempBannedError(TcpClient prmClient, string prmPacket)
         {
             string[] ban_Informations = prmPacket.Substring(3).Split('|');

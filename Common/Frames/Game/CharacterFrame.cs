@@ -9,6 +9,7 @@ using Bot_Dofus_1._29._1.Game.Enums;
 using Bot_Dofus_1._29._1.Game.Mapas.Entidades;
 using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
+using Bot_Dofus_1._29._1.Managers.Characters;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -22,10 +23,10 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
 {
     class CharacterFrame : Frame
     {
-        [Packet("As")]
-        public void get_Stats_Actualizados(TcpClient cliente, string paquete) => cliente.account.game.CharacterClass.actualizar_Caracteristicas(paquete);
+        [PacketHandler("As")]
+        public void get_Stats_Actualizados(TcpClient cliente, string paquete) => cliente.account.Game.Character.actualizar_Caracteristicas(paquete);
 
-        [Packet("PIK")]
+        [PacketHandler("PIK")]
         public void get_Peticion_Grupo(TcpClient cliente, string paquete)
         {
             cliente.account.logger.log_informacion("Groupe", $"Nouvelle invitation de groupe du personnage: {paquete.Substring(3).Split('|')[0]}");
@@ -33,27 +34,27 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             cliente.account.logger.log_informacion("Groupe", "Rejêt de l'invitation");
         }
 
-        [Packet("SL")]
+        [PacketHandler("SL")]
         public void get_Lista_Hechizos(TcpClient cliente, string paquete)
         {
             if (!paquete[2].Equals('o'))
-                cliente.account.game.CharacterClass.actualizar_Hechizos(paquete.Substring(2));
+                cliente.account.Game.Character.actualizar_Hechizos(paquete.Substring(2));
         }
 
-        [Packet("Ow")]
+        [PacketHandler("Ow")]
         public void get_Actualizacion_Pods(TcpClient cliente, string paquete)
         {
             string[] pods = paquete.Substring(2).Split('|');
             short pods_actuales = short.Parse(pods[0]);
             short pods_maximos = short.Parse(pods[1]);
-            Character personaje = cliente.account.game.CharacterClass;
+            Character personaje = cliente.account.Game.Character;
 
             personaje.inventario.pods_actuales = pods_actuales;
             personaje.inventario.pods_maximos = pods_maximos;
-            cliente.account.game.CharacterClass.evento_Pods_Actualizados();
+            cliente.account.Game.Character.evento_Pods_Actualizados();
         }
 
-        [Packet("DV")]
+        [PacketHandler("DV")]
         public void get_Cerrar_Dialogo(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.account;
@@ -61,22 +62,22 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             switch (cuenta.accountState)
             {
                 case AccountState.STORAGE:
-                    cuenta.game.CharacterClass.inventario.evento_Almacenamiento_Abierto();
+                    cuenta.Game.Character.inventario.evento_Almacenamiento_Abierto();
                     break;
 
                 case AccountState.DIALOG:
-                    IEnumerable<Npcs> npcs = cuenta.game.Map.lista_npcs();
-                    Npcs npc = npcs.ElementAt((cuenta.game.CharacterClass.hablando_npc_id * -1) - 1);
+                    IEnumerable<Npcs> npcs = cuenta.Game.Map.lista_npcs();
+                    Npcs npc = npcs.ElementAt((cuenta.Game.Character.hablando_npc_id * -1) - 1);
                     npc.respuestas.Clear();
                     npc.respuestas = null;
 
                     cuenta.accountState = AccountState.CONNECTED_INACTIVE;
-                    cuenta.game.CharacterClass.evento_Dialogo_Acabado();
+                    cuenta.Game.Character.evento_Dialogo_Acabado();
                 break;
             }
         }
 
-        [Packet("EV")]
+        [PacketHandler("EV")]
         public void get_Ventana_Cerrada(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.account;
@@ -84,15 +85,15 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             if (cuenta.accountState == AccountState.STORAGE)
             {
                 cuenta.accountState = AccountState.CONNECTED_INACTIVE;
-                cuenta.game.CharacterClass.inventario.evento_Almacenamiento_Cerrado();
+                cuenta.Game.Character.inventario.evento_Almacenamiento_Cerrado();
             }
         }
 
-        [Packet("JS")]
+        [PacketHandler("JS")]
         public void get_Skills_Oficio(TcpClient cliente, string paquete)
         {
             string[] separador_skill;
-            Character personaje = cliente.account.game.CharacterClass;
+            Character personaje = cliente.account.Game.Character;
             Job oficio;
             JobSkills skill = null;
             short id_oficio, id_skill;
@@ -129,11 +130,11 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             personaje.evento_Oficios_Actualizados();
         }
 
-        [Packet("JX")]
+        [PacketHandler("JX")]
         public void get_Experiencia_Oficio(TcpClient cliente, string paquete)
         {
             string[] separador_oficio_experiencia = paquete.Substring(3).Split('|');
-            Character personaje = cliente.account.game.CharacterClass;
+            Character personaje = cliente.account.Game.Character;
             uint experiencia_actual, experiencia_base, experiencia_siguiente_nivel;
             short id;
             byte nivel;
@@ -155,41 +156,41 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             personaje.evento_Oficios_Actualizados();
         }
 
-        [Packet("Re")]
+        [PacketHandler("Re")]
         public void get_Datos_Montura(TcpClient cliente, string paquete) => cliente.account.canUseMount = true;
 
-        [Packet("OAKO")]
-        public void get_Aparecer_Objeto(TcpClient cliente, string paquete) => cliente.account.game.CharacterClass.inventario.agregar_Objetos(paquete.Substring(4));
+        [PacketHandler("OAKO")]
+        public void get_Aparecer_Objeto(TcpClient cliente, string paquete) => cliente.account.Game.Character.inventario.agregar_Objetos(paquete.Substring(4));
 
-        [Packet("OR")]
-        public void get_Eliminar_Objeto(TcpClient cliente, string paquete) => cliente.account.game.CharacterClass.inventario.eliminar_Objeto(uint.Parse(paquete.Substring(2)), 1, false);
+        [PacketHandler("OR")]
+        public void get_Eliminar_Objeto(TcpClient cliente, string paquete) => cliente.account.Game.Character.inventario.eliminar_Objeto(uint.Parse(paquete.Substring(2)), 1, false);
 
-        [Packet("OQ")]
-        public void get_Modificar_Cantidad_Objeto(TcpClient cliente, string paquete) => cliente.account.game.CharacterClass.inventario.modificar_Objetos(paquete.Substring(2));
+        [PacketHandler("OQ")]
+        public void get_Modificar_Cantidad_Objeto(TcpClient cliente, string paquete) => cliente.account.Game.Character.inventario.modificar_Objetos(paquete.Substring(2));
 
-        [Packet("ECK")]
+        [PacketHandler("ECK")]
         public void get_Intercambio_Ventana_Abierta(TcpClient cliente, string paquete) => cliente.account.accountState = AccountState.STORAGE;
 
-        [Packet("PCK")]
-        public void get_Grupo_Aceptado(TcpClient cliente, string paquete) => cliente.account.game.CharacterClass.en_grupo = true;
+        [PacketHandler("PCK")]
+        public void get_Grupo_Aceptado(TcpClient cliente, string paquete) => cliente.account.Game.Character.en_grupo = true;
 
-        [Packet("PV")]
-        public void get_Grupo_Abandonado(TcpClient cliente, string paquete) => cliente.account.game.CharacterClass.en_grupo = true;
+        [PacketHandler("PV")]
+        public void get_Grupo_Abandonado(TcpClient cliente, string paquete) => cliente.account.Game.Character.en_grupo = true;
 
-        [Packet("ERK")]
+        [PacketHandler("ERK")]
         public void get_Peticion_Intercambio(TcpClient cliente, string paquete)
         {
             cliente.account.logger.log_informacion("INFORMATION", "L'invitation à l'échange est rejetée");
             cliente.SendPacket("EV", true);
         }
 
-        [Packet("ILS")]
+        [PacketHandler("ILS")]
         public void get_Tiempo_Regenerado(TcpClient cliente, string paquete)
         {
             paquete = paquete.Substring(3);
             int tiempo = int.Parse(paquete);
             Account cuenta = cliente.account;
-            Character personaje = cuenta.game.CharacterClass;
+            Character personaje = cuenta.Game.Character;
 
             personaje.timer_regeneracion.Change(Timeout.Infinite, Timeout.Infinite);
             personaje.timer_regeneracion.Change(tiempo, tiempo);
@@ -197,26 +198,26 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             cuenta.logger.log_informacion("DOFUS", $"Votre personnage récupère 1 pdv chaque {tiempo / 1000} secondes");
         }
 
-        [Packet("ILF")]
+        [PacketHandler("ILF")]
         public void get_Cantidad_Vida_Regenerada(TcpClient cliente, string paquete)
         {
             paquete = paquete.Substring(3);
             int vida = int.Parse(paquete);
             Account cuenta = cliente.account;
-            Character personaje = cuenta.game.CharacterClass;
+            Character personaje = cuenta.Game.Character;
 
             personaje.caracteristicas.vitalidad_actual += vida;
             cuenta.logger.log_informacion("DOFUS", $"Vous avez récupéré {vida} points de vie");
         }
 
-        [Packet("eUK")]
+        [PacketHandler("eUK")]
         public void get_Emote_Recibido(TcpClient cliente, string paquete)
         {
             string[] separador = paquete.Substring(3).Split('|');
             int id = int.Parse(separador[0]), emote_id = int.Parse(separador[1]);
             Account cuenta = cliente.account;
 
-            if (cuenta.game.CharacterClass.id != id)
+            if (cuenta.Game.Character.Id != id)
                 return;
 
             if (emote_id == 1 && cuenta.accountState != AccountState.REGENERATION)
@@ -225,10 +226,10 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
                 cuenta.accountState = AccountState.CONNECTED_INACTIVE;
         }
 
-        [Packet("Bp")]
+        [PacketHandler("Bp")]
         public void get_Ping_Promedio(TcpClient cliente, string paquete) => cliente.SendPacket($"Bp{cliente.GetPingAverage()}|{cliente.GetTotalPings()}|50");
 
-        [Packet("pong")]
+        [PacketHandler("pong")]
         public void get_Ping_Pong(TcpClient cliente, string paquete) => cliente.account.logger.log_informacion("DOFUS", $"Ping: {cliente.GetPing()} ms");
     }
 }

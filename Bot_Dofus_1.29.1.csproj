@@ -64,6 +64,9 @@
     <Reference Include="MoonSharp.Interpreter">
       <HintPath>dll\MoonSharp.Interpreter.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,7 +86,7 @@
     <Compile Include="Common\Frames\Game\FightFrame.cs" />
     <Compile Include="Common\Frames\Game\CharacterFrame.cs" />
     <Compile Include="Common\Frames\Game\ServerSelectionFrame.cs" />
-    <Compile Include="Common\Frames\Transport\PacketAttribute.cs" />
+    <Compile Include="Common\Frames\Transport\PacketHandlerAttribute.cs" />
     <Compile Include="Common\Frames\Transport\PacketHandler.cs" />
     <Compile Include="Common\Frames\Transport\PacketReceiver.cs" />
     <Compile Include="UserInterface\Controles\ColorCheckBox\ColorCheckBox.cs">
@@ -243,7 +246,7 @@
     <Compile Include="Managers\Fights\Peleadores\LuchadorPersonaje.cs" />
     <Compile Include="Managers\Fights\PeleaExtensiones.cs" />
     <Compile Include="Game\Character\Spells\Spell.cs" />
-    <Compile Include="Game\Character\Character.cs" />
+    <Compile Include="Managers\Characters\Character.cs" />
     <Compile Include="Game\Character\CharacterBaseStats.cs" />
     <Compile Include="Game\Character\CharacterCharacteristics.cs" />
     <Compile Include="Scripts\Acciones\AccionesScript.cs" />
@@ -288,8 +291,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Config\GlobalConfig.cs" />
+    <Compile Include="Utilities\Config\ConfigurationManager.cs" />
+    <Compile Include="Utilities\Config\Configuration.cs" />
     <Compile Include="Utilities\Config\AccountConfig.cs" />
+    <Compile Include="Utilities\Config\RealmInfo.cs" />
+    <Compile Include="Utilities\Config\ServerInfo.cs" />
     <Compile Include="Utilities\Crypto\Hash.cs" />
     <Compile Include="Utilities\Crypto\Randomize.cs" />
     <Compile Include="Utilities\Extensions\Extensions.cs" />
@@ -348,6 +354,10 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Configuration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

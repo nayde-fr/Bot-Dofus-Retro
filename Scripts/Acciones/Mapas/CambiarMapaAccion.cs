@@ -35,14 +35,14 @@ namespace Bot_Dofus_1._29._1.Scripts.Acciones.Mapas
         {
             if (celda_especifica)
             {
-                Cell celda = cuenta.game.Map.GetCellFromId(celda_id);
+                Cell celda = cuenta.Game.Map.GetCellFromId(celda_id);
 
-                if (!cuenta.game.manager.MovementManager.get_Cambiar_Mapa(direccion, celda))
+                if (!cuenta.Game.manager.MovementManager.get_Cambiar_Mapa(direccion, celda))
                     return resultado_fallado;
             }
             else if (direccion_especifica)
             {
-                if (!cuenta.game.manager.MovementManager.get_Cambiar_Mapa(direccion))
+                if (!cuenta.Game.manager.MovementManager.get_Cambiar_Mapa(direccion))
                     return resultado_fallado;
             }
 

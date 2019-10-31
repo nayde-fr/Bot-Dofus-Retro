@@ -17,8 +17,8 @@ namespace Bot_Dofus_1._29._1.Scripts.Acciones.Npcs
             if (!cuenta.Is_In_Dialog())
                 return resultado_fallado;
 
-            IEnumerable<Game.Mapas.Entidades.Npcs> npcs = cuenta.game.Map.lista_npcs();
-            Game.Mapas.Entidades.Npcs npc = npcs.ElementAt((cuenta.game.CharacterClass.hablando_npc_id * -1) - 1);
+            IEnumerable<Game.Mapas.Entidades.Npcs> npcs = cuenta.Game.Map.lista_npcs();
+            Game.Mapas.Entidades.Npcs npc = npcs.ElementAt((cuenta.Game.Character.hablando_npc_id * -1) - 1);
 
             if(npc == null)
                 return resultado_fallado;

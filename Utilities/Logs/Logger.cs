@@ -22,7 +22,7 @@ namespace Bot_Dofus_1._29._1.Utilities.Logs
 
         private void log_Final(string reference, string message, LogTypes color, Exception ex = null)
         {
-            if (color == LogTypes.DEBUG && !GlobalConfig.show_debug_messages)
+            if (color == LogTypes.DEBUG && !ConfigurationManager.ShouldDebug())
                 return;
             log_Final(reference, message, ((int)color).ToString("X"), ex);
         }

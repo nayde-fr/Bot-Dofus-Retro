@@ -1,0 +1,70 @@
+{
+  "Accounts": [],
+  "DebugPackets": false,
+  "ServerInfos": [
+    {
+      "RealmInfos": [
+        {
+          "Id": 601,
+          "Name": "Eratz"
+        },
+        {
+          "Id": 602,
+          "Name": "Henual"
+        },
+        {
+          "Id": 603,
+          "Name": "Nabur"
+        },
+        {
+          "Id": 604,
+          "Name": "Arty"
+        },
+        {
+          "Id": 605,
+          "Name": "Algathe"
+        },
+        {
+          "Id": 606,
+          "Name": "Hogmeiser"
+        },
+        {
+          "Id": 607,
+          "Name": "Droupik"
+        },
+        {
+          "Id": 608,
+          "Name": "Ayuto"
+        },
+        {
+          "Id": 609,
+          "Name": "Bilby"
+        },
+        {
+          "Id": 610,
+          "Name": "Clustus"
+        },
+        {
+          "Id": 611,
+          "Name": "Issering"
+        }
+      ],
+      "LoginIp": "34.251.172.139",
+      "LoginPort": 443,
+      "Name": "Dofus Retro",
+      "Id": 0
+    },
+    {
+      "RealmInfos": [
+        {
+          "Id": 1,
+          "Name": "Amakna"
+        }
+      ],
+      "LoginIp": "190.115.26.126",
+      "LoginPort": 887,
+      "Name": "Amakna",
+      "Id": 1
+    }
+  ]
+}

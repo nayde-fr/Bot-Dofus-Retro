@@ -29,7 +29,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
         {
             InitializeComponent();
             cuenta = _cuenta;
-            nombre_cuenta = cuenta.accountConfig.accountUsername; ;
+            nombre_cuenta = cuenta.Configuration.Username; ;
         }
 
         private void UI_Principal_Load(object sender, EventArgs e)
@@ -45,13 +45,13 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
             cuenta.script.evento_script_iniciado += evento_Scripts_Iniciado;
             cuenta.script.evento_script_detenido += evento_Scripts_Detenido;
 
-            cuenta.game.CharacterClass.caracteristicas_actualizadas += caracteristicas_Actualizadas;
-            cuenta.game.CharacterClass.pods_actualizados += pods_Actualizados;
-            cuenta.game.CharacterClass.servidor_seleccionado += servidor_Seleccionado;
-            cuenta.game.CharacterClass.personaje_seleccionado += personaje_Seleccionado;
+            cuenta.Game.Character.caracteristicas_actualizadas += caracteristicas_Actualizadas;
+            cuenta.Game.Character.pods_actualizados += pods_Actualizados;
+            cuenta.Game.Character.servidor_seleccionado += servidor_Seleccionado;
+            cuenta.Game.Character.personaje_seleccionado += personaje_Seleccionado;
 
             if (cuenta.hasGroup)
-                escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] -> Le chef de groupe est: " + cuenta.group.lider.accountConfig.accountUsername, LogTypes.ERROR.ToString("X"));
+                escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] -> Le chef de groupe est: " + cuenta.group.lider.Configuration.Username, LogTypes.ERROR.ToString("X"));
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,14 +169,14 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
         {
             BeginInvoke((Action)(() =>
             {
-                canal_informaciones.Checked = cuenta.game.CharacterClass.canales.Contains("i");
-                canal_general.Checked = cuenta.game.CharacterClass.canales.Contains("*");
-                canal_privado.Checked = cuenta.game.CharacterClass.canales.Contains("#");
-                canal_gremio.Checked = cuenta.game.CharacterClass.canales.Contains("%");
-                canal_alineamiento.Checked = cuenta.game.CharacterClass.canales.Contains("!");
-                canal_reclutamiento.Checked = cuenta.game.CharacterClass.canales.Contains("?");
-                canal_comercio.Checked = cuenta.game.CharacterClass.canales.Contains(":");
-                canal_incarnam.Checked = cuenta.game.CharacterClass.canales.Contains("^");
+                canal_informaciones.Checked = cuenta.Game.Character.canales.Contains("i");
+                canal_general.Checked = cuenta.Game.Character.canales.Contains("*");
+                canal_privado.Checked = cuenta.Game.Character.canales.Contains("#");
+                canal_gremio.Checked = cuenta.Game.Character.canales.Contains("%");
+                canal_alineamiento.Checked = cuenta.Game.Character.canales.Contains("!");
+                canal_reclutamiento.Checked = cuenta.Game.Character.canales.Contains("?");
+                canal_comercio.Checked = cuenta.Game.Character.canales.Contains(":");
+                canal_incarnam.Checked = cuenta.Game.Character.canales.Contains("^");
                 comboBox_lista_canales.SelectedIndex = 0;
             }));
         }
@@ -199,11 +199,11 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
                 switch (textBox_enviar_consola.Text.ToUpper())
                 {
                     case "/MAPID":
-                        escribir_mensaje(cuenta.game.Map.mapId.ToString(), "0040FF");
+                        escribir_mensaje(cuenta.Game.Map.mapId.ToString(), "0040FF");
                     break;
 
                     case "/CELLID":
-                        escribir_mensaje(cuenta.game.CharacterClass.celda.cellId.ToString(), "0040FF");
+                        escribir_mensaje(cuenta.Game.Character.Cell.cellId.ToString(), "0040FF");
                     break;
 
                     case "/PING":
@@ -274,7 +274,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
         {
             BeginInvoke((Action)(() =>
             {
-                Character personaje = cuenta.game.CharacterClass;
+                Character personaje = cuenta.Game.Character;
 
                 progresBar_vitalidad.valor_Maximo = personaje.caracteristicas.vitalidad_maxima;
                 progresBar_vitalidad.Valor = personaje.caracteristicas.vitalidad_actual;
@@ -290,8 +290,8 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
         {
             BeginInvoke((Action)(() =>
             {
-                progresBar_pods.valor_Maximo = cuenta.game.CharacterClass.inventario.pods_maximos;
-                progresBar_pods.Valor = cuenta.game.CharacterClass.inventario.pods_actuales;
+                progresBar_pods.valor_Maximo = cuenta.Game.Character.inventario.pods_maximos;
+                progresBar_pods.Valor = cuenta.Game.Character.inventario.pods_actuales;
             }));
         }
 

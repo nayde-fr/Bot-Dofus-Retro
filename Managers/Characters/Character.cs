@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Bot_Dofus_1._29._1.Game.Character;
 using Bot_Dofus_1._29._1.Game.Character.Inventory;
 using Bot_Dofus_1._29._1.Game.Character.Jobs;
 using Bot_Dofus_1._29._1.Game.Character.Spells;
 using Bot_Dofus_1._29._1.Game.Enums;
 using Bot_Dofus_1._29._1.Game.Mapas;
 using Bot_Dofus_1._29._1.Game.Mapas.Entidades;
-using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 
 /*
@@ -19,11 +19,11 @@ using Bot_Dofus_1._29._1.Managers.Accounts;
     web: http://www.salesprendes.com
 */
 
-namespace Bot_Dofus_1._29._1.Game.Character
+namespace Bot_Dofus_1._29._1.Managers.Characters
 {
     public class Character : Entidad, IManager
     {
-        public int id { get; set; } = 0;
+        public int Id { get; set; } = 0;
         public string nombre { get; set; }
         public byte nivel { get; set; } = 0;
         public byte sexo { get; set; } = 0;
@@ -38,7 +38,7 @@ namespace Bot_Dofus_1._29._1.Game.Character
         public Timer timer_regeneracion { get; private set; }
         public Timer timer_afk { get; private set; }
         public string canales { get; set; } = string.Empty;
-        public Cell celda { get; set; }
+        public Cell Cell { get; set; }
         
         public bool en_grupo { get; set; } = false;
         private bool disposed;
@@ -74,7 +74,7 @@ namespace Bot_Dofus_1._29._1.Game.Character
 
         public void set_Datos_Personaje(int _id, string _nombre_personaje, byte _nivel, byte _sexo, byte _raza_id)
         {
-            id = _id;
+            Id = _id;
             nombre = _nombre_personaje;
             nivel = _nivel;
             sexo = _sexo;
@@ -248,7 +248,7 @@ namespace Bot_Dofus_1._29._1.Game.Character
 
         public void Clear()
         {
-            id = 0;
+            Id = 0;
             hechizos.Clear();
             oficios.Clear();
             inventario.Clear();

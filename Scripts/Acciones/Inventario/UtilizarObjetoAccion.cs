@@ -13,11 +13,11 @@ namespace Bot_Dofus_1._29._1.Scripts.Acciones.Inventario
 
         internal override async Task<ResultadosAcciones> proceso(Account cuenta)
         {
-            InventoryObject objeto = cuenta.game.CharacterClass.inventario.get_Objeto_Modelo_Id(modelo_id);
+            InventoryObject objeto = cuenta.Game.Character.inventario.get_Objeto_Modelo_Id(modelo_id);
 
             if (objeto != null)
             {
-                cuenta.game.CharacterClass.inventario.utilizar_Objeto(objeto);
+                cuenta.Game.Character.inventario.utilizar_Objeto(objeto);
                 await Task.Delay(800);
             }
 

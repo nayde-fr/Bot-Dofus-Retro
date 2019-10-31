@@ -16,17 +16,17 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
 {
     internal class ServerSelectionFrame : Frame
     {
-        [Packet("HG")]
+        [PacketHandler("HG")]
         public void bienvenida_Juego(TcpClient cliente, string paquete) => cliente.SendPacket("AT" + cliente.account.gameTicket);
 
-        [Packet("ATK0")]
+        [PacketHandler("ATK0")]
         public void resultado_Servidor_Seleccion(TcpClient cliente, string paquete)
         {
             cliente.SendPacket("Ak0");
             cliente.SendPacket("AV");
         }
 
-        [Packet("AV0")]
+        [PacketHandler("AV0")]
         public void lista_Personajes(TcpClient cliente, string paquete)
         {
             cliente.SendPacket("Ages");
@@ -34,7 +34,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             cliente.SendPacket("Af");
         }
 
-        [Packet("ALK")]
+        [PacketHandler("ALK")]
         public void seleccionar_Personaje(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.account;
@@ -48,7 +48,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
                 int id = int.Parse(_loc11_[0]);
                 string nombre = _loc11_[1];
 
-                if (nombre.ToLower().Equals(cuenta.accountConfig.characterName.ToLower()) || string.IsNullOrEmpty(cuenta.accountConfig.characterName))
+                if (nombre.ToLower().Equals(cuenta.Configuration.CharacterName.ToLower()) || string.IsNullOrEmpty(cuenta.Configuration.CharacterName))
                 {
                     cliente.SendPacket("AS" + id, true);
                     encontrado = true;
@@ -58,10 +58,14 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             }
         }
 
-        [Packet("BT")]
-        public void get_Tiempo_Servidor(TcpClient cliente, string paquete) => cliente.SendPacket("GI");
+        //[PacketHandler("BT")]
+        //public void get_Tiempo_Servidor(TcpClient cliente, string paquete) => cliente.SendPacket("GI");
 
-        [Packet("ASK")]
+        [PacketHandler("GCK")]
+        public void ConnectedPacketHandler(TcpClient cliente, string paquete) => cliente.SendPacket("GI");
+
+
+        [PacketHandler("ASK")]
         public void personaje_Seleccionado(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.account;
@@ -73,13 +77,13 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             byte raza_id = byte.Parse(_loc4[3]);
             byte sexo = byte.Parse(_loc4[4]);
 
-            cuenta.game.CharacterClass.set_Datos_Personaje(id, nombre, nivel, sexo, raza_id);
-            cuenta.game.CharacterClass.inventario.agregar_Objetos(_loc4[9]);
+            cuenta.Game.Character.set_Datos_Personaje(id, nombre, nivel, sexo, raza_id);
+            cuenta.Game.Character.inventario.agregar_Objetos(_loc4[9]);
 
             cliente.SendPacket("GC1");
 
-            cuenta.game.CharacterClass.evento_Personaje_Seleccionado();
-            cuenta.game.CharacterClass.timer_afk.Change(1200000, 1200000);
+            cuenta.Game.Character.evento_Personaje_Seleccionado();
+            cuenta.Game.Character.timer_afk.Change(1200000, 1200000);
             cliente.account.accountState = AccountState.CONNECTED_INACTIVE;
         }
     }

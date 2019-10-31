@@ -10,18 +10,18 @@ namespace Bot_Dofus_1._29._1.Game.Mapas.Entidades
 {
     public class Personajes : Entidad
     {
-        public int id { get; set; } = 0;
+        public int Id { get; set; } = 0;
         public string nombre { get; set; }
         public byte sexo { get; set; } = 0;
-        public Cell celda { get; set; }
+        public Cell Cell { get; set; }
         private bool disposed;
 
         public Personajes(int _id, string _nombre_personaje, byte _sexo, Cell _celda)
         {
-            id = _id;
+            Id = _id;
             nombre = _nombre_personaje;
             sexo = _sexo;
-            celda = _celda;
+            Cell = _celda;
         }
 
         #region Zona Dispose
@@ -32,7 +32,7 @@ namespace Bot_Dofus_1._29._1.Game.Mapas.Entidades
         {
             if (!disposed)
             {
-                celda = null;
+                Cell = null;
                 disposed = true;
             }
         }

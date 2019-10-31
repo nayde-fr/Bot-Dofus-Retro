@@ -25,10 +25,10 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
         public string gameTicket { get; set; } = string.Empty;
         public Logger logger { get; private set; }
         public TcpClient connexion { get; set; }
-        public AccountManager game { get; private set; }
+        public AccountManager Game { get; private set; }
         public ManejadorScript script { get; set; }
         public PeleaExtensiones fightExtension { get; set; }
-        public AccountConfig accountConfig { get; private set; }
+        public AccountConfig Configuration { get; private set; }
         private AccountState _accountState = AccountState.DISCONNECTED;
         public bool canUseMount = false;
 
@@ -40,11 +40,11 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
         public event Action accountStateEvent;
         public event Action accountDisconnectEvent;
 
-        public Account(AccountConfig prmAccountConfig)
+        public Account(AccountConfig prmConfiguration)
         {
-            accountConfig = prmAccountConfig;
+            Configuration = prmConfiguration;
             logger = new Logger();
-            game = new AccountManager(this);
+            Game = new AccountManager(this);
             fightExtension = new PeleaExtensiones(this);
             script = new ManejadorScript(this);
         }
@@ -52,7 +52,7 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
         public void Connect()
         {
             connexion = new TcpClient(this);
-            connexion.ConnectToServer(IPAddress.Parse(GlobalConfig.loginIP), GlobalConfig.loginPort);
+            connexion.ConnectToServer(IPAddress.Parse(Configuration.GetChosenServer().LoginIp), Configuration.GetChosenServer().LoginPort);
         }
 
         public void Disconnect()
@@ -61,7 +61,7 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
             connexion = null;
 
             script.detener_Script();
-            game.Clear();
+            Game.Clear();
             accountState = AccountState.DISCONNECTED;
             accountDisconnectEvent?.Invoke();
         }
@@ -100,16 +100,16 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
                 {
                     script.Dispose();
                     connexion?.Dispose();
-                    game.Dispose();
+                    Game.Dispose();
                 }
                 accountState = AccountState.DISCONNECTED;
                 script = null;
                 welcomeKey = null;
                 connexion = null;
                 logger = null;
-                game = null;
+                Game = null;
                 nickname = null;
-                accountConfig = null;
+                Configuration = null;
                 _disposed = true;
             }
         }

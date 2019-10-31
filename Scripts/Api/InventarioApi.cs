@@ -30,14 +30,14 @@ namespace Bot_Dofus_1._29._1.Scripts.Api
             manejar_acciones = _manejar_acciones;
         }
 
-        public int pods() => cuenta.game.CharacterClass.inventario.pods_actuales;
-        public int podsMaximos() => cuenta.game.CharacterClass.inventario.pods_maximos;
-        public int podsPorcentaje() => cuenta.game.CharacterClass.inventario.porcentaje_pods;
-        public bool tieneObjeto(int modelo_id) => cuenta.game.CharacterClass.inventario.get_Objeto_Modelo_Id(modelo_id) != null;
+        public int pods() => cuenta.Game.Character.inventario.pods_actuales;
+        public int podsMaximos() => cuenta.Game.Character.inventario.pods_maximos;
+        public int podsPorcentaje() => cuenta.Game.Character.inventario.porcentaje_pods;
+        public bool tieneObjeto(int modelo_id) => cuenta.Game.Character.inventario.get_Objeto_Modelo_Id(modelo_id) != null;
 
         public bool utilizar(int modelo_id)
         {
-            InventoryObject objeto = cuenta.game.CharacterClass.inventario.get_Objeto_Modelo_Id(modelo_id);
+            InventoryObject objeto = cuenta.Game.Character.inventario.get_Objeto_Modelo_Id(modelo_id);
 
             if (objeto == null)
                 return false;
@@ -48,7 +48,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Api
 
         public bool equipar(int modelo_id)
         {
-            InventoryObject objeto = cuenta.game.CharacterClass.inventario.get_Objeto_Modelo_Id(modelo_id);
+            InventoryObject objeto = cuenta.Game.Character.inventario.get_Objeto_Modelo_Id(modelo_id);
 
             if (objeto == null || objeto.posicion != InventorySlots.NOT_EQUIPPED)
                 return false;

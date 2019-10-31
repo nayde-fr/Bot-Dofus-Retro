@@ -48,13 +48,13 @@ namespace Bot_Dofus_1._29._1.Game.Mapas
             CellsTeleport = new Dictionary<MovementDirection, List<short>>();
         }
 
-        public void GetRefreshMap(string prmPacket)
+        public void GetRefreshMap(string packetData)
         {
             entities.Clear();
             interactives.Clear();
             CellsTeleport.Clear();
 
-            string[] _loc3 = prmPacket.Split('|');
+            string[] _loc3 = packetData.Split('|');
             mapId = int.Parse(_loc3[0]);
 
             FileInfo mapFile = new FileInfo("mapas/" + mapId + ".xml");
@@ -78,7 +78,7 @@ namespace Bot_Dofus_1._29._1.Game.Mapas
         public bool get_Puede_Luchar_Contra_Grupo_Monstruos(int monstruos_minimos, int monstruos_maximos, int nivel_minimo, int nivel_maximo, List<int> monstruos_prohibidos, List<int> monstruos_obligatorios) => get_Grupo_Monstruos(monstruos_minimos, monstruos_maximos, nivel_minimo, nivel_maximo, monstruos_prohibidos, monstruos_obligatorios).Count > 0;
 
         // si el destino es una celda teleport, aunque haya un monstruo encima de la celda no causara agresion
-        public List<Cell> celdas_ocupadas() => entities.Values.Select(c => c.celda).ToList();
+        public List<Cell> celdas_ocupadas() => entities.Values.Select(c => c.Cell).ToList();
         public List<Npcs> lista_npcs() => entities.Values.Where(n => n is Npcs).Select(n => n as Npcs).ToList();
         public List<Monstruos> lista_monstruos() => entities.Values.Where(n => n is Monstruos).Select(n => n as Monstruos).ToList();
         public List<Personajes> lista_personajes() => entities.Values.Where(n => n is Personajes).Select(n => n as Personajes).ToList();
@@ -95,7 +95,7 @@ namespace Bot_Dofus_1._29._1.Game.Mapas
                 if (grupo_monstruo.get_Total_Nivel_Grupo < nivel_minimo || grupo_monstruo.get_Total_Nivel_Grupo > nivel_maximo)
                     continue;
 
-                if (grupo_monstruo.celda.cellType == CellTypes.TELEPORT_CELL)
+                if (grupo_monstruo.Cell.cellType == CellTypes.TELEPORT_CELL)
                     continue;
 
                 bool es_valido = true;

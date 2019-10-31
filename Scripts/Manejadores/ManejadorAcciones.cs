@@ -39,17 +39,17 @@ namespace Bot_Dofus_1._29._1.Scripts.Manejadores
             manejador_script = _manejador_script;
             fila_acciones = new ConcurrentQueue<AccionesScript>();
             timer_out = new TimerWrapper(60000, time_Out_Callback);
-            Character personaje = cuenta.game.CharacterClass;
+            Character personaje = cuenta.Game.Character;
             
-            cuenta.game.Map.mapRefreshEvent += evento_Mapa_Cambiado;
-            cuenta.game.fight.pelea_creada += get_Pelea_Creada;
-            cuenta.game.manager.MovementManager.movimiento_finalizado += evento_Movimiento_Celda;
+            cuenta.Game.Map.mapRefreshEvent += evento_Mapa_Cambiado;
+            cuenta.Game.fight.pelea_creada += get_Pelea_Creada;
+            cuenta.Game.manager.MovementManager.movimiento_finalizado += evento_Movimiento_Celda;
             personaje.dialogo_npc_recibido += npcs_Dialogo_Recibido;
             personaje.dialogo_npc_acabado += npcs_Dialogo_Acabado;
             personaje.inventario.almacenamiento_abierto += iniciar_Almacenamiento;
             personaje.inventario.almacenamiento_cerrado += cerrar_Almacenamiento;
-            cuenta.game.manager.GatheringManager.onGatherStart += get_Recoleccion_Iniciada;
-            cuenta.game.manager.GatheringManager.onGatherEnd += get_Recoleccion_Acabada;
+            cuenta.Game.manager.GatheringManager.onGatherStart += get_Recoleccion_Iniciada;
+            cuenta.Game.manager.GatheringManager.onGatherEnd += get_Recoleccion_Acabada;
         }
 
         private void evento_Mapa_Cambiado()
@@ -160,8 +160,8 @@ namespace Bot_Dofus_1._29._1.Scripts.Manejadores
                 if (cuenta.accountState != AccountState.DIALOG)
                     return;
 
-                IEnumerable<Npcs> npcs = cuenta.game.Map.lista_npcs();
-                Npcs npc = npcs.ElementAt((cuenta.game.CharacterClass.hablando_npc_id * -1) - 1);
+                IEnumerable<Npcs> npcs = cuenta.Game.Map.lista_npcs();
+                Npcs npc = npcs.ElementAt((cuenta.Game.Character.hablando_npc_id * -1) - 1);
 
                 cuenta.connexion.SendPacket("DR" + npc.pregunta + "|" + npc.respuestas[0], true);
             }

@@ -29,18 +29,18 @@ namespace Bot_Dofus_1._29._1.Scripts.Acciones
 
         internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
-            Map mapa = cuenta.game.Map;
+            Map mapa = cuenta.Game.Map;
             List<Monstruos> grupos_disponibles = mapa.get_Grupo_Monstruos(monstruos_minimos, monstruos_maximos, monstruo_nivel_minimo, monstruo_nivel_maximo, monstruos_prohibidos, monstruos_obligatorios);
 
             if (grupos_disponibles.Count > 0)
             {
                 foreach (Monstruos grupo_monstruo in grupos_disponibles)
                 {
-                    var test = cuenta.game.manager.MovementManager.get_Mover_A_Celda(grupo_monstruo.celda, new List<Cell>());
+                    var test = cuenta.Game.manager.MovementManager.get_Mover_A_Celda(grupo_monstruo.Cell, new List<Cell>());
                     switch (test)
                     {
                         case MovementResult.OK:
-                            cuenta.logger.log_informacion("SCRIPT", $"Mouvent vers un groupes à la cellule : {grupo_monstruo.celda.cellId}, monstres total: {grupo_monstruo.get_Total_Monstruos}, niveaux du groupe: {grupo_monstruo.get_Total_Nivel_Grupo}");
+                            cuenta.logger.log_informacion("SCRIPT", $"Mouvent vers un groupes à la cellule : {grupo_monstruo.Cell.cellId}, monstres total: {grupo_monstruo.get_Total_Monstruos}, niveaux du groupe: {grupo_monstruo.get_Total_Nivel_Grupo}");
                         return resultado_procesado;
                             
                         case MovementResult.PATHFINDING_ERROR:

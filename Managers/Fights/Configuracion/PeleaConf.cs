@@ -12,7 +12,7 @@ namespace Bot_Dofus_1._29._1.Managers.Fights.Configuracion
         private Account cuenta;
         private bool disposed;
 
-        private string archivo_configuracion => Path.Combine(carpeta_configuracion, $"{cuenta.game.CharacterClass.nombre}.config");
+        private string archivo_configuracion => Path.Combine(carpeta_configuracion, $"{cuenta.Game.Character.nombre}.config");
         public List<HechizoPelea> hechizos { get; private set; }
         public bool desactivar_espectador { get; set; }
         public bool utilizar_dragopavo { get; set; }

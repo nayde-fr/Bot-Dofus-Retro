@@ -35,7 +35,7 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
             cuenta = _cuenta;
             configuracion = new PeleaConf(cuenta);
             manejador_hechizos = new ManejadorHechizos(cuenta);
-            pelea = cuenta.game.fight;
+            pelea = cuenta.Game.fight;
 
             get_Eventos();
         }
@@ -61,7 +61,7 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
 
             await Task.Delay(400);
 
-            if (configuracion.hechizos.Count == 0 || !cuenta.game.fight.get_Enemigos.Any())
+            if (configuracion.hechizos.Count == 0 || !cuenta.Game.fight.get_Enemigos.Any())
             {
                 await get_Fin_Turno();
                 return;
@@ -182,7 +182,7 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
         public async Task get_Mover(bool cercano, Luchadores enemigo)
         {
             KeyValuePair<short, MovimientoNodo>? nodo = null;
-            Map mapa = cuenta.game.Map;
+            Map mapa = cuenta.Game.Map;
             int distancia = -1;
 
             int distancia_total = Get_Total_Distancia_Enemigo(pelea.jugador_luchador.celda);
@@ -211,10 +211,10 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
             }
 
             if (nodo != null)
-                await cuenta.game.manager.MovementManager.get_Mover_Celda_Pelea(nodo);
+                await cuenta.Game.manager.MovementManager.get_Mover_Celda_Pelea(nodo);
         }
 
-        public int Get_Total_Distancia_Enemigo(Cell celda) => cuenta.game.fight.get_Enemigos.Sum(e => e.celda.GetDistanceBetweenCells(celda) - 1);
+        public int Get_Total_Distancia_Enemigo(Cell celda) => cuenta.Game.fight.get_Enemigos.Sum(e => e.celda.GetDistanceBetweenCells(celda) - 1);
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);

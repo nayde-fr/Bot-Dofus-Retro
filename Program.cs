@@ -29,7 +29,7 @@ namespace Bot_Dofus_1._29._1
 
             Task.Run(() =>
             {
-                GlobalConfig.Load_All_Accounts();
+                ConfigurationManager.Load();
                 LuaManejadorScript.inicializar_Funciones();
                 XElement.Parse(Properties.Resources.interactivos).Descendants("SKILL").ToList().ForEach(i => new InteractiveObjectModel(i.Element("nombre").Value, i.Element("gfx").Value, bool.Parse(i.Element("caminable").Value), i.Element("habilidades").Value, bool.Parse(i.Element("recolectable").Value)));
                 PacketReceiver.Initialize();

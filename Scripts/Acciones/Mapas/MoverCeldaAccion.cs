@@ -13,13 +13,13 @@ namespace Bot_Dofus_1._29._1.Scripts.Acciones.Mapas
 
         internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
-            Map mapa = cuenta.game.Map;
+            Map mapa = cuenta.Game.Map;
             Cell celda = mapa.GetCellFromId(celda_id);
 
             if (celda == null)
                 return resultado_fallado;
 
-            switch (cuenta.game.manager.MovementManager.get_Mover_A_Celda(celda, cuenta.game.Map.celdas_ocupadas()))
+            switch (cuenta.Game.manager.MovementManager.get_Mover_A_Celda(celda, cuenta.Game.Map.celdas_ocupadas()))
             {
                 case MovementResult.OK:
                     return resultado_procesado;

@@ -20,10 +20,10 @@ namespace Bot_Dofus_1._29._1.Scripts.Api
 
         public PersonajeApi(Account _cuenta) => cuenta = _cuenta;
 
-        public string nombre() => cuenta.game.CharacterClass.nombre;
-        public byte nivel() => cuenta.game.CharacterClass.nivel;
-        public int experiencia() => cuenta.game.CharacterClass.porcentaje_experiencia;
-        public int kamas() => cuenta.game.CharacterClass.kamas;
+        public string nombre() => cuenta.Game.Character.nombre;
+        public byte nivel() => cuenta.Game.Character.nivel;
+        public int experiencia() => cuenta.Game.Character.porcentaje_experiencia;
+        public int kamas() => cuenta.Game.Character.kamas;
 
         #region Zona Dispose
         ~PersonajeApi() => Dispose(false);

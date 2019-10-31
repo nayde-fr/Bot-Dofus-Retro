@@ -26,18 +26,18 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
             ui_hechizos.set_Cuenta(cuenta);
             ui_oficios.set_Cuenta(cuenta);
 
-            cuenta.game.CharacterClass.personaje_seleccionado += personaje_Seleccionado_Servidor_Juego;
-            cuenta.game.CharacterClass.caracteristicas_actualizadas += personaje_Caracteristicas_Actualizadas;
+            cuenta.Game.Character.personaje_seleccionado += personaje_Seleccionado_Servidor_Juego;
+            cuenta.Game.Character.caracteristicas_actualizadas += personaje_Caracteristicas_Actualizadas;
          }
 
         private void personaje_Seleccionado_Servidor_Juego()
         {
             BeginInvoke((Action)(() =>
             {
-                Bitmap imagen_raza = Properties.Resources.ResourceManager.GetObject("_" + cuenta.game.CharacterClass.raza_id + cuenta.game.CharacterClass.sexo) as Bitmap;
+                Bitmap imagen_raza = Properties.Resources.ResourceManager.GetObject("_" + cuenta.Game.Character.raza_id + cuenta.Game.Character.sexo) as Bitmap;
                 imagen_personaje.Image = imagen_raza;
 
-                label_nombre_personaje.Text = cuenta.game.CharacterClass.nombre;
+                label_nombre_personaje.Text = cuenta.Game.Character.nombre;
             }));
         }
 
@@ -46,25 +46,25 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
             BeginInvoke((Action)(() =>
             {
                 //Sumario
-                label_puntos_vida.Text = cuenta.game.CharacterClass.caracteristicas.vitalidad_actual.ToString() + '/' + cuenta.game.CharacterClass.caracteristicas.vitalidad_maxima.ToString();
-                label_puntos_accion.Text = cuenta.game.CharacterClass.caracteristicas.puntos_accion.total_stats.ToString();
-                label_puntos_movimiento.Text = cuenta.game.CharacterClass.caracteristicas.puntos_movimiento.total_stats.ToString();
-                label_iniciativa.Text = cuenta.game.CharacterClass.caracteristicas.iniciativa.total_stats.ToString();
-                label_prospeccion.Text = cuenta.game.CharacterClass.caracteristicas.prospeccion.total_stats.ToString();
-                label_alcanze.Text = cuenta.game.CharacterClass.caracteristicas.alcanze.total_stats.ToString();
-                label_invocaciones.Text = cuenta.game.CharacterClass.caracteristicas.criaturas_invocables.total_stats.ToString();
+                label_puntos_vida.Text = cuenta.Game.Character.caracteristicas.vitalidad_actual.ToString() + '/' + cuenta.Game.Character.caracteristicas.vitalidad_maxima.ToString();
+                label_puntos_accion.Text = cuenta.Game.Character.caracteristicas.puntos_accion.total_stats.ToString();
+                label_puntos_movimiento.Text = cuenta.Game.Character.caracteristicas.puntos_movimiento.total_stats.ToString();
+                label_iniciativa.Text = cuenta.Game.Character.caracteristicas.iniciativa.total_stats.ToString();
+                label_prospeccion.Text = cuenta.Game.Character.caracteristicas.prospeccion.total_stats.ToString();
+                label_alcanze.Text = cuenta.Game.Character.caracteristicas.alcanze.total_stats.ToString();
+                label_invocaciones.Text = cuenta.Game.Character.caracteristicas.criaturas_invocables.total_stats.ToString();
 
                 //Caracteristicas
-                stats_vitalidad.Text = cuenta.game.CharacterClass.caracteristicas.vitalidad.base_personaje.ToString() + " (" + cuenta.game.CharacterClass.caracteristicas.vitalidad.equipamiento.ToString() + ")";
-                stats_sabiduria.Text = cuenta.game.CharacterClass.caracteristicas.sabiduria.base_personaje.ToString() + " (" + cuenta.game.CharacterClass.caracteristicas.sabiduria.equipamiento.ToString() + ")";
-                stats_fuerza.Text = cuenta.game.CharacterClass.caracteristicas.fuerza.base_personaje.ToString() + " (" + cuenta.game.CharacterClass.caracteristicas.fuerza.equipamiento.ToString() + ")";
-                stats_inteligencia.Text = cuenta.game.CharacterClass.caracteristicas.inteligencia.base_personaje.ToString() + " (" + cuenta.game.CharacterClass.caracteristicas.inteligencia.equipamiento.ToString() + ")";
-                stats_suerte.Text = cuenta.game.CharacterClass.caracteristicas.suerte.base_personaje.ToString() + " (" + cuenta.game.CharacterClass.caracteristicas.suerte.equipamiento.ToString() + ")";
-                stats_agilidad.Text = cuenta.game.CharacterClass.caracteristicas.agilidad.base_personaje.ToString() + " (" + cuenta.game.CharacterClass.caracteristicas.agilidad.equipamiento.ToString() + ")";
+                stats_vitalidad.Text = cuenta.Game.Character.caracteristicas.vitalidad.base_personaje.ToString() + " (" + cuenta.Game.Character.caracteristicas.vitalidad.equipamiento.ToString() + ")";
+                stats_sabiduria.Text = cuenta.Game.Character.caracteristicas.sabiduria.base_personaje.ToString() + " (" + cuenta.Game.Character.caracteristicas.sabiduria.equipamiento.ToString() + ")";
+                stats_fuerza.Text = cuenta.Game.Character.caracteristicas.fuerza.base_personaje.ToString() + " (" + cuenta.Game.Character.caracteristicas.fuerza.equipamiento.ToString() + ")";
+                stats_inteligencia.Text = cuenta.Game.Character.caracteristicas.inteligencia.base_personaje.ToString() + " (" + cuenta.Game.Character.caracteristicas.inteligencia.equipamiento.ToString() + ")";
+                stats_suerte.Text = cuenta.Game.Character.caracteristicas.suerte.base_personaje.ToString() + " (" + cuenta.Game.Character.caracteristicas.suerte.equipamiento.ToString() + ")";
+                stats_agilidad.Text = cuenta.Game.Character.caracteristicas.agilidad.base_personaje.ToString() + " (" + cuenta.Game.Character.caracteristicas.agilidad.equipamiento.ToString() + ")";
 
                 //Otros
-                label_capital_stats.Text = cuenta.game.CharacterClass.puntos_caracteristicas.ToString();
-                label_nivel_personaje.Text = $"Nivel {cuenta.game.CharacterClass.nivel}";
+                label_capital_stats.Text = cuenta.Game.Character.puntos_caracteristicas.ToString();
+                label_nivel_personaje.Text = $"Nivel {cuenta.Game.Character.nivel}";
             }));
         }
     }

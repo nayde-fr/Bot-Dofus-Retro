@@ -19,16 +19,16 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
 {
     class NPCFrame : Frame
     {
-        [Packet("DCK")]
+        [PacketHandler("DCK")]
         public void get_Dialogo_Creado(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.account;
 
             cuenta.accountState = AccountState.DIALOG;
-            cuenta.game.CharacterClass.hablando_npc_id = sbyte.Parse(paquete.Substring(3));
+            cuenta.Game.Character.hablando_npc_id = sbyte.Parse(paquete.Substring(3));
         }
 
-        [Packet("DQ")]
+        [PacketHandler("DQ")]
         public void get_Lista_Respuestas(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.account;
@@ -36,8 +36,8 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             if (!cuenta.Is_In_Dialog())
                 return;
 
-            IEnumerable<Npcs> npcs = cuenta.game.Map.lista_npcs();
-            Npcs npc = npcs.ElementAt((cuenta.game.CharacterClass.hablando_npc_id * -1) - 1);
+            IEnumerable<Npcs> npcs = cuenta.Game.Map.lista_npcs();
+            Npcs npc = npcs.ElementAt((cuenta.Game.Character.hablando_npc_id * -1) - 1);
 
             if (npc != null)
             {
@@ -50,7 +50,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
                 foreach (string respuesta in respuestas_disponibles)
                     npc.respuestas.Add(short.Parse(respuesta));
 
-                cuenta.game.CharacterClass.evento_Dialogo_Recibido();
+                cuenta.Game.Character.evento_Dialogo_Recibido();
             }
         }
     }

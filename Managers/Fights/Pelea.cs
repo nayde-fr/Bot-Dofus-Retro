@@ -73,7 +73,7 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
 
         public void actualizar_Hechizo_Exito(short celda_id, short hechizo_id)
         {
-            Spell hechizo = cuenta.game.CharacterClass.get_Hechizo(hechizo_id);
+            Spell hechizo = cuenta.Game.Character.get_Hechizo(hechizo_id);
             SpellStats datos_hechizo = hechizo.get_Stats();
 
             if (datos_hechizo.intervalo > 0 && !hechizos_intervalo.ContainsKey(hechizo.id))
@@ -194,8 +194,8 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
 
         public void get_Agregar_Luchador(Luchadores luchador)
         {
-            if (luchador.id == cuenta.game.CharacterClass.id)
-                jugador_luchador = new LuchadorPersonaje(cuenta.game.CharacterClass.nombre, cuenta.game.CharacterClass.nivel, luchador);
+            if (luchador.id == cuenta.Game.Character.Id)
+                jugador_luchador = new LuchadorPersonaje(cuenta.Game.Character.nombre, cuenta.Game.Character.nivel, luchador);
 
             else if (!luchadores.TryAdd(luchador.id, luchador))
                 luchador.get_Actualizar_Luchador(luchador.id, luchador.esta_vivo, luchador.vida_actual, luchador.pa, luchador.pm, luchador.celda, luchador.vida_maxima, luchador.equipo, luchador.id_invocador);
@@ -257,7 +257,7 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
 
         public FallosLanzandoHechizo get_Puede_Lanzar_hechizo(short hechizo_id)
         {
-            Spell hechizo = cuenta.game.CharacterClass.get_Hechizo(hechizo_id);
+            Spell hechizo = cuenta.Game.Character.get_Hechizo(hechizo_id);
 
             if (hechizo == null)
                 return FallosLanzandoHechizo.DESONOCIDO;
@@ -273,7 +273,7 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
             if (hechizos_intervalo.ContainsKey(hechizo_id))
                 return FallosLanzandoHechizo.COOLDOWN;
 
-            if (datos_hechizo.efectos_normales.Count > 0 && datos_hechizo.efectos_normales[0].id == 181 && contador_invocaciones >= cuenta.game.CharacterClass.caracteristicas.criaturas_invocables.total_stats)
+            if (datos_hechizo.efectos_normales.Count > 0 && datos_hechizo.efectos_normales[0].id == 181 && contador_invocaciones >= cuenta.Game.Character.caracteristicas.criaturas_invocables.total_stats)
                 return FallosLanzandoHechizo.DEMASIADAS_INVOCACIONES;
 
             return FallosLanzandoHechizo.NINGUNO;
@@ -281,7 +281,7 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
 
         public FallosLanzandoHechizo get_Puede_Lanzar_hechizo(short hechizo_id, Cell celda_actual, Cell celda_objetivo, Map mapa)
         {
-            Spell hechizo = cuenta.game.CharacterClass.get_Hechizo(hechizo_id);
+            Spell hechizo = cuenta.Game.Character.get_Hechizo(hechizo_id);
 
             if (hechizo == null)
                 return FallosLanzandoHechizo.DESONOCIDO;
@@ -307,7 +307,7 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
         {
             List<short> rango = new List<short>();
             
-            foreach (Cell celda in SpellShape.Get_Lista_Celdas_Rango_Hechizo(celda_personaje, datos_hechizo, cuenta.game.Map, cuenta.game.CharacterClass.caracteristicas.alcanze.total_stats))
+            foreach (Cell celda in SpellShape.Get_Lista_Celdas_Rango_Hechizo(celda_personaje, datos_hechizo, cuenta.Game.Map, cuenta.Game.Character.caracteristicas.alcanze.total_stats))
             {
                 if (celda == null || rango.Contains(celda.cellId))
                     continue;
@@ -519,7 +519,7 @@ namespace Bot_Dofus_1._29._1.Managers.Fights
         #region Zona Eventos
         public void get_Combate_Creado()
         {
-            cuenta.game.CharacterClass.timer_regeneracion.Change(Timeout.Infinite, Timeout.Infinite);
+            cuenta.Game.Character.timer_regeneracion.Change(Timeout.Infinite, Timeout.Infinite);
             cuenta.accountState = AccountState.FIGHTING;
             pelea_creada?.Invoke();
             cuenta.logger.log_informacion("COMBAT", "Un nouveau combat commencé");

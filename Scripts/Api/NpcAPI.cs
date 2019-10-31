@@ -23,7 +23,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Api
 
         public bool npcBanco(int npc_id)
         {
-            if (npc_id > 0 && cuenta.game.Map.lista_npcs().FirstOrDefault(n => n.npc_modelo_id == npc_id) == null)
+            if (npc_id > 0 && cuenta.Game.Map.lista_npcs().FirstOrDefault(n => n.npc_modelo_id == npc_id) == null)
                 return false;
 
             manejador_acciones.enqueue_Accion(new NpcBancoAccion(npc_id), true);
@@ -32,7 +32,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Api
 
         public bool hablarNpc(int npc_id)
         {
-            if (npc_id > 0 && cuenta.game.Map.lista_npcs().FirstOrDefault(n => n.npc_modelo_id == npc_id) == null)
+            if (npc_id > 0 && cuenta.Game.Map.lista_npcs().FirstOrDefault(n => n.npc_modelo_id == npc_id) == null)
                 return false;
 
             manejador_acciones.enqueue_Accion(new NpcAccion(npc_id), true);

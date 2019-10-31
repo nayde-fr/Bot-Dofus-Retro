@@ -28,7 +28,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
         public void set_Cuenta(Account _cuenta)
         {
             cuenta = _cuenta;
-            cuenta.game.CharacterClass.hechizos_actualizados += actualizar_Agregar_Lista_Hechizos;
+            cuenta.Game.Character.hechizos_actualizados += actualizar_Agregar_Lista_Hechizos;
         }
 
         private void actualizar_Agregar_Lista_Hechizos()
@@ -37,7 +37,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
             {
                 dataGridView_hechizos.Rows.Clear();
 
-                foreach (Spell spell in cuenta.game.CharacterClass.hechizos.Values)
+                foreach (Spell spell in cuenta.Game.Character.hechizos.Values)
                     dataGridView_hechizos.Rows.Add(new object[] { spell.id, spell.nombre, spell.nivel, (spell.nivel == 7 || spell.id == 0 ? "-" : "Subir hechizo") });
             }));
         }

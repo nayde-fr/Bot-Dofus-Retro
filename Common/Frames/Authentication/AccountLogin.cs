@@ -4,6 +4,7 @@ using Bot_Dofus_1._29._1.Game.Enums;
 using Bot_Dofus_1._29._1.Game.Server;
 using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
+using Bot_Dofus_1._29._1.Utilities.Config;
 using Bot_Dofus_1._29._1.Utilities.Crypto;
 
 /*
@@ -18,7 +19,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
 {
     public class AccountLogin : Frame
     {
-        [Packet("HC")]
+        [PacketHandler("HC")]
         public void GetWelcomeKeyAsync(TcpClient prmClient, string prmPacket)
         {
             Account account = prmClient.account;
@@ -26,23 +27,23 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
             account.accountState = AccountState.CONNECTED;
             account.welcomeKey = prmPacket.Substring(2);
 
-            prmClient.SendPacket("1.29");
-            prmClient.SendPacket(prmClient.account.accountConfig.accountUsername + "\n" + Hash.Crypt_Password(prmClient.account.accountConfig.accountPassword, prmClient.account.welcomeKey));
+            prmClient.SendPacket("1.30");
+            prmClient.SendPacket(prmClient.account.Configuration.Username + "\n" + Hash.Crypt_Password(prmClient.account.Configuration.Password, prmClient.account.welcomeKey));
             prmClient.SendPacket("Af");
         }
 
-        [Packet("Ad")]
+        [PacketHandler("Ad")]
         public void GetNickname(TcpClient prmClient, string prmPacket) => prmClient.account.nickname = prmPacket.Substring(2);
 
-        [Packet("Af")]
+        [PacketHandler("Af")]
         public void GetLoginQueue(TcpClient prmClient, string prmPacket) => prmClient.account.logger.log_informacion("File d'attente", "Position " + prmPacket[2] + "/" + prmPacket[4]);
 
-        [Packet("AH")]
+        [PacketHandler("AH")]
         public void GetServerState(TcpClient prmClient, string prmPacket)
         {
             Account account = prmClient.account;
             string[] serverList = prmPacket.Substring(2).Split('|');
-            GameServer server = account.game.Server;
+            GameServer server = account.Game.Server;
             bool firstTime = true;
 
             foreach(string sv in serverList)
@@ -51,14 +52,14 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
 
                 int id = int.Parse(separator[0]);
                 ServerState serverState = (ServerState)byte.Parse(separator[1]);
-                string serverName = account.accountConfig.server;
+                var accountRealm = account.Configuration.GetChosenRealm();
 
                 // Add Method to take name with Id
 
-                if (id == account.accountConfig.Get_Server_ID())
+                if (id == accountRealm.Id)
                 {
-                    server.RefreshData(id, serverName, serverState);
-                    account.logger.log_informacion("LOGIN", $"Le serveur {serverName} est {account.game.Server.GetState(serverState)}");
+                    server.RefreshData(id, accountRealm.Name, serverState);
+                    account.logger.log_informacion("LOGIN", $"Le serveur {accountRealm.Name} est {account.Game.Server.GetState(serverState)}");
 
                     if (serverState != ServerState.ONLINE)
                         firstTime = false;
@@ -69,14 +70,14 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
                 prmClient.SendPacket("Ax");
         }
 
-        [Packet("AQ")]
+        [PacketHandler("AQ")]
         public void GetSecretQuestion(TcpClient prmClient, string prmPacket)
         {
-            if (prmClient.account.game.Server.serverState == ServerState.ONLINE)
+            if (prmClient.account.Game.Server.serverState == ServerState.ONLINE)
                 prmClient.SendPacket("Ax", true);
         }
 
-        [Packet("AxK")]
+        [PacketHandler("AxK")]
         public void GetServerList(TcpClient prmClient, string prmPacket)
         {
             Account account = prmClient.account;
@@ -89,12 +90,12 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
                 string[] _loc10_ = loc5[counter].Split(',');
                 int serverId = int.Parse(_loc10_[0]);
 
-                if (serverId == account.game.Server.serverId)
+                if (serverId == account.Game.Server.serverId)
                 {
-                    if(account.game.Server.serverState == ServerState.ONLINE)
+                    if(account.Game.Server.serverState == ServerState.ONLINE)
                     {
                         picked = true;
-                        account.game.CharacterClass.evento_Servidor_Seleccionado();
+                        account.Game.Character.evento_Servidor_Seleccionado();
                     }
                     else
                         account.logger.log_Error("LOGIN", "Serveur non accessible lorsque celui-ci se reconnectera");
@@ -103,10 +104,10 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
             }
 
             if(picked)
-                prmClient.SendPacket($"AX{account.game.Server.serverId}", true);
+                prmClient.SendPacket($"AX{account.Game.Server.serverId}", true);
         }
 
-        [Packet("AXK")]
+        [PacketHandler("AXK")]
         public void GetServerSelection(TcpClient prmClient, string prmPacket)
         {
             prmClient.account.gameTicket = prmPacket.Substring(14);

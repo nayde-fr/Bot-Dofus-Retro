@@ -9,7 +9,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Acciones.Almacenamiento
     {
         internal override async Task<ResultadosAcciones> proceso(Account cuenta)
         {
-            InventoryClass inventario = cuenta.game.CharacterClass.inventario;
+            InventoryClass inventario = cuenta.Game.Character.inventario;
             
             foreach (InventoryObject objeto in inventario.objetos)
             {

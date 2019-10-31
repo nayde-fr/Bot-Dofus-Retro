@@ -120,7 +120,7 @@ namespace Bot_Dofus_1._29._1.Game.Character.Inventory
                 return false;
             }
 
-            if (objeto.nivel > cuenta.game.CharacterClass.nivel)
+            if (objeto.nivel > cuenta.Game.Character.nivel)
             {
                 cuenta.logger.log_Error("INVENTAIRE", $"Le niveau de l'objet {objeto.nombre} est supérieur à ton niveau");
                 return false;

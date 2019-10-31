@@ -255,13 +255,13 @@ namespace Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa
 
                     if(cuenta != null)
                     {
-                        if (celda.id == cuenta.game.CharacterClass.celda.cellId && !animaciones.ContainsKey(cuenta.game.CharacterClass.id))
+                        if (celda.id == cuenta.Game.Character.Cell?.cellId && !animaciones.ContainsKey(cuenta.Game.Character.Id))
                             celda.dibujar_FillPie(g, Color.Blue, RealCellHeight / 2);
-                        else if (cuenta.game.Map.entities.Values.Where(m => m is Monstruos).FirstOrDefault(m => m.celda.cellId == celda.id && !animaciones.ContainsKey(m.id)) != null)
+                        else if (cuenta.Game.Map.entities.Values.Where(m => m is Monstruos).FirstOrDefault(m => m.Cell.cellId == celda.id && !animaciones.ContainsKey(m.Id)) != null)
                             celda.dibujar_FillPie(g, Color.DarkRed, RealCellHeight / 2);
-                        else if (cuenta.game.Map.entities.Values.Where(n => n is Npcs).FirstOrDefault(n => n.celda.cellId == celda.id && !animaciones.ContainsKey(n.id)) != null)
+                        else if (cuenta.Game.Map.entities.Values.Where(n => n is Npcs).FirstOrDefault(n => n.Cell.cellId == celda.id && !animaciones.ContainsKey(n.Id)) != null)
                             celda.dibujar_FillPie(g, Color.FromArgb(179, 120, 211), RealCellHeight / 2);
-                        else if (cuenta.game.Map.entities.Values.Where(p => p is Personajes).FirstOrDefault(p => p.celda.cellId == celda.id && !animaciones.ContainsKey(p.id)) != null)
+                        else if (cuenta.Game.Map.entities.Values.Where(p => p is Personajes).FirstOrDefault(p => p.Cell.cellId == celda.id && !animaciones.ContainsKey(p.Id)) != null)
                             celda.dibujar_FillPie(g, Color.FromArgb(81, 113, 202), RealCellHeight / 2);
                     }
                 }
@@ -335,13 +335,13 @@ namespace Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa
 
         public void refrescar_Mapa()
         {
-            if (cuenta.game.Map == null)
+            if (cuenta.Game.Map == null)
                 return;
 
             animaciones.Clear();
             animaciones_timer.Stop();
 
-            Cell[] celdas_mapa = cuenta.game.Map.mapCells;
+            Cell[] celdas_mapa = cuenta.Game.Map.mapCells;
 
             if (celdas_mapa == null)
                 return;

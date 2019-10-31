@@ -24,7 +24,10 @@ namespace Bot_Dofus_1._29._1.UserInterface.Forms
         {
             InitializeComponent();
             cuentas_cargadas = new List<AccountConfig>();
-
+            foreach (var server in ConfigurationManager.Configuration.ServerInfos)
+            {
+                comboBox_Servidor.Items.Add(server);
+            }
             comboBox_Servidor.SelectedIndex = 0;
             cargar_Cuentas_Lista();
         }
@@ -33,16 +36,16 @@ namespace Bot_Dofus_1._29._1.UserInterface.Forms
         {
             listViewCuentas.Items.Clear();
 
-            GlobalConfig.Get_Accounts_List().ForEach(x =>
+            ConfigurationManager.Configuration.Accounts.ForEach(x =>
             {
-                if (!Principal.cuentas_cargadas.ContainsKey(x.accountUsername))
-                    listViewCuentas.Items.Add(x.accountUsername).SubItems.AddRange(new string[2] { x.server, x.characterName });
+                if (!Principal.cuentas_cargadas.ContainsKey(x.Username))
+                    listViewCuentas.Items.Add(x.Username).SubItems.AddRange(new string[2] { x.GetChosenServer().Name, x.CharacterName });
             });
         }
 
         private void boton_Agregar_Cuenta_Click(object sender, EventArgs e)
         {
-            if (GlobalConfig.Get_Account(textBox_Nombre_Cuenta.Text) != null && GlobalConfig.show_debug_messages)
+            if (ConfigurationManager.GetAccount(textBox_Nombre_Cuenta.Text) != null && ConfigurationManager.Configuration.DebugPackets)
             {
                 MessageBox.Show("Un compte existe déjà avec le nom du compte", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -65,7 +68,9 @@ namespace Bot_Dofus_1._29._1.UserInterface.Forms
 
             if (!tiene_errores)
             {
-                GlobalConfig.AddAccount(textBox_Nombre_Cuenta.Text, textBox_Password.Text, comboBox_Servidor.SelectedItem.ToString(), textBox_nombre_personaje.Text);
+                var serverId = (comboBox_Servidor.SelectedItem as ServerInfo)?.Id ?? 0;
+                var realmId = (realCbx.SelectedItem as RealmInfo)?.Id ?? 0;
+                ConfigurationManager.AddAccount(new AccountConfig(textBox_Nombre_Cuenta.Text, textBox_Password.Text, serverId, realmId, textBox_nombre_personaje.Text));
                 cargar_Cuentas_Lista();
 
                 textBox_Nombre_Cuenta.Clear();
@@ -75,7 +80,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Forms
                 if (checkBox_Agregar_Retroceder.Checked)
                     tabControlPrincipalCuentas.SelectedIndex = 0;
 
-                GlobalConfig.SaveConfig();
+                ConfigurationManager.Save();
             }
         }
 
@@ -91,10 +96,10 @@ namespace Bot_Dofus_1._29._1.UserInterface.Forms
             {
                 foreach (ListViewItem cuenta in listViewCuentas.SelectedItems)
                 {
-                    GlobalConfig.DeleteAccount(cuenta.Index);
+                    ConfigurationManager.DeleteAccount(cuenta.Index);
                     cuenta.Remove();
                 }
-                GlobalConfig.SaveConfig();
+                ConfigurationManager.Save();
                 cargar_Cuentas_Lista();
             }
         }
@@ -104,7 +109,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Forms
             if (listViewCuentas.SelectedItems.Count > 0 && listViewCuentas.FocusedItem != null)
             {
                 foreach (ListViewItem cuenta in listViewCuentas.SelectedItems)
-                    cuentas_cargadas.Add(GlobalConfig.Get_Accounts_List().FirstOrDefault(f => f.accountUsername == cuenta.Text));
+                    cuentas_cargadas.Add(ConfigurationManager.GetAccount( cuenta.Text));
 
                 DialogResult = DialogResult.OK;
                 Close();
@@ -118,32 +123,47 @@ namespace Bot_Dofus_1._29._1.UserInterface.Forms
         {
             if (listViewCuentas.SelectedItems.Count == 1 && listViewCuentas.FocusedItem != null)
             {
-                AccountConfig cuenta = GlobalConfig.Get_Account(listViewCuentas.SelectedItems[0].Index);
+                AccountConfig cuenta = ConfigurationManager.GetAccount(listViewCuentas.SelectedItems[0].Index);
 
                 switch (sender.ToString())
                 {
                     case "Cuenta":
-                        string nueva_cuenta = Interaction.InputBox($"Entrez le nouveau compte", "Modifier le compte", cuenta.accountUsername);
+                        string nueva_cuenta = Interaction.InputBox($"Entrez le nouveau compte", "Modifier le compte", cuenta.Username);
 
                         if (!string.IsNullOrEmpty(nueva_cuenta) || nueva_cuenta.Split(new char[0]).Length == 0)
-                            cuenta.accountUsername = nueva_cuenta;
+                            cuenta.Username = nueva_cuenta;
                     break;
 
                     case "Contraseña":
-                        string nueva_password = Interaction.InputBox($"Entrez le nouveau mot de passe", "Changer le mot de passe", cuenta.accountPassword);
+                        string nueva_password = Interaction.InputBox($"Entrez le nouveau mot de passe", "Changer le mot de passe", cuenta.Password);
 
                         if (!string.IsNullOrEmpty(nueva_password) || nueva_password.Split(new char[0]).Length == 0)
-                            cuenta.accountPassword = nueva_password;
+                            cuenta.Password = nueva_password;
                     break;
 
                     default:
-                        string nuevo_personaje = Interaction.InputBox($"Entrez le nouveau nom du personnage", "Modifier le nom du personnage", cuenta.characterName);
-                        cuenta.characterName = nuevo_personaje;
+                        string nuevo_personaje = Interaction.InputBox($"Entrez le nouveau nom du personnage", "Modifier le nom du personnage", cuenta.CharacterName);
+                        cuenta.CharacterName = nuevo_personaje;
                     break;
                 }
 
-                GlobalConfig.SaveConfig();
+                ConfigurationManager.Save();
                 cargar_Cuentas_Lista();
+            }
+        }
+
+        private void ComboBox_Servidor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            realCbx.Items.Clear();
+            var serverInfo = (comboBox_Servidor.SelectedItem as ServerInfo);
+            if (serverInfo == null)
+            {
+                return;
+            }
+
+            foreach (var realm in serverInfo.RealmInfos)
+            {
+                realCbx.Items.Add(realm);
             }
         }
     }

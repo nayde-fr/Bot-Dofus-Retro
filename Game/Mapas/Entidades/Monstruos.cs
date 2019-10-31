@@ -13,9 +13,9 @@ namespace Bot_Dofus_1._29._1.Game.Mapas.Entidades
 {
     public class Monstruos : Entidad
     {
-        public int id { get; set; } = 0;
+        public int Id { get; set; } = 0;
         public int template_id { get; set; } = 0;
-        public Cell celda { get; set; }
+        public Cell Cell { get; set; }
         public int nivel { get; set; }
 
         public List<Monstruos> moobs_dentro_grupo { get; set; }
@@ -27,9 +27,9 @@ namespace Bot_Dofus_1._29._1.Game.Mapas.Entidades
 
         public Monstruos(int _id, int _template, Cell _celda, int _nivel)
         {
-            id = _id;
+            Id = _id;
             template_id = _template;
-            celda = _celda;
+            Cell = _celda;
             moobs_dentro_grupo = new List<Monstruos>();
             nivel = _nivel;
         }

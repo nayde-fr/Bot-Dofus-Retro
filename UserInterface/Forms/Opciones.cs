@@ -20,30 +20,15 @@ namespace Bot_Dofus_1._29._1.UserInterface.Forms
         {
             InitializeComponent();
 
-            checkBox_mensajes_debug.Checked = GlobalConfig.show_debug_messages;
-            textBox_ip_servidor.Text = GlobalConfig.loginIP;
-            textBox_puerto_servidor.Text = Convert.ToString(GlobalConfig.loginPort);
+            checkBox_mensajes_debug.Checked = ConfigurationManager.ShouldDebug();
         }
 
         private void boton_opciones_guardar_Click(object sender, EventArgs e)
         {
-            if (!IPAddress.TryParse(textBox_ip_servidor.Text, out IPAddress address))
-            {
-                textBox_ip_servidor.BackColor = Color.Red;
-                return;
-            }
-
-            if (!short.TryParse(textBox_puerto_servidor.Text, out short puerto))
-            {
-                textBox_puerto_servidor.BackColor = Color.Red;
-                return;
-            }
-
-            GlobalConfig.show_debug_messages = checkBox_mensajes_debug.Checked;
-            GlobalConfig.loginIP = textBox_ip_servidor.Text;
-            GlobalConfig.loginPort = short.Parse(textBox_puerto_servidor.Text);
-            GlobalConfig.SaveConfig();
+            ConfigurationManager.Configuration.DebugPackets = checkBox_mensajes_debug.Checked;
+            ConfigurationManager.Save();
             Close();
         }
+
     }
 }

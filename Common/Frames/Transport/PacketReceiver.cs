@@ -21,9 +21,9 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Transport
         {
             Assembly asm = typeof(Frame).GetTypeInfo().Assembly;
 
-            foreach (MethodInfo methodInfo in asm.GetTypes().SelectMany(x => x.GetMethods()).Where(m => m.GetCustomAttributes(typeof(PacketAttribute), false).Length > 0))
+            foreach (MethodInfo methodInfo in asm.GetTypes().SelectMany(x => x.GetMethods()).Where(m => m.GetCustomAttributes(typeof(PacketHandlerAttribute), false).Length > 0))
             {
-                PacketAttribute packetAttribute = methodInfo.GetCustomAttributes(typeof(PacketAttribute), true)[0] as PacketAttribute;
+                PacketHandlerAttribute packetAttribute = methodInfo.GetCustomAttributes(typeof(PacketHandlerAttribute), true)[0] as PacketHandlerAttribute;
                 Type handlerType = Type.GetType(methodInfo.DeclaringType.FullName);
 
                 object instance = Activator.CreateInstance(handlerType, null);

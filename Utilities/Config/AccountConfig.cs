@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -12,70 +14,50 @@ namespace Bot_Dofus_1._29._1.Utilities.Config
 {
     public class AccountConfig
     {
-        public string accountUsername { get; set; } = string.Empty;
-        public string accountPassword { get; set; } = string.Empty;
-        public string server { get; set; } = string.Empty;
-        public string characterName { get; set; } = string.Empty;
-
-        public AccountConfig(string _accountUsername, string _accountPassword, string _server, string _characterName)
+        public AccountConfig()
         {
-            accountUsername = _accountUsername;
-            accountPassword = _accountPassword;
-            server = _server;
-            characterName = _characterName;
+            
         }
 
-        public void SaveAccount(BinaryWriter bw)
+        public AccountConfig(string username,string password,int serverId, int realmId, string characterName)
         {
-            bw.Write(accountUsername);
-            bw.Write(accountPassword);
-            bw.Write(server);
-            bw.Write(characterName);
+            Username = username;
+            Password = password;
+            ServerId = serverId;;
+            RealmId = realmId;
+            CharacterName = characterName;
         }
 
-        public static AccountConfig LoadAcccount(BinaryReader br)
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public int ServerId { get; set; } = 0;
+
+        public int RealmId { get; set; } = 0;
+
+        public string CharacterName { get; set; } = string.Empty;
+
+        public ServerInfo GetChosenServer()
         {
-            try
+            var serverInfo = ConfigurationManager.Configuration.ServerInfos.FirstOrDefault(s => s.Id == ServerId);
+            if (serverInfo == null)
             {
-                return new AccountConfig(br.ReadString(), br.ReadString(), br.ReadString(), br.ReadString());
+                throw new InvalidOperationException("Invalid Server Info");
             }
-            catch
-            {
-                return null;
-            }
+
+            return serverInfo;
         }
 
-        public int Get_Server_ID()
+
+        public RealmInfo GetChosenRealm()
         {
-            switch (server)
+            var realmInfo = GetChosenServer().RealmInfos.FirstOrDefault(s => s.Id == RealmId);
+            if (realmInfo == null)
             {
-                case "Amakna":
-                    return 1;
-                case "Eratz":
-                    return 601;
-                case "Henual":
-                    return 602;
-                case "Nabur":
-                    return 603;
-                case "Arty":
-                    return 604;
-                case "Algathe":
-                    return 605;
-                case "Hogmeiser":
-                    return 606;
-                case "Droupik":
-                    return 607;
-                case "Ayuto":
-                    return 608;
-                case "Bilby":
-                    return 609;
-                case "Clustus":
-                    return 610;
-                case "Issering":
-                    return 611;
-                default:
-                    return 601;
+                throw new InvalidOperationException("Invalid Realm Info");
             }
+
+            return realmInfo;
         }
+
     }
 }

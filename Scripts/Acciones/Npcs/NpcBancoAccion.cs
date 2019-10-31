@@ -26,7 +26,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Acciones.Npcs
                 return resultado_fallado;
 
             Game.Mapas.Entidades.Npcs npc = null;
-            IEnumerable<Game.Mapas.Entidades.Npcs> npcs = cuenta.game.Map.lista_npcs();
+            IEnumerable<Game.Mapas.Entidades.Npcs> npcs = cuenta.Game.Map.lista_npcs();
 
             if (npc_id < 0)
             {
@@ -43,7 +43,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Acciones.Npcs
             if (npc == null)
                 return resultado_fallado;
 
-            cuenta.connexion.SendPacket("DC" + npc.id, true);
+            cuenta.connexion.SendPacket("DC" + npc.Id, true);
             return resultado_procesado;
         }
     }

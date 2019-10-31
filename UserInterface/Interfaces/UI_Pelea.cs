@@ -23,7 +23,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
             cuenta = _cuenta;
 
             refrescar_Lista_Hechizos();
-            cuenta.game.CharacterClass.hechizos_actualizados += actualizar_Agregar_Lista_Hechizos;
+            cuenta.Game.Character.hechizos_actualizados += actualizar_Agregar_Lista_Hechizos;
         }
 
         private void UI_Pelea_Load(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
         {
             comboBox_lista_hechizos.DisplayMember = "nombre";
             comboBox_lista_hechizos.ValueMember = "id";
-            comboBox_lista_hechizos.DataSource = cuenta.game.CharacterClass.hechizos.Values.ToList();
+            comboBox_lista_hechizos.DataSource = cuenta.Game.Character.hechizos.Values.ToList();
 
             comboBox_lista_hechizos.SelectedIndex = 0;
         }
@@ -103,19 +103,19 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Map mapa = cuenta.game.Map;
+            Map mapa = cuenta.Game.Map;
 
-            List<Monstruos> monstruos = cuenta.game.Map.lista_monstruos();
+            List<Monstruos> monstruos = cuenta.Game.Map.lista_monstruos();
 
             if (monstruos.Count > 0)
             {
-                Cell celda_actual = cuenta.game.CharacterClass.celda, celda_monstruo_destino = monstruos[0].celda;
+                Cell celda_actual = cuenta.Game.Character.Cell, celda_monstruo_destino = monstruos[0].Cell;
 
                 if (celda_actual.cellId != celda_monstruo_destino.cellId & celda_monstruo_destino.cellId > 0)
                 {
                     cuenta.logger.log_informacion("UI_PELEAS", "Monstruo encontrado en la casilla " + celda_monstruo_destino.cellId);
 
-                    switch (cuenta.game.manager.MovementManager.get_Mover_A_Celda(celda_monstruo_destino, new List<Cell>()))
+                    switch (cuenta.Game.manager.MovementManager.get_Mover_A_Celda(celda_monstruo_destino, new List<Cell>()))
                     {
                         case MovementResult.OK:
                             cuenta.logger.log_informacion("UI_PELEAS", "Desplazando para comenzar el combate");
