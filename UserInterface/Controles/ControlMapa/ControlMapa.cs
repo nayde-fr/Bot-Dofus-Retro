@@ -7,12 +7,12 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Timers;
 using System.Windows.Forms;
+using Bot_Dofus_1._29._1.Controles.ControlMapa.Animaciones;
+using Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas;
 using Bot_Dofus_1._29._1.Game.Mapas;
 using Bot_Dofus_1._29._1.Game.Mapas.Entidades;
 using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
-using Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Animaciones;
-using Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Celdas;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1

@@ -1,4 +1,6 @@
-﻿namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
+﻿using System.Windows.Forms;
+
+namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
 {
     partial class UI_Debugger
     {
@@ -39,6 +41,7 @@
             this.handler = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fecha = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.paquete = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listView = new ListView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();

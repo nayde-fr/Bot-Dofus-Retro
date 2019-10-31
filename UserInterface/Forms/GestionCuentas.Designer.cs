@@ -489,15 +489,6 @@
             this.comboBox_Servidor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Servidor.FormattingEnabled = true;
             this.comboBox_Servidor.Location = new System.Drawing.Point(3, 15);
-            "Clustus",
-            "Nabur",
-            "Arty",
-            "Algathe",
-            "Hogmeiser",
-            "Droupik",
-            "Bilby",
-            "Ayuto",
-            "Issering"});
             this.comboBox_Servidor.Name = "comboBox_Servidor";
             this.comboBox_Servidor.Size = new System.Drawing.Size(263, 25);
             this.comboBox_Servidor.TabIndex = 6;

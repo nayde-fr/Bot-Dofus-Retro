@@ -1,4 +1,6 @@
-﻿namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
+﻿using Bot_Dofus_1._29._1.Interfaces;
+
+namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
 {
     partial class UI_Personaje
     {

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Bot_Dofus_1._29._1.Game.Character;
 using Bot_Dofus_1._29._1.Game.Enums;
+using Bot_Dofus_1._29._1.Interfaces;
 using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 using Bot_Dofus_1._29._1.Managers.Characters;

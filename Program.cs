@@ -1,7 +1,4 @@
 ﻿using Bot_Dofus_1._29._1.Utilities.Config;
-using Bot_Dofus_1._29._1.Otros.Mapas.Interactivo;
-using Bot_Dofus_1._29._1.Otros.Scripts.Manejadores;
-using Bot_Dofus_1._29._1.Utilities.Config;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

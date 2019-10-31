@@ -63,7 +63,7 @@ namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
             }
         }
 
-        public virtual void dibujar_Celda_Id(ControlMapa parent, Graphics g)
+        public virtual void dibujar_Celda_Id(UserInterface.Controles.ControlMapa.ControlMapa parent, Graphics g)
         {
             StringFormat formato = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
             g.DrawString(id.ToString(), parent.Font, Brushes.Black, new RectangleF(Rectangulo.X, Rectangulo.Y, Rectangulo.Width, Rectangulo.Height), formato);

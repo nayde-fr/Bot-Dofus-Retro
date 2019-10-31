@@ -40,7 +40,6 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -110,11 +109,6 @@
             this.boton_opciones_guardar.TabIndex = 2;
             this.boton_opciones_guardar.Text = "Sauvegarder";
             this.boton_opciones_guardar.UseVisualStyleBackColor = true;
-            this.tableLayoutPanel3.Controls.Add(this.textBox_puerto_servidor, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label_puerto_servidor, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox_ip_servidor, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label_ip_conexion, 0, 0);
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(370, 71);
             // 
             // textBox_puerto_servidor
             // 
@@ -178,8 +172,6 @@
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
