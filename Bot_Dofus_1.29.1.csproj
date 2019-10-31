@@ -64,6 +64,9 @@
     <Reference Include="MoonSharp.Interpreter">
       <HintPath>dll\MoonSharp.Interpreter.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,222 +77,225 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comun\Frames\Autentificacion\AutentificacionLoginFrame.cs" />
-    <Compile Include="Comun\Frames\Juego\AutentificacionJuego.cs" />
-    <Compile Include="Comun\Frames\Juego\ChatFrame.cs" />
-    <Compile Include="Comun\Frames\Juego\IMFrame.cs" />
-    <Compile Include="Comun\Frames\Juego\MapaFrame.cs" />
-    <Compile Include="Comun\Frames\Juego\NPCFrame.cs" />
-    <Compile Include="Comun\Frames\Juego\PeleaFrame.cs" />
-    <Compile Include="Comun\Frames\Juego\PersonajeFrame.cs" />
-    <Compile Include="Comun\Frames\Juego\ServidorSeleccionFrame.cs" />
-    <Compile Include="Comun\Frames\Transporte\PaqueteAtributo.cs" />
-    <Compile Include="Comun\Frames\Transporte\PaqueteDatos.cs" />
-    <Compile Include="Comun\Frames\Transporte\PaqueteRecibido.cs" />
-    <Compile Include="Controles\ColorCheckBox\ColorCheckBox.cs">
+    <Compile Include="Common\Frames\Authentication\ServerLoginFrame.cs" />
+    <Compile Include="Common\Frames\Game\GameLoginFrame.cs" />
+    <Compile Include="Common\Frames\Game\ChatFrame.cs" />
+    <Compile Include="Common\Frames\Game\IMFrame.cs" />
+    <Compile Include="Common\Frames\Game\MapFrame.cs" />
+    <Compile Include="Common\Frames\Game\NPCFrame.cs" />
+    <Compile Include="Common\Frames\Game\FightFrame.cs" />
+    <Compile Include="Common\Frames\Game\CharacterFrame.cs" />
+    <Compile Include="Common\Frames\Game\ServerSelectionFrame.cs" />
+    <Compile Include="Common\Frames\Transport\PacketHandlerAttribute.cs" />
+    <Compile Include="Common\Frames\Transport\PacketHandler.cs" />
+    <Compile Include="Common\Frames\Transport\PacketReceiver.cs" />
+    <Compile Include="UserInterface\Controles\ColorCheckBox\ColorCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controles\ControlMapa\Animaciones\MovimientoAnimacion.cs" />
-    <Compile Include="Controles\ControlMapa\Animaciones\TipoAnimaciones.cs" />
-    <Compile Include="Controles\ControlMapa\CalidadMapa.cs" />
-    <Compile Include="Controles\ControlMapa\Celdas\CeldaEstado.cs" />
-    <Compile Include="Controles\ControlMapa\Celdas\CeldaMapa.cs" />
-    <Compile Include="Controles\ControlMapa\ControlMapa.cs">
+    <Compile Include="UserInterface\Controles\ControlMapa\Animaciones\MovimientoAnimacion.cs" />
+    <Compile Include="UserInterface\Controles\ControlMapa\Animaciones\TipoAnimaciones.cs" />
+    <Compile Include="UserInterface\Controles\ControlMapa\MapQuality.cs" />
+    <Compile Include="UserInterface\Controles\ControlMapa\Celdas\CeldaEstado.cs" />
+    <Compile Include="UserInterface\Controles\ControlMapa\Celdas\CeldaMapa.cs" />
+    <Compile Include="UserInterface\Controles\ControlMapa\ControlMapa.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controles\ControlMapa\ControlMapa.designer.cs">
+    <Compile Include="UserInterface\Controles\ControlMapa\ControlMapa.designer.cs">
       <DependentUpon>ControlMapa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controles\LayoutPanel\FlowLayoutPanelBuffered.cs">
+    <Compile Include="UserInterface\Controles\LayoutPanel\FlowLayoutPanelBuffered.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controles\ProgresBar\ProgresBar.cs">
+    <Compile Include="UserInterface\Controles\ProgresBar\ProgresBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controles\ProgresBar\TipoProgresBar.cs" />
-    <Compile Include="Controles\TabControl\Cabezera.cs">
+    <Compile Include="UserInterface\Controles\ProgresBar\TipoProgresBar.cs" />
+    <Compile Include="UserInterface\Controles\TabControl\Cabezera.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controles\TabControl\TabControl.cs">
+    <Compile Include="UserInterface\Controles\TabControl\TabControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controles\TabControl\TabControl.Designer.cs">
+    <Compile Include="UserInterface\Controles\TabControl\TabControl.Designer.cs">
       <DependentUpon>TabControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controles\TabControl\Pagina.cs" />
-    <Compile Include="Forms\GestionCuentas.cs">
+    <Compile Include="UserInterface\Controles\TabControl\Pagina.cs" />
+    <Compile Include="UserInterface\Forms\GestionCuentas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GestionCuentas.Designer.cs">
+    <Compile Include="UserInterface\Forms\GestionCuentas.Designer.cs">
       <DependentUpon>GestionCuentas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Opciones.cs">
+    <Compile Include="UserInterface\Forms\Opciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Opciones.Designer.cs">
+    <Compile Include="UserInterface\Forms\Opciones.Designer.cs">
       <DependentUpon>Opciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Principal.cs">
+    <Compile Include="UserInterface\Forms\Principal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Principal.Designer.cs">
+    <Compile Include="UserInterface\Forms\Principal.Designer.cs">
       <DependentUpon>Principal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comun\Frames\Autentificacion\AccountLogin.cs" />
-    <Compile Include="Comun\Frames\Frame.cs" />
-    <Compile Include="Interfaces\UI_Hechizos.cs">
+    <Compile Include="Common\Frames\Authentication\AccountLogin.cs" />
+    <Compile Include="Common\Frames\Frame.cs" />
+    <Compile Include="UserInterface\Interfaces\UI_Hechizos.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfaces\UI_Hechizos.Designer.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Hechizos.Designer.cs">
       <DependentUpon>UI_Hechizos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\UI_Inventario.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Inventario.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfaces\UI_Inventario.Designer.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Inventario.Designer.cs">
       <DependentUpon>UI_Inventario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\UI_Mapa.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Mapa.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfaces\UI_Mapa.designer.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Mapa.designer.cs">
       <DependentUpon>UI_Mapa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\UI_Oficios.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Oficios.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfaces\UI_Oficios.Designer.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Oficios.Designer.cs">
       <DependentUpon>UI_Oficios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\UI_Pelea.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Pelea.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfaces\UI_Pelea.Designer.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Pelea.Designer.cs">
       <DependentUpon>UI_Pelea.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\UI_Personaje.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Personaje.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfaces\UI_Personaje.Designer.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Personaje.Designer.cs">
       <DependentUpon>UI_Personaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\UI_Principal.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Principal.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfaces\UI_Principal.Designer.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Principal.Designer.cs">
       <DependentUpon>UI_Principal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\UI_Debugger.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Debugger.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Interfaces\UI_Debugger.Designer.cs">
+    <Compile Include="UserInterface\Interfaces\UI_Debugger.Designer.cs">
       <DependentUpon>UI_Debugger.cs</DependentUpon>
     </Compile>
-    <Compile Include="Otros\Account.cs" />
-    <Compile Include="Otros\Game\Server\GameServer.cs" />
-    <Compile Include="Otros\Mapas\Entidades\Entidad.cs" />
-    <Compile Include="Otros\Game\Manejadores\Interactivos\Interactivo.cs" />
-    <Compile Include="Otros\Game\Manejadores\Manejador.cs" />
-    <Compile Include="Otros\Game\Manejadores\Movimientos\Movimiento.cs" />
-    <Compile Include="Otros\Game\Manejadores\Recolecciones\Recoleccion.cs" />
-    <Compile Include="Otros\Game\Manejadores\Recolecciones\RecoleccionResultado.cs" />
-    <Compile Include="Otros\Game\Manejadores\Teleports\Teleport.cs" />
-    <Compile Include="Otros\Game\Manejadores\Teleports\TipoTeleport.cs" />
-    <Compile Include="Otros\Mapas\Entidades\Monstruos.cs" />
-    <Compile Include="Otros\Mapas\Entidades\Npcs.cs" />
-    <Compile Include="Otros\Game\Character\Spells\SpellEffect.cs" />
-    <Compile Include="Otros\Game\Character\Spells\SpellShape.cs" />
-    <Compile Include="Otros\Game\Character\Spells\SpellStats.cs" />
-    <Compile Include="Otros\Game\Character\Spells\SpellActionZone.cs" />
-    <Compile Include="Otros\Game\Character\Spells\Shaper.cs" />
-    <Compile Include="Otros\Game\Character\Spells\Zones.cs" />
-    <Compile Include="Otros\Game\Character\Inventory\InventoryClass.cs" />
-    <Compile Include="Otros\Game\Character\Inventory\Enums\InventorySlots.cs" />
-    <Compile Include="Otros\Game\Character\Inventory\InventoryUtilities.cs" />
-    <Compile Include="Otros\Game\Character\Inventory\InventoryObject.cs" />
-    <Compile Include="Otros\Game\Character\Jobs\Job.cs" />
-    <Compile Include="Otros\Game\Character\Jobs\JobSkills.cs" />
-    <Compile Include="Otros\Game\GameClass.cs" />
-    <Compile Include="Otros\Grupos\Agrupamiento.cs" />
-    <Compile Include="Otros\Grupos\Grupo.cs" />
-    <Compile Include="Otros\IEliminable.cs" />
-    <Compile Include="Otros\Mapas\Cell.cs" />
-    <Compile Include="Otros\Mapas\Entidades\Personajes.cs" />
-    <Compile Include="Otros\Mapas\Interactivo\ObjetoInteractivo.cs" />
-    <Compile Include="Otros\Mapas\Interactivo\ObjetoInteractivoModelo.cs" />
-    <Compile Include="Otros\Mapas\Map.cs" />
-    <Compile Include="Otros\Mapas\Movimiento\Mapas\DuracionAnimacion.cs" />
-    <Compile Include="Otros\Mapas\Movimiento\Mapas\Pathfinder.cs" />
-    <Compile Include="Otros\Mapas\Movimiento\PathFinderUtil.cs" />
-    <Compile Include="Otros\Mapas\Movimiento\Peleas\MovimientoNodo.cs" />
-    <Compile Include="Otros\Mapas\Movimiento\Peleas\NodoPelea.cs" />
-    <Compile Include="Otros\Mapas\Movimiento\Peleas\PeleaCamino.cs" />
-    <Compile Include="Otros\Mapas\Movimiento\Peleas\PeleasPathfinder.cs" />
-    <Compile Include="Otros\Game\Manejadores\Movimientos\MapaTeleportCeldas.cs" />
-    <Compile Include="Otros\Game\Manejadores\Movimientos\ResultadoMovimientos.cs" />
-    <Compile Include="Otros\Mapas\Movimiento\Mapas\TipoAnimacion.cs" />
-    <Compile Include="Otros\Mapas\CellTypes.cs" />
-    <Compile Include="Otros\Peleas\Configuracion\HechizoPelea.cs" />
-    <Compile Include="Otros\Peleas\Configuracion\PeleaConf.cs" />
-    <Compile Include="Otros\Peleas\Enums\FallosLanzandoHechizo.cs" />
-    <Compile Include="Otros\Peleas\Enums\HechizoFocus.cs" />
-    <Compile Include="Otros\Peleas\Enums\MetodoLanzamiento.cs" />
-    <Compile Include="Otros\Peleas\Enums\PosicionamientoInicioPelea.cs" />
-    <Compile Include="Otros\Peleas\Enums\ResultadoLanzandoHechizo.cs" />
-    <Compile Include="Otros\Peleas\Enums\Tactica.cs" />
-    <Compile Include="Otros\Peleas\ManejadorHechizos.cs" />
-    <Compile Include="Otros\Peleas\Peleadores\Luchadores.cs" />
-    <Compile Include="Otros\Peleas\Pelea.cs" />
-    <Compile Include="Otros\Peleas\Peleadores\LuchadorPersonaje.cs" />
-    <Compile Include="Otros\Peleas\PeleaExtensiones.cs" />
-    <Compile Include="Otros\Game\Character\Spells\Spell.cs" />
-    <Compile Include="Otros\Game\Character\CharacterClass.cs" />
-    <Compile Include="Otros\Game\Character\CharacterBaseStats.cs" />
-    <Compile Include="Otros\Game\Character\CharacterCharacteristics.cs" />
-    <Compile Include="Otros\Scripts\Acciones\AccionesScript.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Almacenamiento\AlmacenarTodosLosObjetosAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Almacenamiento\RecuperarObjetoBanco.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Inventario\UtilizarObjetoAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Mapas\CambiarMapaAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\CerrarVentanaAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Global\DelayAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Inventario\EquiparItemAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Mapas\MoverCeldaAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Npcs\CerrarDialogoAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Npcs\NpcAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Npcs\NpcBancoAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\Npcs\RespuestaAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\PeleasAccion.cs" />
-    <Compile Include="Otros\Scripts\Acciones\RecoleccionAccion.cs" />
-    <Compile Include="Otros\Scripts\Api\API.cs" />
-    <Compile Include="Otros\Scripts\Api\InventarioApi.cs" />
-    <Compile Include="Otros\Scripts\Api\MapaApi.cs" />
-    <Compile Include="Otros\Scripts\Api\NpcAPI.cs" />
-    <Compile Include="Otros\Scripts\Api\PeleaApi.cs" />
-    <Compile Include="Otros\Scripts\Api\PersonajeApi.cs" />
-    <Compile Include="Otros\Scripts\Banderas\Bandera.cs" />
-    <Compile Include="Otros\Scripts\Banderas\CambiarMapa.cs" />
-    <Compile Include="Otros\Scripts\Banderas\FuncionPersonalizada.cs" />
-    <Compile Include="Otros\Scripts\Banderas\NPCBancoBandera.cs" />
-    <Compile Include="Otros\Scripts\Banderas\PeleaBandera.cs" />
-    <Compile Include="Otros\Scripts\Banderas\RecoleccionBandera.cs" />
-    <Compile Include="Otros\Scripts\EstadoScript.cs" />
-    <Compile Include="Otros\Scripts\Manejadores\LuaManejadorScript.cs" />
-    <Compile Include="Otros\Scripts\Manejadores\ManejadorAcciones.cs" />
-    <Compile Include="Otros\Scripts\ManejadorScript.cs" />
+    <Compile Include="Managers\Accounts\Account.cs" />
+    <Compile Include="Game\Server\GameServer.cs" />
+    <Compile Include="Game\Mapas\Entidades\Entidad.cs" />
+    <Compile Include="Managers\Interactives\Interactive.cs" />
+    <Compile Include="Managers\Characters\CharacterManager.cs" />
+    <Compile Include="Managers\Movements\MovementManager.cs" />
+    <Compile Include="Managers\Jobs\GatheringManager.cs" />
+    <Compile Include="Managers\Jobs\GatheringResult.cs" />
+    <Compile Include="Managers\Teleports\Teleport.cs" />
+    <Compile Include="Managers\Teleports\TeleportKind.cs" />
+    <Compile Include="Game\Mapas\Entidades\Monstruos.cs" />
+    <Compile Include="Game\Mapas\Entidades\Npcs.cs" />
+    <Compile Include="Game\Character\Spells\SpellEffect.cs" />
+    <Compile Include="Game\Character\Spells\SpellShape.cs" />
+    <Compile Include="Game\Character\Spells\SpellStats.cs" />
+    <Compile Include="Game\Character\Spells\SpellActionZone.cs" />
+    <Compile Include="Game\Character\Spells\Shaper.cs" />
+    <Compile Include="Game\Character\Spells\Zones.cs" />
+    <Compile Include="Game\Character\Inventory\InventoryClass.cs" />
+    <Compile Include="Game\Character\Inventory\Enums\InventorySlots.cs" />
+    <Compile Include="Game\Character\Inventory\InventoryUtilities.cs" />
+    <Compile Include="Game\Character\Inventory\InventoryObject.cs" />
+    <Compile Include="Game\Character\Jobs\Job.cs" />
+    <Compile Include="Game\Character\Jobs\JobSkills.cs" />
+    <Compile Include="Managers\Accounts\AccountManager.cs" />
+    <Compile Include="Managers\Groups\Group.cs" />
+    <Compile Include="Managers\Groups\GroupManager.cs" />
+    <Compile Include="Managers\IManager.cs" />
+    <Compile Include="Game\Mapas\Cell.cs" />
+    <Compile Include="Game\Mapas\Entidades\Personajes.cs" />
+    <Compile Include="Game\Mapas\Interactivo\InteractiveObject.cs" />
+    <Compile Include="Game\Mapas\Interactivo\InteractiveObjectModel.cs" />
+    <Compile Include="Game\Mapas\Map.cs" />
+    <Compile Include="Game\Mapas\Movimiento\Mapas\DuracionAnimacion.cs" />
+    <Compile Include="Game\Mapas\Movimiento\Mapas\Pathfinder.cs" />
+    <Compile Include="Game\Mapas\Movimiento\PathFinderUtil.cs" />
+    <Compile Include="Game\Mapas\Movimiento\Peleas\MovimientoNodo.cs" />
+    <Compile Include="Game\Mapas\Movimiento\Peleas\NodoPelea.cs" />
+    <Compile Include="Game\Mapas\Movimiento\Peleas\PeleaCamino.cs" />
+    <Compile Include="Game\Mapas\Movimiento\Peleas\PeleasPathfinder.cs" />
+    <Compile Include="Managers\Movements\MovementDirection.cs" />
+    <Compile Include="Managers\Movements\MovementResult.cs" />
+    <Compile Include="Game\Mapas\Movimiento\Mapas\TipoAnimacion.cs" />
+    <Compile Include="Game\Mapas\CellTypes.cs" />
+    <Compile Include="Managers\Fights\Configuracion\HechizoPelea.cs" />
+    <Compile Include="Managers\Fights\Configuracion\PeleaConf.cs" />
+    <Compile Include="Managers\Fights\Enums\FallosLanzandoHechizo.cs" />
+    <Compile Include="Managers\Fights\Enums\HechizoFocus.cs" />
+    <Compile Include="Managers\Fights\Enums\MetodoLanzamiento.cs" />
+    <Compile Include="Managers\Fights\Enums\PosicionamientoInicioPelea.cs" />
+    <Compile Include="Managers\Fights\Enums\ResultadoLanzandoHechizo.cs" />
+    <Compile Include="Managers\Fights\Enums\Tactica.cs" />
+    <Compile Include="Managers\Fights\ManejadorHechizos.cs" />
+    <Compile Include="Managers\Fights\Peleadores\Luchadores.cs" />
+    <Compile Include="Managers\Fights\Pelea.cs" />
+    <Compile Include="Managers\Fights\Peleadores\LuchadorPersonaje.cs" />
+    <Compile Include="Managers\Fights\PeleaExtensiones.cs" />
+    <Compile Include="Game\Character\Spells\Spell.cs" />
+    <Compile Include="Managers\Characters\Character.cs" />
+    <Compile Include="Game\Character\CharacterBaseStats.cs" />
+    <Compile Include="Game\Character\CharacterCharacteristics.cs" />
+    <Compile Include="Scripts\Acciones\AccionesScript.cs" />
+    <Compile Include="Scripts\Acciones\Almacenamiento\AlmacenarTodosLosObjetosAccion.cs" />
+    <Compile Include="Scripts\Acciones\Almacenamiento\RecuperarObjetoBanco.cs" />
+    <Compile Include="Scripts\Acciones\Inventario\UtilizarObjetoAccion.cs" />
+    <Compile Include="Scripts\Acciones\Mapas\CambiarMapaAccion.cs" />
+    <Compile Include="Scripts\Acciones\CerrarVentanaAccion.cs" />
+    <Compile Include="Scripts\Acciones\Global\DelayAccion.cs" />
+    <Compile Include="Scripts\Acciones\Inventario\EquiparItemAccion.cs" />
+    <Compile Include="Scripts\Acciones\Mapas\MoverCeldaAccion.cs" />
+    <Compile Include="Scripts\Acciones\Npcs\CerrarDialogoAccion.cs" />
+    <Compile Include="Scripts\Acciones\Npcs\NpcAccion.cs" />
+    <Compile Include="Scripts\Acciones\Npcs\NpcBancoAccion.cs" />
+    <Compile Include="Scripts\Acciones\Npcs\RespuestaAccion.cs" />
+    <Compile Include="Scripts\Acciones\PeleasAccion.cs" />
+    <Compile Include="Scripts\Acciones\RecoleccionAccion.cs" />
+    <Compile Include="Scripts\Api\API.cs" />
+    <Compile Include="Scripts\Api\InventarioApi.cs" />
+    <Compile Include="Scripts\Api\MapaApi.cs" />
+    <Compile Include="Scripts\Api\NpcAPI.cs" />
+    <Compile Include="Scripts\Api\PeleaApi.cs" />
+    <Compile Include="Scripts\Api\PersonajeApi.cs" />
+    <Compile Include="Scripts\Banderas\Bandera.cs" />
+    <Compile Include="Scripts\Banderas\CambiarMapa.cs" />
+    <Compile Include="Scripts\Banderas\FuncionPersonalizada.cs" />
+    <Compile Include="Scripts\Banderas\NPCBancoBandera.cs" />
+    <Compile Include="Scripts\Banderas\PeleaBandera.cs" />
+    <Compile Include="Scripts\Banderas\RecoleccionBandera.cs" />
+    <Compile Include="Scripts\EstadoScript.cs" />
+    <Compile Include="Scripts\Manejadores\LuaManejadorScript.cs" />
+    <Compile Include="Scripts\Manejadores\ManejadorAcciones.cs" />
+    <Compile Include="Scripts\ManejadorScript.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Comun\Network\TcpClient.cs" />
-    <Compile Include="Otros\Enums\AccountStates.cs" />
-    <Compile Include="Otros\Game\Character\Inventory\Enums\InventoryObjectsTypes.cs" />
-    <Compile Include="Otros\Enums\ServerStates.cs" />
+    <Compile Include="Common\Network\TcpClient.cs" />
+    <Compile Include="Game\Enums\AccountState.cs" />
+    <Compile Include="Game\Character\Inventory\Enums\InventoryObjectsTypes.cs" />
+    <Compile Include="Game\Enums\ServerState.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Config\GlobalConfig.cs" />
+    <Compile Include="Utilities\Config\ConfigurationManager.cs" />
+    <Compile Include="Utilities\Config\Configuration.cs" />
     <Compile Include="Utilities\Config\AccountConfig.cs" />
+    <Compile Include="Utilities\Config\RealmInfo.cs" />
+    <Compile Include="Utilities\Config\ServerInfo.cs" />
     <Compile Include="Utilities\Crypto\Hash.cs" />
     <Compile Include="Utilities\Crypto\Randomize.cs" />
     <Compile Include="Utilities\Extensions\Extensions.cs" />
@@ -297,50 +303,50 @@
     <Compile Include="Utilities\Logs\LogMessage.cs" />
     <Compile Include="Utilities\Logs\LogTypes.cs" />
     <Compile Include="Utilities\TimerWrapper.cs" />
-    <EmbeddedResource Include="Controles\ControlMapa\ControlMapa.resx">
+    <EmbeddedResource Include="UserInterface\Controles\ControlMapa\ControlMapa.resx">
       <DependentUpon>ControlMapa.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controles\TabControl\TabControl.resx">
+    <EmbeddedResource Include="UserInterface\Controles\TabControl\TabControl.resx">
       <DependentUpon>TabControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GestionCuentas.resx">
+    <EmbeddedResource Include="UserInterface\Forms\GestionCuentas.resx">
       <DependentUpon>GestionCuentas.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Opciones.resx">
+    <EmbeddedResource Include="UserInterface\Forms\Opciones.resx">
       <DependentUpon>Opciones.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Principal.resx">
+    <EmbeddedResource Include="UserInterface\Forms\Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaces\UI_Hechizos.resx">
+    <EmbeddedResource Include="UserInterface\Interfaces\UI_Hechizos.resx">
       <DependentUpon>UI_Hechizos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaces\UI_Inventario.resx">
+    <EmbeddedResource Include="UserInterface\Interfaces\UI_Inventario.resx">
       <DependentUpon>UI_Inventario.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaces\UI_Mapa.resx">
+    <EmbeddedResource Include="UserInterface\Interfaces\UI_Mapa.resx">
       <DependentUpon>UI_Mapa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaces\UI_Oficios.resx">
+    <EmbeddedResource Include="UserInterface\Interfaces\UI_Oficios.resx">
       <DependentUpon>UI_Oficios.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaces\UI_Pelea.resx">
+    <EmbeddedResource Include="UserInterface\Interfaces\UI_Pelea.resx">
       <DependentUpon>UI_Pelea.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaces\UI_Personaje.resx">
+    <EmbeddedResource Include="UserInterface\Interfaces\UI_Personaje.resx">
       <DependentUpon>UI_Personaje.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaces\UI_Principal.resx">
+    <EmbeddedResource Include="UserInterface\Interfaces\UI_Principal.resx">
       <DependentUpon>UI_Principal.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Interfaces\UI_Debugger.resx">
+    <EmbeddedResource Include="UserInterface\Interfaces\UI_Debugger.resx">
       <DependentUpon>UI_Debugger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -348,6 +354,10 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Configuration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -513,6 +523,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\razas\41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\razas\50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\razas\51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\razas\60.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\razas\50.png" />

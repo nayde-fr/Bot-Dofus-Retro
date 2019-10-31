@@ -1,40 +1,40 @@
-﻿using Bot_Dofus_1._29._1.Otros.Enums;
-using Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos;
-using MoonSharp.Interpreter;
+﻿using MoonSharp.Interpreter;
 using System.Collections.Generic;
 using System.Linq;
+using Bot_Dofus_1._29._1.Game.Enums;
+using Bot_Dofus_1._29._1.Managers.Movements;
 
 namespace Bot_Dofus_1._29._1.Utilities.Extensions
 {
     public static class Extensions
     {
-        public static string cadena_Amigable(this AccountStates accountStatus)
+        public static string cadena_Amigable(this AccountState accountStatus)
         {
             switch (accountStatus)
             {
-                case AccountStates.CONNECTED:
+                case AccountState.CONNECTED:
                     return "Connecté";
-                case AccountStates.DISCONNECTED:
+                case AccountState.DISCONNECTED:
                     return "Deconnecté";
-                case AccountStates.EXCHANGE:
+                case AccountState.EXCHANGE:
                     return "Echange";
-                case AccountStates.FIGHTING:
+                case AccountState.FIGHTING:
                     return "Combat";
-                case AccountStates.GATHERING:
+                case AccountState.GATHERING:
                     return "Recolte";
-                case AccountStates.MOVING:
+                case AccountState.MOVING:
                     return "Deplacement";
-                case AccountStates.CONNECTED_INACTIVE:
+                case AccountState.CONNECTED_INACTIVE:
                     return "Inactif";
-                case AccountStates.STORAGE:
+                case AccountState.STORAGE:
                     return "Stockage";
-                case AccountStates.DIALOG:
+                case AccountState.DIALOG:
                     return "Dialogue";
-                case AccountStates.BUYING:
+                case AccountState.BUYING:
                     return "Achat";
-                case AccountStates.SELLING:
+                case AccountState.SELLING:
                     return "Vente";
-                case AccountStates.REGENERATION:
+                case AccountState.REGENERATION:
                     return "Regeneration";
                 default:
                     return "-";
@@ -58,7 +58,7 @@ namespace Bot_Dofus_1._29._1.Utilities.Extensions
             }
         }
 
-        public static Dictionary<MapaTeleportCeldas, List<short>> Add(this Dictionary<MapaTeleportCeldas, List<short>> cells, short cellId)
+        public static Dictionary<MovementDirection, List<short>> Add(this Dictionary<MovementDirection, List<short>> cells, short cellId)
         {
             short[] topCells = new short[] { 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 36 };
             short[] rightCells = new short[] { 28, 57, 86, 115, 144, 173, 231, 202, 260, 289, 318, 347, 376, 405, 434 };
@@ -67,45 +67,45 @@ namespace Bot_Dofus_1._29._1.Utilities.Extensions
 
             if (topCells.Contains(cellId))
             {
-                if (cells.ContainsKey(MapaTeleportCeldas.TOP))
-                    cells[MapaTeleportCeldas.TOP].Add(cellId);
+                if (cells.ContainsKey(MovementDirection.TOP))
+                    cells[MovementDirection.TOP].Add(cellId);
                 else
                 {
-                    cells.Add(MapaTeleportCeldas.TOP, new List<short>());
-                    cells[MapaTeleportCeldas.TOP].Add(cellId);
+                    cells.Add(MovementDirection.TOP, new List<short>());
+                    cells[MovementDirection.TOP].Add(cellId);
                 }
             }
 
             if (rightCells.Contains(cellId))
             {
-                if (cells.ContainsKey(MapaTeleportCeldas.RIGHT))
-                    cells[MapaTeleportCeldas.RIGHT].Add(cellId);
+                if (cells.ContainsKey(MovementDirection.RIGHT))
+                    cells[MovementDirection.RIGHT].Add(cellId);
                 else
                 {
-                    cells.Add(MapaTeleportCeldas.RIGHT, new List<short>());
-                    cells[MapaTeleportCeldas.RIGHT].Add(cellId);
+                    cells.Add(MovementDirection.RIGHT, new List<short>());
+                    cells[MovementDirection.RIGHT].Add(cellId);
                 }
             }
 
             if (bottomCells.Contains(cellId))
             {
-                if (cells.ContainsKey(MapaTeleportCeldas.BOTTOM))
-                    cells[MapaTeleportCeldas.BOTTOM].Add(cellId);
+                if (cells.ContainsKey(MovementDirection.BOTTOM))
+                    cells[MovementDirection.BOTTOM].Add(cellId);
                 else
                 {
-                    cells.Add(MapaTeleportCeldas.BOTTOM, new List<short>());
-                    cells[MapaTeleportCeldas.BOTTOM].Add(cellId);
+                    cells.Add(MovementDirection.BOTTOM, new List<short>());
+                    cells[MovementDirection.BOTTOM].Add(cellId);
                 }
             }
 
             if (leftCells.Contains(cellId))
             {
-                if (cells.ContainsKey(MapaTeleportCeldas.LEFT))
-                    cells[MapaTeleportCeldas.LEFT].Add(cellId);
+                if (cells.ContainsKey(MovementDirection.LEFT))
+                    cells[MovementDirection.LEFT].Add(cellId);
                 else
                 {
-                    cells.Add(MapaTeleportCeldas.LEFT, new List<short>());
-                    cells[MapaTeleportCeldas.LEFT].Add(cellId);
+                    cells.Add(MovementDirection.LEFT, new List<short>());
+                    cells[MovementDirection.LEFT].Add(cellId);
                 }
             }
 

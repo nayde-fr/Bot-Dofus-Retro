@@ -9,3 +9,5 @@
 /obj/Release
 /.vs
 /mapas
+/packages/*
+*.orig
