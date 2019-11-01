@@ -142,7 +142,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GAF")]
-        public void GetEndAction(TcpClient prmClient, string prmRawPacketData)
+        public void EndActionPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             string[] idEndAction = prmRawPacketData.Substring(3).Split('|');
 
@@ -150,10 +150,10 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GAS")]
-        public async Task GetInitialAction(TcpClient prmClient, string prmRawPacketData) => await Task.Delay(200);
+        public async Task InitialActionPacketHandle(TcpClient prmClient, string prmRawPacketData) => await Task.Delay(200);
 
         [PacketHandler("GA")]
-        public async Task GetStartAction(TcpClient prmClient, string prmRawPacketData)
+        public async Task StartActionPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             string[] splittedData = prmRawPacketData.Substring(2).Split(';');
             int actionId = int.Parse(splittedData[1]);
