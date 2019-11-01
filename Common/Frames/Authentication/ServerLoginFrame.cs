@@ -52,8 +52,8 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
         [PacketHandler("AlEk")]
         public void AccountTempBannedError(TcpClient prmClient, string prmPacket)
         {
-            string[] ban_Informations = prmPacket.Substring(3).Split('|');
-            int days = int.Parse(ban_Informations[0].Substring(1)), hours = int.Parse(ban_Informations[1]), minutes = int.Parse(ban_Informations[2]);
+            string[] banInformations = prmPacket.Substring(3).Split('|');
+            int days = int.Parse(banInformations[0].Substring(1)), hours = int.Parse(banInformations[1]), minutes = int.Parse(banInformations[2]);
             StringBuilder banInformationsMessage = new StringBuilder().Append("Votre compte sera invalide pendant ");
 
             if (days > 0)
