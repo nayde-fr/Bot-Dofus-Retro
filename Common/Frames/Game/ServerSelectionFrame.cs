@@ -17,17 +17,17 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     internal class ServerSelectionFrame : Frame
     {
         [PacketHandler("HG")]
-        public void GameWelcome(TcpClient prmClient, string prmRawPacketData) => prmClient.SendPacket("AT" + prmClient.account.gameTicket);
+        public void GameWelcomePacketHandle(TcpClient prmClient, string prmRawPacketData) => prmClient.SendPacket("AT" + prmClient.account.gameTicket);
 
         [PacketHandler("ATK0")]
-        public void CharactersList(TcpClient prmClient, string prmRawPacketData)
+        public void CharactersListPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             prmClient.SendPacket("Ak0");
             prmClient.SendPacket("AV");
         }
 
         [PacketHandler("AV0")]
-        public void CharacterSelect(TcpClient prmClient, string prmRawPacketData)
+        public void CharacterSelectPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             prmClient.SendPacket("Ages");
             prmClient.SendPacket("AL");
@@ -35,7 +35,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("ALK")]
-        public void CharacterSelection(TcpClient prmClient, string prmRawPacketData)
+        public void CharacterSelectionPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
             string[] splittedData = prmRawPacketData.Substring(3).Split('|');
@@ -61,11 +61,11 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         //public void get_Tiempo_Servidor(TcpClient cliente, string paquete) => cliente.SendPacket("GI");
 
         [PacketHandler("GCK")]
-        public void ConnectedPacketHandler(TcpClient prmClient, string prmRawPacketData) => prmClient.SendPacket("GI");
+        public void ConnectedPacketHandle(TcpClient prmClient, string prmRawPacketData) => prmClient.SendPacket("GI");
 
 
         [PacketHandler("ASK")]
-        public void SelectedCharacter(TcpClient prmClient, string prmRawPacketData)
+        public void SelectedCharacterPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
             string[] splittedData = prmRawPacketData.Substring(4).Split('|');
