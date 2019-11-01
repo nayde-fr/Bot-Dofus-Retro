@@ -24,27 +24,27 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     class CharacterFrame : Frame
     {
         [PacketHandler("As")]
-        public void GetStatsUpdate(TcpClient prmClient, string prmPacket) => prmClient.account.Game.Character.actualizar_Caracteristicas(prmPacket);
+        public void GetStatsUpdate(TcpClient prmClient, string prmRawPacketData) => prmClient.account.Game.Character.actualizar_Caracteristicas(prmRawPacketData);
 
         [PacketHandler("PIK")]
-        public void GetGroupRequest(TcpClient prmClient, string prmPacket)
+        public void GetGroupRequest(TcpClient prmClient, string prmRawPacketData)
         {
-            prmClient.account.logger.log_informacion("Groupe", $"Nouvelle invitation de groupe du personnage: {prmPacket.Substring(3).Split('|')[0]}");
+            prmClient.account.logger.log_informacion("Groupe", $"Nouvelle invitation de groupe du personnage: {prmRawPacketData.Substring(3).Split('|')[0]}");
             prmClient.SendPacket("PR");
             prmClient.account.logger.log_informacion("Groupe", "Rejêt de l'invitation");
         }
 
         [PacketHandler("SL")]
-        public void GetSpellList(TcpClient prmClient, string prmPacket)
+        public void GetSpellList(TcpClient prmClient, string prmRawPacketData)
         {
-            if (!prmPacket[2].Equals('o'))
-                prmClient.account.Game.Character.actualizar_Hechizos(prmPacket.Substring(2));
+            if (!prmRawPacketData[2].Equals('o'))
+                prmClient.account.Game.Character.actualizar_Hechizos(prmRawPacketData.Substring(2));
         }
 
         [PacketHandler("Ow")]
-        public void GetPodsUpdate(TcpClient prmClient, string prmPacket)
+        public void GetPodsUpdate(TcpClient prmClient, string prmRawPacketData)
         {
-            string[] pods = prmPacket.Substring(2).Split('|');
+            string[] pods = prmRawPacketData.Substring(2).Split('|');
             short currentPods = short.Parse(pods[0]);
             short maxPods = short.Parse(pods[1]);
             Character character = prmClient.account.Game.Character;
@@ -55,7 +55,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("DV")]
-        public void GetDialogClose(TcpClient prmClient, string prmPacket)
+        public void GetDialogClose(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
 
@@ -77,7 +77,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("EV")]
-        public void GetWindowClosed(TcpClient prmClient, string prmPacket)
+        public void GetWindowClosed(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
 
@@ -89,7 +89,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("JS")]
-        public void GetProfessionsSkills(TcpClient prmClient, string prmPacket)
+        public void GetProfessionsSkills(TcpClient prmClient, string prmRawPacketData)
         {
             string[] skillMsgSplitted;
             Character character = prmClient.account.Game.Character;
@@ -99,7 +99,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
             byte minQuantity, maxQuantity;
             float time;
 
-            foreach (string professionData in prmPacket.Substring(3).Split('|'))
+            foreach (string professionData in prmRawPacketData.Substring(3).Split('|'))
             {
                 professionId = short.Parse(professionData.Split(';')[0]);
                 profession = character.oficios.Find(x => x.id == professionId);
@@ -130,9 +130,9 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("JX")]
-        public void GetProfessionExperience(TcpClient prmClient, string prmPacket)
+        public void GetProfessionExperience(TcpClient prmClient, string prmRawPacketData)
         {
-            string[] professionExperienceSplitted = prmPacket.Substring(3).Split('|');
+            string[] professionExperienceSplitted = prmRawPacketData.Substring(3).Split('|');
             Character character = prmClient.account.Game.Character;
             uint currentExperience, baseExperience, nextLevelExperience;
             short id;
@@ -156,38 +156,38 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("Re")]
-        public void GetMontData(TcpClient prmClient, string prmPacket) => prmClient.account.canUseMount = true;
+        public void GetMontData(TcpClient prmClient, string prmRawPacketData) => prmClient.account.canUseMount = true;
 
         [PacketHandler("OAKO")]
-        public void GetObjectAppear(TcpClient prmClient, string prmPacket) => prmClient.account.Game.Character.inventario.agregar_Objetos(prmPacket.Substring(4));
+        public void GetObjectAppear(TcpClient prmClient, string prmRawPacketData) => prmClient.account.Game.Character.inventario.agregar_Objetos(prmRawPacketData.Substring(4));
 
         [PacketHandler("OR")]
-        public void GetDeleteObject(TcpClient prmClient, string prmPacket) => prmClient.account.Game.Character.inventario.eliminar_Objeto(uint.Parse(prmPacket.Substring(2)), 1, false);
+        public void GetDeleteObject(TcpClient prmClient, string prmRawPacketData) => prmClient.account.Game.Character.inventario.eliminar_Objeto(uint.Parse(prmRawPacketData.Substring(2)), 1, false);
 
         [PacketHandler("OQ")]
-        public void GetObjectQuantityModification(TcpClient prmClient, string prmPacket) => prmClient.account.Game.Character.inventario.modificar_Objetos(prmPacket.Substring(2));
+        public void GetObjectQuantityModification(TcpClient prmClient, string prmRawPacketData) => prmClient.account.Game.Character.inventario.modificar_Objetos(prmRawPacketData.Substring(2));
 
         [PacketHandler("ECK")]
-        public void GetOpenExchangeWindow(TcpClient prmClient, string prmPacket) => prmClient.account.accountState = AccountState.STORAGE;
+        public void GetOpenExchangeWindow(TcpClient prmClient, string prmRawPacketData) => prmClient.account.accountState = AccountState.STORAGE;
 
         [PacketHandler("PCK")]
-        public void GetGroupAccepted(TcpClient prmClient, string prmPacket) => prmClient.account.Game.Character.en_grupo = true;
+        public void GetGroupAccepted(TcpClient prmClient, string prmRawPacketData) => prmClient.account.Game.Character.en_grupo = true;
 
         [PacketHandler("PV")]
-        public void GetGroupLeave(TcpClient prmClient, string prmPacket) => prmClient.account.Game.Character.en_grupo = true; // TODO check this line
+        public void GetGroupLeave(TcpClient prmClient, string prmRawPacketData) => prmClient.account.Game.Character.en_grupo = true; // TODO check this line
 
         [PacketHandler("ERK")]
-        public void GetExchangeRequest(TcpClient prmClient, string prmPacket)
+        public void GetExchangeRequest(TcpClient prmClient, string prmRawPacketData)
         {
             prmClient.account.logger.log_informacion("INFORMATION", "L'invitation à l'échange est rejetée");
             prmClient.SendPacket("EV", true);
         }
 
         [PacketHandler("ILS")]
-        public void GetRegenerationTime(TcpClient prmClient, string prmPacket)
+        public void GetRegenerationTime(TcpClient prmClient, string prmRawPacketData)
         {
-            prmPacket = prmPacket.Substring(3);
-            int time = int.Parse(prmPacket);
+            prmRawPacketData = prmRawPacketData.Substring(3);
+            int time = int.Parse(prmRawPacketData);
             Account account = prmClient.account;
             Character character = account.Game.Character;
 
@@ -198,10 +198,10 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("ILF")]
-        public void GetLifeQuantityRegenerated(TcpClient prmClient, string prmPacket)
+        public void GetLifeQuantityRegenerated(TcpClient prmClient, string prmRawPacketData)
         {
-            prmPacket = prmPacket.Substring(3);
-            int hp = int.Parse(prmPacket);
+            prmRawPacketData = prmRawPacketData.Substring(3);
+            int hp = int.Parse(prmRawPacketData);
             Account account = prmClient.account;
             Character character = account.Game.Character;
 
@@ -210,9 +210,9 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("eUK")]
-        public void GetReceivedEmote(TcpClient prmClient, string prmPacket)
+        public void GetReceivedEmote(TcpClient prmClient, string prmRawPacketData)
         {
-            string[] splittedData = prmPacket.Substring(3).Split('|');
+            string[] splittedData = prmRawPacketData.Substring(3).Split('|');
             int id = int.Parse(splittedData[0]), emote_id = int.Parse(splittedData[1]);
             Account account = prmClient.account;
 
@@ -226,9 +226,9 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("Bp")]
-        public void GetPingAverage(TcpClient prmClient, string prmPacket) => prmClient.SendPacket($"Bp{prmClient.GetPingAverage()}|{prmClient.GetTotalPings()}|50");
+        public void GetPingAverage(TcpClient prmClient, string prmRawPacketData) => prmClient.SendPacket($"Bp{prmClient.GetPingAverage()}|{prmClient.GetTotalPings()}|50");
 
         [PacketHandler("pong")]
-        public void GetPingPong(TcpClient prmClient, string prmPacket) => prmClient.account.logger.log_informacion("DOFUS", $"Ping: {prmClient.GetPing()} ms");
+        public void GetPingPong(TcpClient prmClient, string prmRawPacketData) => prmClient.account.logger.log_informacion("DOFUS", $"Ping: {prmClient.GetPing()} ms");
     }
 }

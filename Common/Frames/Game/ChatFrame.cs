@@ -6,15 +6,15 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     internal class ChatFrame : Frame
     {
         [PacketHandler("cC+")]
-        public void GetChannelAdd(TcpClient prmClient, string prmPacket) => prmClient.account.Game.Character.agregar_Canal_Personaje(prmPacket.Substring(3));
+        public void GetChannelAdd(TcpClient prmClient, string prmRawPacketData) => prmClient.account.Game.Character.agregar_Canal_Personaje(prmRawPacketData.Substring(3));
 
         [PacketHandler("cC-")]
-        public void GetChannelRemove(TcpClient prmClient, string prmPacket) => prmClient.account.Game.Character.eliminar_Canal_Personaje(prmPacket.Substring(3));
+        public void GetChannelRemove(TcpClient prmClient, string prmRawPacketData) => prmClient.account.Game.Character.eliminar_Canal_Personaje(prmRawPacketData.Substring(3));
 
         [PacketHandler("cMK")]
-        public void GetChatMessage(TcpClient prmClient, string prmPacket)
+        public void GetChatMessage(TcpClient prmClient, string prmRawPacketData)
         {
-            string[] splittedData = prmPacket.Substring(3).Split('|');
+            string[] splittedData = prmRawPacketData.Substring(3).Split('|');
             string canal = string.Empty;
 
             switch (splittedData[0])

@@ -28,10 +28,10 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     internal class MapFrame : Frame
     {
         [PacketHandler("GM")]
-        public async Task CharacterMovementsPacketHandle(TcpClient prmClient, string prmPacket)
+        public async Task CharacterMovementsPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
-            string[] playersSplit = prmPacket.Substring(3).Split('|'), infos;
+            string[] playersSplit = prmRawPacketData.Substring(3).Split('|'), infos;
             string _loc6, templateNumber, type;
 
             for (int i = 0; i < playersSplit.Length; ++i)
@@ -142,20 +142,20 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GAF")]
-        public void GetEndAction(TcpClient prmClient, string prmPacket)
+        public void GetEndAction(TcpClient prmClient, string prmRawPacketData)
         {
-            string[] idEndAction = prmPacket.Substring(3).Split('|');
+            string[] idEndAction = prmRawPacketData.Substring(3).Split('|');
 
             prmClient.account.connexion.SendPacket("GKK" + idEndAction[0]);
         }
 
         [PacketHandler("GAS")]
-        public async Task GetInitialAction(TcpClient prmClient, string prmPacket) => await Task.Delay(200);
+        public async Task GetInitialAction(TcpClient prmClient, string prmRawPacketData) => await Task.Delay(200);
 
         [PacketHandler("GA")]
-        public async Task GetStartAction(TcpClient prmClient, string prmPacket)
+        public async Task GetStartAction(TcpClient prmClient, string prmRawPacketData)
         {
-            string[] splittedData = prmPacket.Substring(2).Split(';');
+            string[] splittedData = prmRawPacketData.Substring(2).Split(';');
             int actionId = int.Parse(splittedData[1]);
             Account account = prmClient.account;
             Character character = account.Game.Character;
@@ -320,9 +320,9 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GDF")]
-        public void InteractiveStatePacketHandle(TcpClient prmClient, string prmPacket)
+        public void InteractiveStatePacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
-            foreach (string interactive in prmPacket.Substring(4).Split('|'))
+            foreach (string interactive in prmRawPacketData.Substring(4).Split('|'))
             {
                 string[] splitter = interactive.Split(';');
                 Account account = prmClient.account;
@@ -353,26 +353,26 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GDM")]
-        public void NewMapPacketHandle(TcpClient prmClient, string prmPacket)
+        public void NewMapPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
-            if (prmPacket.Length == 21)
+            if (prmRawPacketData.Length == 21)
             {
                 // Required in Amakna
-                string[] _loc3 = prmPacket.Split('|');
+                string[] _loc3 = prmRawPacketData.Split('|');
                 var mapId = int.Parse(_loc3[1]);
                 prmClient.SendPacket($"GDm{mapId}");
             }
             else
             {
-                prmClient.account.Game.Map.GetRefreshMap(prmPacket.Substring(4));
+                prmClient.account.Game.Map.GetRefreshMap(prmRawPacketData.Substring(4));
                 prmClient.SendPacket("GI"); // Amakna only ?
             }
         }
 
         [PacketHandler("GDK")]
-        public void ChangeMapPacketHandle(TcpClient prmClient, string prmPacket) => prmClient.account.Game.Map.GetMapRefreshEvent();
+        public void ChangeMapPacketHandle(TcpClient prmClient, string prmRawPacketData) => prmClient.account.Game.Map.GetMapRefreshEvent();
 
         [PacketHandler("GV")]
-        public void ChangeScreenPacketHandle(TcpClient prmClient, string prmPacket) => prmClient.account.connexion.SendPacket("GC1");
+        public void ChangeScreenPacketHandle(TcpClient prmClient, string prmRawPacketData) => prmClient.account.connexion.SendPacket("GC1");
     }
 }

@@ -20,16 +20,16 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     class NPCFrame : Frame
     {
         [PacketHandler("DCK")]
-        public void GetCreatedDialogue(TcpClient prmClient, string prmPacket)
+        public void GetCreatedDialogue(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
 
             account.accountState = AccountState.DIALOG;
-            account.Game.Character.hablando_npc_id = sbyte.Parse(prmPacket.Substring(3));
+            account.Game.Character.hablando_npc_id = sbyte.Parse(prmRawPacketData.Substring(3));
         }
 
         [PacketHandler("DQ")]
-        public void GetAnswersList(TcpClient prmClient, string prmPacket)
+        public void GetAnswersList(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
 
@@ -41,7 +41,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
 
             if (npc != null)
             {
-                string[] questionsSplitter = prmPacket.Substring(2).Split('|');
+                string[] questionsSplitter = prmRawPacketData.Substring(2).Split('|');
                 string[] availableAnswers = questionsSplitter[1].Split(';');
 
                 npc.pregunta = short.Parse(questionsSplitter[0].Split(';')[0]);

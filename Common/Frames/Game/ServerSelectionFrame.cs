@@ -17,17 +17,17 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     internal class ServerSelectionFrame : Frame
     {
         [PacketHandler("HG")]
-        public void GameWelcome(TcpClient prmClient, string prmPacket) => prmClient.SendPacket("AT" + prmClient.account.gameTicket);
+        public void GameWelcome(TcpClient prmClient, string prmRawPacketData) => prmClient.SendPacket("AT" + prmClient.account.gameTicket);
 
         [PacketHandler("ATK0")]
-        public void CharactersList(TcpClient prmClient, string prmPacket)
+        public void CharactersList(TcpClient prmClient, string prmRawPacketData)
         {
             prmClient.SendPacket("Ak0");
             prmClient.SendPacket("AV");
         }
 
         [PacketHandler("AV0")]
-        public void CharacterSelect(TcpClient prmClient, string prmPacket)
+        public void CharacterSelect(TcpClient prmClient, string prmRawPacketData)
         {
             prmClient.SendPacket("Ages");
             prmClient.SendPacket("AL");
@@ -35,10 +35,10 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("ALK")]
-        public void CharacterSelection(TcpClient prmClient, string prmPacket)
+        public void CharacterSelection(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
-            string[] splittedData = prmPacket.Substring(3).Split('|');
+            string[] splittedData = prmRawPacketData.Substring(3).Split('|');
             int count = 2;
             bool found = false;
             
@@ -61,14 +61,14 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         //public void get_Tiempo_Servidor(TcpClient cliente, string paquete) => cliente.SendPacket("GI");
 
         [PacketHandler("GCK")]
-        public void ConnectedPacketHandler(TcpClient prmClient, string prmPacket) => prmClient.SendPacket("GI");
+        public void ConnectedPacketHandler(TcpClient prmClient, string prmRawPacketData) => prmClient.SendPacket("GI");
 
 
         [PacketHandler("ASK")]
-        public void SelectedCharacter(TcpClient prmClient, string prmPacket)
+        public void SelectedCharacter(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
-            string[] splittedData = prmPacket.Substring(4).Split('|');
+            string[] splittedData = prmRawPacketData.Substring(4).Split('|');
 
             int id = int.Parse(splittedData[0]);
             string characterName = splittedData[1];
