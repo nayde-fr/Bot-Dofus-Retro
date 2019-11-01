@@ -21,151 +21,150 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     internal class FightFrame : Frame
     {
         [PacketHandler("GP")]
-        public void get_Combate_Celdas_Posicion(TcpClient cliente, string paquete)
+        public void GetFightCellsPositions(TcpClient prmClient, string prmPacket)
         {
-            Account cuenta = cliente.account;
-            Map mapa = cuenta.Game.Map;
-            string[] _loc3 = paquete.Substring(2).Split('|');
+            Account account = prmClient.account;
+            Map map = account.Game.Map;
+            string[] splittedData = prmPacket.Substring(2).Split('|');
 
-            for (int a = 0; a < _loc3[0].Length; a += 2)
-                cuenta.Game.fight.celdas_preparacion.Add(mapa.GetCellFromId((short)((Hash.get_Hash(_loc3[0][a]) << 6) + Hash.get_Hash(_loc3[0][a + 1]))));
+            for (int a = 0; a < splittedData[0].Length; a += 2)
+                account.Game.fight.celdas_preparacion.Add(map.GetCellFromId((short)((Hash.get_Hash(splittedData[0][a]) << 6) + Hash.get_Hash(splittedData[0][a + 1]))));
                 
-            if (cuenta.fightExtension.configuracion.desactivar_espectador)
-                cliente.SendPacket("fS");
+            if (account.fightExtension.configuracion.desactivar_espectador)
+                prmClient.SendPacket("fS");
 
-            if (cuenta.canUseMount)
+            if (account.canUseMount)
             {
-                if (cuenta.fightExtension.configuracion.utilizar_dragopavo && !cuenta.Game.Character.esta_utilizando_dragopavo)
+                if (account.fightExtension.configuracion.utilizar_dragopavo && !account.Game.Character.esta_utilizando_dragopavo)
                 {
-                    cliente.SendPacket("Rr");
-                    cuenta.Game.Character.esta_utilizando_dragopavo = true;
+                    prmClient.SendPacket("Rr");
+                    account.Game.Character.esta_utilizando_dragopavo = true;
                 }
             }
         }
 
         [PacketHandler("GICE")]
-        public async Task get_Error_Cambiar_Pos_Pelea(TcpClient cliente, string paquete)
+        public async Task GetFightChangePosError(TcpClient prmClient, string prmPacket)
         {
-            if(cliente.account.IsFighting())
+            if(prmClient.account.IsFighting())
             {
                 await Task.Delay(150);
-                cliente.SendPacket("GR1");//boton listo
+                prmClient.SendPacket("GR1");//boton listo
             }
         }
 
         [PacketHandler("GIC")]
-        public async Task get_Cambiar_Pos_Pelea(TcpClient cliente, string paquete)
+        public async Task GetFightChangePos(TcpClient prmClient, string prmPacket)
         {
-            Account cuenta = cliente.account;
-            string[] separador_posiciones = paquete.Substring(4).Split('|');
-            int id_entidad;
-            short celda;
-            Map mapa = cuenta.Game.Map;
+            Account account = prmClient.account;
+            string[] positionsSplitter = prmPacket.Substring(4).Split('|');
+            int entityId;
+            short cell;
+            Map map = account.Game.Map;
 
-            foreach (string posicion in separador_posiciones)
+            foreach (string position in positionsSplitter)
             {
-                id_entidad = int.Parse(posicion.Split(';')[0]);
-                celda = short.Parse(posicion.Split(';')[1]);
+                entityId = int.Parse(position.Split(';')[0]);
+                cell = short.Parse(position.Split(';')[1]);
 
-                if (id_entidad == cuenta.Game.Character.Id)
+                if (entityId == account.Game.Character.Id)
                 {
                     await Task.Delay(150);
-                    cliente.SendPacket("GR1");//boton listo
+                    prmClient.SendPacket("GR1");//boton listo
                 }
 
-                Luchadores luchador = cuenta.Game.fight.get_Luchador_Por_Id(id_entidad);
-                if (luchador != null)
-                    luchador.celda = mapa.GetCellFromId(celda);
+                Luchadores fighter = account.Game.fight.get_Luchador_Por_Id(entityId);
+                if (fighter != null)
+                    fighter.celda = map.GetCellFromId(cell);
             }
         }
 
         [PacketHandler("GTM")]
-        public void get_Combate_Info_Stats(TcpClient cliente, string paquete)
+        public void GetFightStatsInfos(TcpClient prmClient, string prmPacket)
         {
-            string[] separador = paquete.Substring(4).Split('|');
-            Map mapa = cliente.account.Game.Map;
+            string[] splittedData = prmPacket.Substring(4).Split('|');
+            Map map = prmClient.account.Game.Map;
 
-            for (int i = 0; i < separador.Length; ++i)
+            for (int i = 0; i < splittedData.Length; ++i)
             {
-                string[] _loc6_ = separador[i].Split(';');
+                string[] _loc6_ = splittedData[i].Split(';');
                 int id = int.Parse(_loc6_[0]);
-                Luchadores luchador = cliente.account.Game.fight.get_Luchador_Por_Id(id);
+                Luchadores fighter = prmClient.account.Game.fight.get_Luchador_Por_Id(id);
 
                 if (_loc6_.Length != 0)
                 {
-                    bool esta_vivo = _loc6_[1].Equals("0");
-                    if (esta_vivo)
+                    bool isAlive = _loc6_[1].Equals("0");
+                    if (isAlive)
                     {
-                        int vida_actual = int.Parse(_loc6_[2]);
-                        byte pa = byte.Parse(_loc6_[3]);
-                        byte pm = byte.Parse(_loc6_[4]);
-                        short celda = short.Parse(_loc6_[5]);
-                        int vida_maxima = int.Parse(_loc6_[7]);
+                        int currentHp = int.Parse(_loc6_[2]);
+                        byte ap = byte.Parse(_loc6_[3]);
+                        byte mp = byte.Parse(_loc6_[4]);
+                        short cell = short.Parse(_loc6_[5]);
+                        int maxHp = int.Parse(_loc6_[7]);
 
-                        if (celda > 0)//son espectadores
+                        if (cell > 0)//spectators
                         {
-                            byte equipo = Convert.ToByte(id > 0 ? 1 : 0);
-                            luchador?.get_Actualizar_Luchador(id, esta_vivo, vida_actual, pa, pm, mapa.GetCellFromId(celda), vida_maxima, equipo);
+                            byte team = Convert.ToByte(id > 0 ? 1 : 0);
+                            fighter?.get_Actualizar_Luchador(id, isAlive, currentHp, ap, mp, map.GetCellFromId(cell), maxHp, team);
                         }
                     }
                     else
-                        luchador?.get_Actualizar_Luchador(id, esta_vivo, 0, 0, 0, null, 0, 0);
+                        fighter?.get_Actualizar_Luchador(id, isAlive, 0, 0, 0, null, 0, 0);
                 }
             }
         }
 
         [PacketHandler("GTR")]
-        public void get_Combate_Turno_Listo(TcpClient cliente, string paquete)
+        public void GetFightTurnReady(TcpClient prmClient, string prmPacket)
         {
-            Account cuenta = cliente.account;
-            int id = int.Parse(paquete.Substring(3));
+            Account account = prmClient.account;
+            int id = int.Parse(prmPacket.Substring(3));
 
-            if(cuenta.Game.Character.Id == id)
-                cuenta.connexion.SendPacket("BD");
+            if(account.Game.Character.Id == id)
+                account.connexion.SendPacket("BD");
 
-            cuenta.connexion.SendPacket("GT");
+            account.connexion.SendPacket("GT");
         }
 
         [PacketHandler("GJK")]
-        public void get_Combate_Unirse_Pelea(TcpClient cliente, string paquete)
+        public void GetFightJoinFight(TcpClient prmClient, string prmSocket)
         {
-            Account cuenta = cliente.account;
+            Account account = prmClient.account;
 
             //GJK - estado|boton_cancelar|mostrat_botones|espectador|tiempo|tipo_pelea
-            string[] separador = paquete.Substring(3).Split('|');
-            byte estado_pelea = byte.Parse(separador[0]);
+            string[] splittedData = prmSocket.Substring(3).Split('|');
+            byte fightingState = byte.Parse(splittedData[0]);
 
-            switch (estado_pelea)
+            switch (fightingState)
             {
                 case 0:
                 case 1:
                 case 2:
                 case 3:
                 case 4:
-                    cuenta.Game.fight.get_Combate_Creado();
+                    account.Game.fight.get_Combate_Creado();
                break;
             }
         }
 
         [PacketHandler("GTS")]
-        public void get_Combate_Inicio_Turno(TcpClient cliente, string paquete)
+        public void GetFightStartTurn(TcpClient prmClient, string prmPacket)
         {
-            Account cuenta = cliente.account;
+            Account account = prmClient.account;
 
-            if (int.Parse(paquete.Substring(3).Split('|')[0]) != cuenta.Game.Character.Id || cuenta.Game.fight.total_enemigos_vivos <= 0)
+            if (int.Parse(prmPacket.Substring(3).Split('|')[0]) != account.Game.Character.Id || account.Game.fight.total_enemigos_vivos <= 0)
                 return;
 
-
-            cuenta.Game.fight.get_Turno_Iniciado();
+            account.Game.fight.get_Turno_Iniciado();
         }
 
         [PacketHandler("GE")]
-        public void get_Combate_Finalizado(TcpClient cliente, string paquete)
+        public void GetFightFinalized(TcpClient prmClient, string prmPacket)
         {
-            Account cuenta = cliente.account;
+            Account account = prmClient.account;
 
-            cuenta.Game.fight.get_Combate_Acabado();
-            cliente.SendPacket("GC1");
+            account.Game.fight.get_Combate_Acabado();
+            prmClient.SendPacket("GC1");
         }
     }
 }
