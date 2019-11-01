@@ -21,7 +21,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     internal class FightFrame : Frame
     {
         [PacketHandler("GP")]
-        public void GetFightCellsPositions(TcpClient prmClient, string prmRawPacketData)
+        public void FightCellsPositionsPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
             Map map = account.Game.Map;
@@ -44,7 +44,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GICE")]
-        public async Task GetFightChangePosError(TcpClient prmClient, string prmRawPacketData)
+        public async Task FightChangePosErrorPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             if(prmClient.account.IsFighting())
             {
@@ -54,7 +54,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GIC")]
-        public async Task GetFightChangePos(TcpClient prmClient, string prmRawPacketData)
+        public async Task FightChangePosPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
             string[] positionsSplitter = prmRawPacketData.Substring(4).Split('|');
@@ -80,7 +80,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GTM")]
-        public void GetFightStatsInfos(TcpClient prmClient, string prmRawPacketData)
+        public void FightStatsInfosPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             string[] splittedData = prmRawPacketData.Substring(4).Split('|');
             Map map = prmClient.account.Game.Map;
@@ -115,7 +115,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GTR")]
-        public void GetFightTurnReady(TcpClient prmClient, string prmRawPacketData)
+        public void FightTurnReadyPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
             int id = int.Parse(prmRawPacketData.Substring(3));
@@ -127,7 +127,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GJK")]
-        public void GetFightJoinFight(TcpClient prmClient, string prmSocket)
+        public void FightJoinFightPacketHandle(TcpClient prmClient, string prmSocket)
         {
             Account account = prmClient.account;
 
@@ -148,7 +148,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GTS")]
-        public void GetFightStartTurn(TcpClient prmClient, string prmRawPacketData)
+        public void FightStartTurnPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
 
@@ -159,7 +159,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("GE")]
-        public void GetFightFinalized(TcpClient prmClient, string prmRawPacketData)
+        public void FightFinalizedPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
 
