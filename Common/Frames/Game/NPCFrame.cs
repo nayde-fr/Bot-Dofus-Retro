@@ -20,7 +20,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     class NPCFrame : Frame
     {
         [PacketHandler("DCK")]
-        public void GetCreatedDialogue(TcpClient prmClient, string prmRawPacketData)
+        public void CreatedDialoguePacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
 
@@ -29,7 +29,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         }
 
         [PacketHandler("DQ")]
-        public void GetAnswersList(TcpClient prmClient, string prmRawPacketData)
+        public void AnswersListPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
 
