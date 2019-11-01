@@ -17,44 +17,43 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     internal class ServerSelectionFrame : Frame
     {
         [PacketHandler("HG")]
-        public void bienvenida_Juego(TcpClient cliente, string paquete) => cliente.SendPacket("AT" + cliente.account.gameTicket);
+        public void GameWelcomePacketHandle(TcpClient prmClient, string prmRawPacketData) => prmClient.SendPacket("AT" + prmClient.account.gameTicket);
 
         [PacketHandler("ATK0")]
-        public void resultado_Servidor_Seleccion(TcpClient cliente, string paquete)
+        public void CharactersListPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
-            cliente.SendPacket("Ak0");
-            cliente.SendPacket("AV");
+            prmClient.SendPacket("Ak0");
+            prmClient.SendPacket("AV");
         }
 
         [PacketHandler("AV0")]
-        public void lista_Personajes(TcpClient cliente, string paquete)
+        public void CharacterSelectPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
-            cliente.SendPacket("Ages");
-            cliente.SendPacket("AL");
-            cliente.SendPacket("Af");
+            prmClient.SendPacket("Ages");
+            prmClient.SendPacket("AL");
+            prmClient.SendPacket("Af");
         }
 
         [PacketHandler("ALK")]
-        public void seleccionar_Personaje(TcpClient cliente, string paquete)
+        public void CharacterSelectionPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
-            Account cuenta = cliente.account;
-            string[] _loc6_ = paquete.Substring(3).Split('|');
-            int contador = 2;
-            bool encontrado = false;
-
-            while (contador < _loc6_.Length && !encontrado)
+            Account account = prmClient.account;
+            string[] splittedData = prmRawPacketData.Substring(3).Split('|');
+            int count = 2;
+            bool found = false;
+            
+            while (count < splittedData.Length && !found)
             {
-                string[] _loc11_ = _loc6_[contador].Split(';');
+                string[] _loc11_ = splittedData[count].Split(';');
                 int id = int.Parse(_loc11_[0]);
-                string nombre = _loc11_[1];
+                string characterName = _loc11_[1];
 
-                if (nombre.ToLower().Equals(cuenta.Configuration.CharacterName.ToLower()) || string.IsNullOrEmpty(cuenta.Configuration.CharacterName))
+                if (characterName.ToLower().Equals(account.Configuration.CharacterName.ToLower()) || string.IsNullOrEmpty(account.Configuration.CharacterName))
                 {
-                    cliente.SendPacket("AS" + id, true);
-                    encontrado = true;
+                    prmClient.SendPacket("AS" + id, true);
+                    found = true;
                 }
-
-                contador++;
+                count++;
             }
         }
 
@@ -62,29 +61,29 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
         //public void get_Tiempo_Servidor(TcpClient cliente, string paquete) => cliente.SendPacket("GI");
 
         [PacketHandler("GCK")]
-        public void ConnectedPacketHandler(TcpClient cliente, string paquete) => cliente.SendPacket("GI");
+        public void ConnectedPacketHandle(TcpClient prmClient, string prmRawPacketData) => prmClient.SendPacket("GI");
 
 
         [PacketHandler("ASK")]
-        public void personaje_Seleccionado(TcpClient cliente, string paquete)
+        public void SelectedCharacterPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
-            Account cuenta = cliente.account;
-            string[] _loc4 = paquete.Substring(4).Split('|');
+            Account account = prmClient.account;
+            string[] splittedData = prmRawPacketData.Substring(4).Split('|');
 
-            int id = int.Parse(_loc4[0]);
-            string nombre = _loc4[1];
-            byte nivel = byte.Parse(_loc4[2]);
-            byte raza_id = byte.Parse(_loc4[3]);
-            byte sexo = byte.Parse(_loc4[4]);
+            int id = int.Parse(splittedData[0]);
+            string characterName = splittedData[1];
+            byte characterLevel = byte.Parse(splittedData[2]);
+            byte characterClassId = byte.Parse(splittedData[3]);
+            byte characterGender = byte.Parse(splittedData[4]);
 
-            cuenta.Game.Character.set_Datos_Personaje(id, nombre, nivel, sexo, raza_id);
-            cuenta.Game.Character.inventario.agregar_Objetos(_loc4[9]);
+            account.Game.Character.set_Datos_Personaje(id, characterName, characterLevel, characterGender, characterClassId);
+            account.Game.Character.inventario.agregar_Objetos(splittedData[9]);
 
-            cliente.SendPacket("GC1");
+            prmClient.SendPacket("GC1");
 
-            cuenta.Game.Character.evento_Personaje_Seleccionado();
-            cuenta.Game.Character.timer_afk.Change(1200000, 1200000);
-            cliente.account.accountState = AccountState.CONNECTED_INACTIVE;
+            account.Game.Character.evento_Personaje_Seleccionado();
+            account.Game.Character.timer_afk.Change(1200000, 1200000);
+            prmClient.account.accountState = AccountState.CONNECTED_INACTIVE;
         }
     }
 }

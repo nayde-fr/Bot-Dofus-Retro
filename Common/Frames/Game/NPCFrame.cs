@@ -20,37 +20,37 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
     class NPCFrame : Frame
     {
         [PacketHandler("DCK")]
-        public void get_Dialogo_Creado(TcpClient cliente, string paquete)
+        public void CreatedDialoguePacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
-            Account cuenta = cliente.account;
+            Account account = prmClient.account;
 
-            cuenta.accountState = AccountState.DIALOG;
-            cuenta.Game.Character.hablando_npc_id = sbyte.Parse(paquete.Substring(3));
+            account.accountState = AccountState.DIALOG;
+            account.Game.Character.hablando_npc_id = sbyte.Parse(prmRawPacketData.Substring(3));
         }
 
         [PacketHandler("DQ")]
-        public void get_Lista_Respuestas(TcpClient cliente, string paquete)
+        public void AnswersListPacketHandle(TcpClient prmClient, string prmRawPacketData)
         {
-            Account cuenta = cliente.account;
+            Account account = prmClient.account;
 
-            if (!cuenta.Is_In_Dialog())
+            if (!account.Is_In_Dialog())
                 return;
 
-            IEnumerable<Npcs> npcs = cuenta.Game.Map.lista_npcs();
-            Npcs npc = npcs.ElementAt((cuenta.Game.Character.hablando_npc_id * -1) - 1);
+            IEnumerable<Npcs> npcs = account.Game.Map.lista_npcs();
+            Npcs npc = npcs.ElementAt((account.Game.Character.hablando_npc_id * -1) - 1);
 
             if (npc != null)
             {
-                string[] pregunta_separada = paquete.Substring(2).Split('|');
-                string[] respuestas_disponibles = pregunta_separada[1].Split(';');
+                string[] questionsSplitter = prmRawPacketData.Substring(2).Split('|');
+                string[] availableAnswers = questionsSplitter[1].Split(';');
 
-                npc.pregunta = short.Parse(pregunta_separada[0].Split(';')[0]);
-                npc.respuestas = new List<short>(respuestas_disponibles.Count());
+                npc.pregunta = short.Parse(questionsSplitter[0].Split(';')[0]);
+                npc.respuestas = new List<short>(availableAnswers.Count());
 
-                foreach (string respuesta in respuestas_disponibles)
-                    npc.respuestas.Add(short.Parse(respuesta));
+                foreach (string answer in availableAnswers)
+                    npc.respuestas.Add(short.Parse(answer));
 
-                cuenta.Game.Character.evento_Dialogo_Recibido();
+                account.Game.Character.evento_Dialogo_Recibido();
             }
         }
     }

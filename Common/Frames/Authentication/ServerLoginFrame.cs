@@ -15,45 +15,45 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
     class ServerLoginFrame : Frame
     {
         [PacketHandler("AlEf")]
-        public void WrongCredentialsError(TcpClient prmClient, string prmPacket)
+        public void WrongCredentialsError(TcpClient prmClient, string prmRawPacketData)
         {
             prmClient.account.logger.log_Error("LOGIN", "Connexion rejetée. Nom de compte ou mot de passe incorrect.");
             prmClient.account.Disconnect();
         }
 
         [PacketHandler("AlEa")]
-        public void AlreadyConnectedError(TcpClient prmClient, string prmPacket)
+        public void AlreadyConnectedError(TcpClient prmClient, string prmRawPacketData)
         {
             prmClient.account.logger.log_Error("LOGIN", "Déjà connecté. Essayez encore une fois.");
             prmClient.account.Disconnect();
         }
 
         [PacketHandler("AlEv")]
-        public void WrongVersionError(TcpClient prmClient, string prmPacket)
+        public void WrongVersionError(TcpClient prmClient, string prmRawPacketData)
         {
             prmClient.account.logger.log_Error("LOGIN", "La version %1 de Dofus que vous avez installée n'est pas compatible avec ce serveur. Pour jouer, installez la version %2. Le client DOFUS sera fermé.");
             prmClient.account.Disconnect();
         }
 
         [PacketHandler("AlEb")]
-        public void AccountBannedError(TcpClient prmClient, string prmPacket)
+        public void AccountBannedError(TcpClient prmClient, string prmRawPacketData)
         {
             prmClient.account.logger.log_Error("LOGIN", "Connexion rejetée. Votre compte a été banni.");
             prmClient.account.Disconnect();
         }
 
         [PacketHandler("AlEd")]
-        public void AlreadyConnectingError(TcpClient prmClient, string prmPacket)
+        public void AlreadyConnectingError(TcpClient prmClient, string prmRawPacketData)
         {
             prmClient.account.logger.log_Error("LOGIN", "Ce compte est déjà connecté à un serveur de jeu. Veuillez réessayer.");
             prmClient.account.Disconnect();
         }
 
         [PacketHandler("AlEk")]
-        public void AccountTempBannedError(TcpClient prmClient, string prmPacket)
+        public void AccountTempBannedError(TcpClient prmClient, string prmRawPacketData)
         {
-            string[] ban_Informations = prmPacket.Substring(3).Split('|');
-            int days = int.Parse(ban_Informations[0].Substring(1)), hours = int.Parse(ban_Informations[1]), minutes = int.Parse(ban_Informations[2]);
+            string[] banInformations = prmRawPacketData.Substring(3).Split('|');
+            int days = int.Parse(banInformations[0].Substring(1)), hours = int.Parse(banInformations[1]), minutes = int.Parse(banInformations[2]);
             StringBuilder banInformationsMessage = new StringBuilder().Append("Votre compte sera invalide pendant ");
 
             if (days > 0)

@@ -11,3 +11,4 @@
 /mapas
 /packages/*
 *.orig
+.idea

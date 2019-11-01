@@ -20,12 +20,12 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
     public class AccountLogin : Frame
     {
         [PacketHandler("HC")]
-        public void GetWelcomeKeyAsync(TcpClient prmClient, string prmPacket)
+        public void GetWelcomeKeyAsync(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
 
             account.accountState = AccountState.CONNECTED;
-            account.welcomeKey = prmPacket.Substring(2);
+            account.welcomeKey = prmRawPacketData.Substring(2);
 
             prmClient.SendPacket("1.30");
             prmClient.SendPacket(prmClient.account.Configuration.Username + "\n" + Hash.Crypt_Password(prmClient.account.Configuration.Password, prmClient.account.welcomeKey));
@@ -33,16 +33,16 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
         }
 
         [PacketHandler("Ad")]
-        public void GetNickname(TcpClient prmClient, string prmPacket) => prmClient.account.nickname = prmPacket.Substring(2);
+        public void GetNickname(TcpClient prmClient, string prmRawPacketData) => prmClient.account.nickname = prmRawPacketData.Substring(2);
 
         [PacketHandler("Af")]
-        public void GetLoginQueue(TcpClient prmClient, string prmPacket) => prmClient.account.logger.log_informacion("File d'attente", "Position " + prmPacket[2] + "/" + prmPacket[4]);
+        public void GetLoginQueue(TcpClient prmClient, string prmRawPacketData) => prmClient.account.logger.log_informacion("File d'attente", "Position " + prmRawPacketData[2] + "/" + prmRawPacketData[4]);
 
         [PacketHandler("AH")]
-        public void GetServerState(TcpClient prmClient, string prmPacket)
+        public void GetServerState(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
-            string[] serverList = prmPacket.Substring(2).Split('|');
+            string[] serverList = prmRawPacketData.Substring(2).Split('|');
             GameServer server = account.Game.Server;
             bool firstTime = true;
 
@@ -71,17 +71,17 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
         }
 
         [PacketHandler("AQ")]
-        public void GetSecretQuestion(TcpClient prmClient, string prmPacket)
+        public void GetSecretQuestion(TcpClient prmClient, string prmRawPacketData)
         {
             if (prmClient.account.Game.Server.serverState == ServerState.ONLINE)
                 prmClient.SendPacket("Ax", true);
         }
 
         [PacketHandler("AxK")]
-        public void GetServerList(TcpClient prmClient, string prmPacket)
+        public void GetServerList(TcpClient prmClient, string prmRawPacketData)
         {
             Account account = prmClient.account;
-            string[] loc5 = prmPacket.Substring(3).Split('|');
+            string[] loc5 = prmRawPacketData.Substring(3).Split('|');
             int counter = 1;
             bool picked = false;
 
@@ -108,10 +108,10 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Authentication
         }
 
         [PacketHandler("AXK")]
-        public void GetServerSelection(TcpClient prmClient, string prmPacket)
+        public void GetServerSelection(TcpClient prmClient, string prmRawPacketData)
         {
-            prmClient.account.gameTicket = prmPacket.Substring(14);
-            prmClient.account.SwitchToGameServer(Hash.Decrypt_IP(prmPacket.Substring(3, 8)), Hash.Decrypt_Port(prmPacket.Substring(11, 3).ToCharArray()));
+            prmClient.account.gameTicket = prmRawPacketData.Substring(14);
+            prmClient.account.SwitchToGameServer(Hash.Decrypt_IP(prmRawPacketData.Substring(3, 8)), Hash.Decrypt_Port(prmRawPacketData.Substring(11, 3).ToCharArray()));
         }
     }
 }
