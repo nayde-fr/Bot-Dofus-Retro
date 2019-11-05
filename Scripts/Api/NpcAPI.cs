@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 using Bot_Dofus_1._29._1.Scripts.Acciones.Npcs;
 using Bot_Dofus_1._29._1.Scripts.Manejadores;

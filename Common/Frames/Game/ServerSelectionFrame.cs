@@ -1,7 +1,6 @@
 ﻿using Bot_Dofus_1._29._1.Common.Frames.Transport;
 using Bot_Dofus_1._29._1.Common.Network;
 using Bot_Dofus_1._29._1.Game.Enums;
-using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 
 /*

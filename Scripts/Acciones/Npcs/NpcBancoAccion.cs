@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 
 /*

@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Bot_Dofus_1._29._1.Game.Mapas;
-using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 using Bot_Dofus_1._29._1.Managers.Movements;
 

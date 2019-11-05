@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Bot_Dofus_1._29._1.Game.Character.Inventory;
-using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 
 namespace Bot_Dofus_1._29._1.Scripts.Acciones.Inventario

@@ -1,7 +1,6 @@
 ﻿using System;
 using Bot_Dofus_1._29._1.Game.Character.Inventory;
 using Bot_Dofus_1._29._1.Game.Character.Inventory.Enums;
-using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 using Bot_Dofus_1._29._1.Scripts.Acciones.Inventario;
 using Bot_Dofus_1._29._1.Scripts.Manejadores;
