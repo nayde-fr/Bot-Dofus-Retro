@@ -21,7 +21,7 @@ namespace Bot_Dofus_1._29._1.Game.Character.Inventory
         public int cantidad { get; set; }
         public InventorySlots posicion { get; set; } = InventorySlots.NOT_EQUIPPED;
         public short pods { get; private set; }
-        public short nivel { get; private set; } = 0;
+        public short nivel { get; private set; }
         public byte tipo { get; private set; }
         public short vida_regenerada { get; }
         public InventoryObjectsTypes tipo_inventario { get; private set; } = InventoryObjectsTypes.UNKNOWN;

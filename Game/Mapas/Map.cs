@@ -39,7 +39,7 @@ namespace Bot_Dofus_1._29._1.Game.Mapas
 
         public event Action mapRefreshEvent;
         public event Action entitiesRefreshEvent;
-        private bool _disposed = false;
+        private bool _disposed;
 
         public Map()
         {

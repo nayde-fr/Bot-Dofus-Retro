@@ -21,7 +21,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Api
     {
         private Account cuenta;
         private ManejadorAcciones manejar_acciones;
-        private bool disposed = false;
+        private bool disposed;
 
         public InventarioApi(Account _cuenta, ManejadorAcciones _manejar_acciones)
         {

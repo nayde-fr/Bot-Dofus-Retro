@@ -23,7 +23,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
 {
     public partial class UI_Mapa : UserControl
     {
-        private Account cuenta = null;
+        private Account cuenta;
 
         public UI_Mapa(Account _cuenta)
         {

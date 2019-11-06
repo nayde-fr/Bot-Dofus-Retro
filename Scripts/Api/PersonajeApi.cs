@@ -15,7 +15,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Api
     public class PersonajeApi
     {
         private Account cuenta;
-        private bool disposed = false;
+        private bool disposed;
 
         public PersonajeApi(Account _cuenta) => cuenta = _cuenta;
 

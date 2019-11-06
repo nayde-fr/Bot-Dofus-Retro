@@ -16,7 +16,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Manejadores
     public class LuaManejadorScript : IDisposable
     {
         public Script script { get; private set; }
-        private bool disposed = false;
+        private bool disposed;
 
         public void cargar_Desde_Archivo(string ruta_archivo, Action funciones_Personalizadas)
         {

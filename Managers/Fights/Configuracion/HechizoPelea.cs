@@ -5,8 +5,8 @@ namespace Bot_Dofus_1._29._1.Managers.Fights.Configuracion
 {
     public class HechizoPelea
     {
-        public short id { get; private set; } = 0;
-        public string nombre { get; private set; } = null;
+        public short id { get; private set; }
+        public string nombre { get; private set; }
         public HechizoFocus focus { get; private set; }
         public byte lanzamientos_x_turno { get; set; }
         public byte lanzamientos_restantes { get; set; }

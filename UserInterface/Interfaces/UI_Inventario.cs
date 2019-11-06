@@ -12,7 +12,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 {
     public partial class UI_Inventario : UserControl
     {
-        private Account cuenta = null;
+        private Account cuenta;
 
         public UI_Inventario(Account _cuenta)
         {

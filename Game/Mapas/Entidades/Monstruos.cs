@@ -13,8 +13,8 @@ namespace Bot_Dofus_1._29._1.Game.Mapas.Entidades
 {
     public class Monstruos : Entidad
     {
-        public int Id { get; set; } = 0;
-        public int template_id { get; set; } = 0;
+        public int Id { get; set; }
+        public int template_id { get; set; }
         public Cell Cell { get; set; }
         public int nivel { get; set; }
 
