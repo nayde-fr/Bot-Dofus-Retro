@@ -1,5 +1,4 @@
 ﻿using System;
-using Bot_Dofus_1._29._1.Game.Character;
 using Bot_Dofus_1._29._1.Game.Mapas;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 using Bot_Dofus_1._29._1.Managers.Jobs;

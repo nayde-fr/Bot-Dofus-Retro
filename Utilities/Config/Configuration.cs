@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1

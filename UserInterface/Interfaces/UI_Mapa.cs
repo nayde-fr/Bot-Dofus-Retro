@@ -7,7 +7,6 @@ using Bot_Dofus_1._29._1.Controles.ControlMapa.Animaciones;
 using Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas;
 using Bot_Dofus_1._29._1.Game.Mapas;
 using Bot_Dofus_1._29._1.Game.Mapas.Movimiento;
-using Bot_Dofus_1._29._1.Managers;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 using Bot_Dofus_1._29._1.Managers.Movements;
 using Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa;
