@@ -32,7 +32,7 @@ namespace Bot_Dofus_1._29._1.Common.Network
         public event Action<string> socketInformationEvent;
 
         /** ping **/
-        private bool _isWaitingPacket = false;
+        private bool _isWaitingPacket;
         private int _ticks;
         private List<int> _pings;
 
