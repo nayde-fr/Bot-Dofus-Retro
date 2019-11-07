@@ -55,7 +55,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Principal.cuentas_cargadas.ContainsKey(nombre_cuenta))
+            if (Principal.LoadedAccounts.ContainsKey(nombre_cuenta))
             {
                 if (cuenta.hasGroup && cuenta.isGroupLeader)
                     cuenta.group.desconectar_Cuentas();
@@ -63,15 +63,15 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
                     cuenta.group.eliminar_Miembro(cuenta);
 
                 cuenta.Dispose();
-                Principal.cuentas_cargadas[nombre_cuenta].contenido.Dispose();
-                Principal.cuentas_cargadas.Remove(nombre_cuenta);
+                Principal.LoadedAccounts[nombre_cuenta].contenido.Dispose();
+                Principal.LoadedAccounts.Remove(nombre_cuenta);
             }
         }
 
         private void cambiar_Tab_Imagen(Image image)
         {
-            if (Principal.cuentas_cargadas.ContainsKey(nombre_cuenta))
-                Principal.cuentas_cargadas[nombre_cuenta].cabezera.propiedad_Imagen = image;
+            if (Principal.LoadedAccounts.ContainsKey(nombre_cuenta))
+                Principal.LoadedAccounts[nombre_cuenta].cabezera.propiedad_Imagen = image;
         }
 
         private void button_limpiar_consola_Click(object sender, EventArgs e) => textbox_logs.Clear();
@@ -146,8 +146,8 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
                     break;
             }
 
-            if (cuenta != null && Principal.cuentas_cargadas.ContainsKey(nombre_cuenta))
-                Principal.cuentas_cargadas[nombre_cuenta].cabezera.propiedad_Estado = cuenta.accountState.cadena_Amigable();
+            if (cuenta != null && Principal.LoadedAccounts.ContainsKey(nombre_cuenta))
+                Principal.LoadedAccounts[nombre_cuenta].cabezera.propiedad_Estado = cuenta.accountState.cadena_Amigable();
         }
 
         private void agregar_Tab_Pagina(string nombre, UserControl control, int imagen_index)
