@@ -36,7 +36,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox_informacion = new System.Windows.Forms.PictureBox();
             this.label_informacionClickCuentas = new System.Windows.Forms.Label();
-            this.listViewCuentas = new System.Windows.Forms.ListView();
+            this.listViewAccounts = new System.Windows.Forms.ListView();
             this.ColumnaNombreCuenta = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnaNombreServidor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnaNombrePersonaje = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -124,7 +124,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listViewCuentas, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.listViewAccounts, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -173,26 +173,26 @@
     "pte pour le connecter";
             this.label_informacionClickCuentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // listViewCuentas
+            // listViewAccounts
             // 
-            this.listViewCuentas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewAccounts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnaNombreCuenta,
             this.ColumnaNombreServidor,
             this.ColumnaNombrePersonaje});
-            this.listViewCuentas.ContextMenuStrip = this.contextMenuStripFormCuentas;
-            this.listViewCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewCuentas.FullRowSelect = true;
-            this.listViewCuentas.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listViewCuentas.HideSelection = false;
-            this.listViewCuentas.Location = new System.Drawing.Point(3, 4);
-            this.listViewCuentas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.listViewCuentas.Name = "listViewCuentas";
-            this.listViewCuentas.Size = new System.Drawing.Size(441, 293);
-            this.listViewCuentas.TabIndex = 1;
-            this.listViewCuentas.UseCompatibleStateImageBehavior = false;
-            this.listViewCuentas.View = System.Windows.Forms.View.Details;
-            this.listViewCuentas.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.listViewCuentas_ColumnWidthChanging);
-            this.listViewCuentas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewCuentas_MouseDoubleClick);
+            this.listViewAccounts.ContextMenuStrip = this.contextMenuStripFormCuentas;
+            this.listViewAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewAccounts.FullRowSelect = true;
+            this.listViewAccounts.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewAccounts.HideSelection = false;
+            this.listViewAccounts.Location = new System.Drawing.Point(3, 4);
+            this.listViewAccounts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listViewAccounts.Name = "listViewAccounts";
+            this.listViewAccounts.Size = new System.Drawing.Size(441, 293);
+            this.listViewAccounts.TabIndex = 1;
+            this.listViewAccounts.UseCompatibleStateImageBehavior = false;
+            this.listViewAccounts.View = System.Windows.Forms.View.Details;
+            this.listViewAccounts.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.listViewAccounts_ColumnWidthChanging);
+            this.listViewAccounts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewAccounts_MouseDoubleClick);
             // 
             // ColumnaNombreCuenta
             // 
@@ -243,21 +243,21 @@
             this.cuentaToolStripMenuItem.Name = "cuentaToolStripMenuItem";
             this.cuentaToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.cuentaToolStripMenuItem.Text = "Compte";
-            this.cuentaToolStripMenuItem.Click += new System.EventHandler(this.modificar_Cuenta);
+            this.cuentaToolStripMenuItem.Click += new System.EventHandler(this.ModifyAccount);
             // 
             // contraseñaToolStripMenuItem
             // 
             this.contraseñaToolStripMenuItem.Name = "contraseñaToolStripMenuItem";
             this.contraseñaToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.contraseñaToolStripMenuItem.Text = "Mot de passe";
-            this.contraseñaToolStripMenuItem.Click += new System.EventHandler(this.modificar_Cuenta);
+            this.contraseñaToolStripMenuItem.Click += new System.EventHandler(this.ModifyAccount);
             // 
             // nombreDelPersonajeToolStripMenuItem
             // 
             this.nombreDelPersonajeToolStripMenuItem.Name = "nombreDelPersonajeToolStripMenuItem";
             this.nombreDelPersonajeToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.nombreDelPersonajeToolStripMenuItem.Text = "Nom du personnage";
-            this.nombreDelPersonajeToolStripMenuItem.Click += new System.EventHandler(this.modificar_Cuenta);
+            this.nombreDelPersonajeToolStripMenuItem.Click += new System.EventHandler(this.ModifyAccount);
             // 
             // eliminarToolStripMenuItem
             // 
@@ -667,7 +667,7 @@
         private System.Windows.Forms.TextBox textBox_Password;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.TextBox textBox_Nombre_Cuenta;
-        private System.Windows.Forms.ListView listViewCuentas;
+        private System.Windows.Forms.ListView listViewAccounts;
         private System.Windows.Forms.ColumnHeader ColumnaNombreCuenta;
         private System.Windows.Forms.ColumnHeader ColumnaNombreServidor;
         private System.Windows.Forms.ColumnHeader ColumnaNombrePersonaje;

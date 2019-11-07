@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Bot_Dofus_1._29._1.Controles.ControlMapa.Animaciones;
-using Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas;
 using Bot_Dofus_1._29._1.Game.Mapas;
 using Bot_Dofus_1._29._1.Game.Mapas.Movimiento;
 using Bot_Dofus_1._29._1.Managers.Accounts;
 using Bot_Dofus_1._29._1.Managers.Movements;
 using Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa;
+using Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Animaciones;
+using Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Celdas;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -91,7 +91,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
             }
         }
 
-        private void get_Dibujar_Pathfinding(List<Cell> lista_celdas) => Task.Run(() => control_mapa.agregar_Animacion(cuenta.Game.Character.Id, lista_celdas, PathFinderUtil.get_Tiempo_Desplazamiento_Mapa(lista_celdas.First(), lista_celdas), TipoAnimaciones.PERSONAJE));
+        private void get_Dibujar_Pathfinding(List<Cell> lista_celdas) => Task.Run(() => control_mapa.agregar_Animacion(cuenta.Game.Character.Id, lista_celdas, PathFinderUtil.get_Tiempo_Desplazamiento_Mapa(lista_celdas.First(), lista_celdas), TipoAnimaciones.CHARACTER));
         private void comboBox_calidad_minimapa_SelectedIndexChanged(object sender, EventArgs e) => control_mapa.TipoCalidad = (MapQuality)comboBox_calidad_minimapa.SelectedIndex;
         private void checkBox_animaciones_CheckedChanged(object sender, EventArgs e) => control_mapa.Mostrar_Animaciones = checkBox_animaciones.Checked;
         private void checkBox_mostrar_celdas_CheckedChanged(object sender, EventArgs e) => control_mapa.Mostrar_Celdas_Id = checkBox_mostrar_celdas.Checked;

@@ -34,12 +34,12 @@ namespace Bot_Dofus_1._29._1.UserInterface.Forms
 
         private void cargar_Cuentas_Lista()
         {
-            listViewCuentas.Items.Clear();
+            listViewAccounts.Items.Clear();
 
             ConfigurationManager.Configuration.Accounts.ForEach(x =>
             {
                 if (!Principal.cuentas_cargadas.ContainsKey(x.Username))
-                    listViewCuentas.Items.Add(x.Username).SubItems.AddRange(new string[2] { x.GetChosenServer().Name, x.CharacterName });
+                    listViewAccounts.Items.Add(x.Username).SubItems.AddRange(new string[2] { x.GetChosenServer().Name, x.CharacterName });
             });
         }
 
@@ -84,72 +84,78 @@ namespace Bot_Dofus_1._29._1.UserInterface.Forms
             }
         }
 
-        private void listViewCuentas_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        private void listViewAccounts_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
         {
             e.Cancel = true;
-            e.NewWidth = listViewCuentas.Columns[e.ColumnIndex].Width;
+            e.NewWidth = listViewAccounts.Columns[e.ColumnIndex].Width;
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listViewCuentas.SelectedItems.Count > 0 && listViewCuentas.FocusedItem != null)
+            if (listViewAccounts.SelectedItems.Count <= 0 || listViewAccounts.FocusedItem == null) return;
+
+            foreach (ListViewItem cuenta in listViewAccounts.SelectedItems)
             {
-                foreach (ListViewItem cuenta in listViewCuentas.SelectedItems)
-                {
-                    ConfigurationManager.DeleteAccount(cuenta.Index);
-                    cuenta.Remove();
-                }
-                ConfigurationManager.Save();
-                cargar_Cuentas_Lista();
+                ConfigurationManager.DeleteAccount(cuenta.Index);
+                cuenta.Remove();
             }
+
+            ConfigurationManager.Save();
+            cargar_Cuentas_Lista();
         }
 
         private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listViewCuentas.SelectedItems.Count > 0 && listViewCuentas.FocusedItem != null)
-            {
-                foreach (ListViewItem cuenta in listViewCuentas.SelectedItems)
-                    cuentas_cargadas.Add(ConfigurationManager.GetAccount( cuenta.Text));
+            if (listViewAccounts.SelectedItems.Count <= 0 || listViewAccounts.FocusedItem == null) return;
 
-                DialogResult = DialogResult.OK;
-                Close();
-            }
+            foreach (ListViewItem account in listViewAccounts.SelectedItems)
+                cuentas_cargadas.Add(ConfigurationManager.GetAccount(account.Text));
+
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         public List<AccountConfig> get_Cuentas_Cargadas() => cuentas_cargadas;
-        private void listViewCuentas_MouseDoubleClick(object sender, MouseEventArgs e) => conectarToolStripMenuItem.PerformClick();
+        private void listViewAccounts_MouseDoubleClick(object sender, MouseEventArgs e) => conectarToolStripMenuItem.PerformClick();
 
-        private void modificar_Cuenta(object sender, EventArgs e)
+        private void ModifyAccount(object sender, EventArgs e)
         {
-            if (listViewCuentas.SelectedItems.Count == 1 && listViewCuentas.FocusedItem != null)
+            if (listViewAccounts.SelectedItems.Count != 1 || listViewAccounts.FocusedItem == null) return;
+            var acccount = ConfigurationManager.GetAccount(listViewAccounts.SelectedItems[0].Index);
+
+            switch (sender.ToString())
             {
-                AccountConfig cuenta = ConfigurationManager.GetAccount(listViewCuentas.SelectedItems[0].Index);
-
-                switch (sender.ToString())
-                {
-                    case "Cuenta":
-                        string nueva_cuenta = Interaction.InputBox($"Entrez le nouveau compte", "Modifier le compte", cuenta.Username);
-
-                        if (!string.IsNullOrEmpty(nueva_cuenta) || nueva_cuenta.Split(new char[0]).Length == 0)
-                            cuenta.Username = nueva_cuenta;
+                case "Compte": // Cuenta
+                    string newAccountName = Interaction.InputBox($"Entrez le nouveau compte", "Modifier le compte", acccount.Username);
+                    if (!string.IsNullOrEmpty(newAccountName) || newAccountName.Split(new char[0]).Length == 0)
+                    {
+                        acccount.Username = newAccountName;
+                        MessageBox.Show(string.Format("Changed account username to: {0}", newAccountName), "Success", MessageBoxButtons.OK);
+                    }
+                    break;
+                case "Mot de passe": // Contraseña
+                    string newAccountPassword = Interaction.InputBox($"Entrez le nouveau mot de passe", "Changer le mot de passe", acccount.Password);
+                    if (!string.IsNullOrEmpty(newAccountPassword) || newAccountPassword.Split(new char[0]).Length == 0)
+                    {
+                        acccount.Password = newAccountPassword;
+                        MessageBox.Show(string.Format("Changed account password to: {0}", newAccountPassword), "Success", MessageBoxButtons.OK);
+                    }
+                    break;
+                case "Nom du personnage": // Nombre de personna
+                    string newCharacterName = Interaction.InputBox($"Entrez le nouveau nom du personnage", "Modifier le nom du personnage", acccount.CharacterName);
+                    if (!string.IsNullOrEmpty(newCharacterName) || newCharacterName.Split(new char[0]).Length == 0)
+                    {
+                        acccount.CharacterName = newCharacterName;
+                        MessageBox.Show(string.Format("Changed character name to: {0}", newCharacterName), "Success", MessageBoxButtons.OK);
+                    }
                     break;
 
-                    case "Contraseña":
-                        string nueva_password = Interaction.InputBox($"Entrez le nouveau mot de passe", "Changer le mot de passe", cuenta.Password);
-
-                        if (!string.IsNullOrEmpty(nueva_password) || nueva_password.Split(new char[0]).Length == 0)
-                            cuenta.Password = nueva_password;
-                    break;
-
-                    default:
-                        string nuevo_personaje = Interaction.InputBox($"Entrez le nouveau nom du personnage", "Modifier le nom du personnage", cuenta.CharacterName);
-                        cuenta.CharacterName = nuevo_personaje;
-                    break;
-                }
-
-                ConfigurationManager.Save();
-                cargar_Cuentas_Lista();
+                default:
+                    throw new ArgumentException();
             }
+
+            ConfigurationManager.Save();
+            cargar_Cuentas_Lista();
         }
 
         private void ComboBox_Servidor_SelectedIndexChanged(object sender, EventArgs e)

@@ -2,7 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Linq;
 
-namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
+namespace Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Celdas
 {
     public class CeldaMapa
     {
@@ -18,7 +18,7 @@ namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
         public CeldaMapa(short _id)
         {
             id = _id;
-            estado = CeldaEstado.NO_CAMINABLE;
+            estado = CeldaEstado.NON_WALKABLE;
         }
 
         public Point[] Puntos
@@ -35,7 +35,6 @@ namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
         {
             int x = Puntos.Min(entry => entry.X);
             int y = Puntos.Min(entry => entry.Y);
-
             int width = Puntos.Max(entry => entry.X) - x;
             int height = Puntos.Max(entry => entry.Y) - y;
 
