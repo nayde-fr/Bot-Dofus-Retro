@@ -27,7 +27,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Controles.ColorCheckBox
             {
                 using (GraphicsPath path = new GraphicsPath())
                 {
-                    path.AddLines(new Point[]
+                    path.AddLines(new[]
                     {
                         new Point(2, Height / 2),
                         new Point(Width / 3, Height - 3),

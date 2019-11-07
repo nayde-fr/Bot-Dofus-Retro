@@ -36,7 +36,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Transport
             PacketHandler handler = handlers.Find(m => rawPacketData.StartsWith(m.PacketIdentifier));
 
             if (handler != null)
-                handler.Information.Invoke(handler.Instance, new object[2] { client, rawPacketData });
+                handler.Information.Invoke(handler.Instance, new object[] { client, rawPacketData });
         }
     }
 }

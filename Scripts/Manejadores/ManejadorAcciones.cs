@@ -195,7 +195,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Manejadores
 
         private void limpiar_Acciones()
         {
-            while (fila_acciones.TryDequeue(out AccionesScript temporal)) { };
+            while (fila_acciones.TryDequeue(out AccionesScript temporal)) { }
             accion_actual = null;
         }
 

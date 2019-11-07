@@ -46,7 +46,7 @@ namespace Bot_Dofus_1._29._1.Common.Network
                 buffer = new byte[socket.ReceiveBufferSize];
                 _semaphore = new SemaphoreSlim(1);
                 _pings = new List<int>(50);
-                socket.BeginConnect(ip, port, new AsyncCallback(ConnectCallBack), socket);
+                socket.BeginConnect(ip, port, ConnectCallBack, socket);
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace Bot_Dofus_1._29._1.Common.Network
                     socket = ar.AsyncState as Socket;
                     socket.EndConnect(ar);
 
-                    socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceptionCallBack), socket);
+                    socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, ReceptionCallBack, socket);
                     socketInformationEvent?.Invoke("Socket connectée correctement");
                 }
                 else
@@ -112,7 +112,7 @@ namespace Bot_Dofus_1._29._1.Common.Network
                 }
 
                 if (IsConnected())
-                    socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(ReceptionCallBack), socket);
+                    socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, ReceptionCallBack, socket);
             }
             else
                 account.Disconnect();
@@ -145,7 +145,7 @@ namespace Bot_Dofus_1._29._1.Common.Network
             {
                 socketInformationEvent?.Invoke(ex.ToString());
                 DisconnectSocket();
-            };
+            }
         }
 
         public void SendPacket(string packet, bool necesita_respuesta = false) => SendPacketAsync(packet, necesita_respuesta).Wait();

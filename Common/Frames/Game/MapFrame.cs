@@ -92,7 +92,7 @@ namespace Bot_Dofus_1._29._1.Common.Frames.Game
                                 if (account.accountState != AccountState.FIGHTING)
                                 {
                                     if (account.Game.Character.Id != id)
-                                        account.Game.Map.entities.TryAdd(id, new Personajes(id, templateNumber, byte.Parse(infos[7].ToString()), cell));
+                                        account.Game.Map.entities.TryAdd(id, new Personajes(id, templateNumber, byte.Parse(infos[7]), cell));
                                     else
                                         account.Game.Character.Cell = cell;
                                 }

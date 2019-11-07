@@ -21,7 +21,7 @@ namespace Bot_Dofus_1._29._1.Utilities.Config
         {
             Username = username;
             Password = password;
-            ServerId = serverId;;
+            ServerId = serverId;
             RealmId = realmId;
             CharacterName = characterName;
         }

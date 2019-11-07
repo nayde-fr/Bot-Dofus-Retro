@@ -28,7 +28,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
         {
             InitializeComponent();
             cuenta = _cuenta;
-            nombre_cuenta = cuenta.Configuration.Username; ;
+            nombre_cuenta = cuenta.Configuration.Username;
         }
 
         private void UI_Principal_Load(object sender, EventArgs e)
@@ -210,7 +210,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
                             cuenta.connexion.SendPacket("ping", true);
                         else
                             escribir_mensaje("No estas conectado a dofus", "0040FF");
-                    break;
+                        break;
 
                     default:
                         switch (comboBox_lista_canales.SelectedIndex)

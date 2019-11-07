@@ -200,8 +200,6 @@ namespace Bot_Dofus_1._29._1.Game.Mapas
                     case "BOTTOM":
                         st.Append(CellsTeleport[MovementDirection.BOTTOM].First());
                         break;
-                    default:
-                        break;
                 }
                 if (i < cellsDirection.Length - 1)
                     st.Append('|');
@@ -224,8 +222,6 @@ namespace Bot_Dofus_1._29._1.Game.Mapas
                     break;
                 case "BOTTOM":
                     st.Append(CellsTeleport[MovementDirection.BOTTOM].First());
-                    break;
-                default:
                     break;
             }
             return st.ToString();

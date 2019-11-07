@@ -25,17 +25,17 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
             lista_paquetes = new List<string>();
         }
 
-        public void paquete_Recibido(string paquete)
+        public void paquete_Recibido(string paqueteRecive)
         {
-            agregar_Nuevo_Paquete(paquete, false);
+            agregar_Nuevo_Paquete(paqueteRecive, false);
         }
 
-        public void paquete_Enviado(string paquete)
+        public void paquete_Enviado(string paqueteSend)
         {
-            agregar_Nuevo_Paquete(paquete, true);
+            agregar_Nuevo_Paquete(paqueteSend, true);
         }
 
-        private void agregar_Nuevo_Paquete(string paquete, bool enviado)
+        private void agregar_Nuevo_Paquete(string newPaquete, bool enviado)
         {
             if (!checkbox_debugger.Checked)
                 return;
@@ -50,17 +50,19 @@ namespace Bot_Dofus_1._29._1.UserInterface.Interfaces
                         listView.Items.RemoveAt(0);
                     }
 
-                    lista_paquetes.Add(paquete);
+                    lista_paquetes.Add(newPaquete);
 
                     ListViewItem objeto_lista = listView.Items.Add(DateTime.Now.ToString("HH:mm:ss"));
                     objeto_lista.BackColor = enviado ? Color.FromArgb(242, 174, 138) : Color.FromArgb(170, 196, 237);
-                    objeto_lista.SubItems.Add(paquete);
-                    var handler = PacketReceiver.handlers.FirstOrDefault(h => paquete.StartsWith(h.PacketIdentifier));
-                    objeto_lista.SubItems.Add(handler?.Information.Name ?? "-");
+                    objeto_lista.SubItems.Add(newPaquete);
+                    var packetHandler = PacketReceiver.handlers.FirstOrDefault(h => newPaquete.StartsWith(h.PacketIdentifier));
+                    objeto_lista.SubItems.Add(packetHandler?.Information.Name ?? "-");
                 }));
             }
-            catch { }
-
+            catch
+            {
+                // ignored
+            }
         }
 
         //private void listView_SelectedIndexChanged(object sender, EventArgs e)

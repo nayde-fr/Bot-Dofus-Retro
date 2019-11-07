@@ -16,7 +16,7 @@ namespace Bot_Dofus_1._29._1.Game.Mapas
     {
         public short cellId { get; private set; }
         public bool isActive { get; private set; }
-        public CellTypes cellType { get; private set; } = CellTypes.NOT_WALKABLE;
+        public CellTypes cellType { get; private set; }
         public bool isInLineOfSight { get; private set; }
         public byte layer_ground_nivel { get; private set; }
         public byte layer_ground_slope { get; private set; }
