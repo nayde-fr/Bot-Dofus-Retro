@@ -9,7 +9,7 @@ namespace Bot_Dofus_1._29._1.Game.Server
         public int serverId;
         public string serverName;
         public ServerState serverState;
-        private bool _disposed = false;
+        private bool _disposed;
 
         public GameServer() => RefreshData(0, "UNDEFINED", ServerState.OFFLINE);
 

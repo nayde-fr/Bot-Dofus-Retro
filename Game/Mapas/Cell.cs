@@ -14,17 +14,17 @@ namespace Bot_Dofus_1._29._1.Game.Mapas
 {
     public class Cell
     {
-        public short cellId { get; private set; } = 0;
-        public bool isActive { get; private set; } = false;
-        public CellTypes cellType { get; private set; } = CellTypes.NOT_WALKABLE;
-        public bool isInLineOfSight { get; private set; } = false;
+        public short cellId { get; private set; }
+        public bool isActive { get; private set; }
+        public CellTypes cellType { get; private set; }
+        public bool isInLineOfSight { get; private set; }
         public byte layer_ground_nivel { get; private set; }
         public byte layer_ground_slope { get; private set; }
         public short layer_object_1_num { get; private set; }
         public short layer_object_2_num { get; private set; }
         public InteractiveObject interactiveObject { get; private set; }
-        public int x { get; private set; } = 0;
-        public int y { get; private set; } = 0;
+        public int x { get; private set; }
+        public int y { get; private set; }
 
         /** pathfinder **/
         public int coste_h { get; set; } = 0;

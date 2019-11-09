@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Celdas;
 
 namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
 {
@@ -18,7 +19,7 @@ namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
         public CeldaMapa(short _id)
         {
             id = _id;
-            estado = CeldaEstado.NO_CAMINABLE;
+            estado = CeldaEstado.NON_WALKABLE;
         }
 
         public Point[] Puntos
@@ -35,7 +36,6 @@ namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
         {
             int x = Puntos.Min(entry => entry.X);
             int y = Puntos.Min(entry => entry.Y);
-
             int width = Puntos.Max(entry => entry.X) - x;
             int height = Puntos.Max(entry => entry.Y) - y;
 
@@ -81,7 +81,7 @@ namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
         {
             using (GraphicsPath path = new GraphicsPath())
             {
-                path.AddLines(new PointF[]
+                path.AddLines(new[]
                 {
                     new PointF(Puntos[0].X, Puntos[0].Y - 10),
                     new PointF(Puntos[1].X, Puntos[1].Y - 10),
@@ -90,7 +90,7 @@ namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
                     new PointF(Puntos[0].X, Puntos[0].Y - 10)
                 });
 
-                path.AddLines(new PointF[]
+                path.AddLines(new[]
                 {
                     new PointF(Puntos[0].X, Puntos[0].Y - 10),
                     new PointF(Puntos[3].X, Puntos[3].Y - 10),
@@ -99,7 +99,7 @@ namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
                     new PointF(Puntos[0].X, Puntos[0].Y - 10),
                 });
 
-                path.AddLines(new PointF[]
+                path.AddLines(new[]
                 {
                     new PointF(Puntos[3].X, Puntos[3].Y - 10),
                     new PointF(Puntos[2].X, Puntos[2].Y - 10),

@@ -12,6 +12,8 @@ using Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas;
 using Bot_Dofus_1._29._1.Game.Mapas;
 using Bot_Dofus_1._29._1.Game.Mapas.Entidades;
 using Bot_Dofus_1._29._1.Managers.Accounts;
+using Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Animaciones;
+using Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Celdas;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -223,36 +225,29 @@ namespace Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa
                 {
                     switch (celda.estado)
                     {
-                        case CeldaEstado.CAMINABLE:
+                        case CeldaEstado.WALKABLE:
                             celda.dibujar_Color(g, Color.Gray, Color.White);
-
-                            if (mostrar_celdas)
-                                celda.dibujar_Celda_Id(this, g);
-                        break;
-
-                        case CeldaEstado.OBSTACULO:
-                            if (mostrar_celdas)
-                                celda.dibujar_Celda_Id(this, g);
-                            else
-                                celda.dibujar_Obstaculo(g, Color.Gray, Color.FromArgb(60, 60, 60));
-                        break;
-
-                        case CeldaEstado.CELDA_TELEPORT:
+                            if (mostrar_celdas) celda.dibujar_Celda_Id(this, g);
+                            break;
+                        case CeldaEstado.OBSTACLE:
+                            if (mostrar_celdas) celda.dibujar_Celda_Id(this, g);
+                            celda.dibujar_Obstaculo(g, Color.Gray, Color.FromArgb(60, 60, 60));
+                            break;
+                        case CeldaEstado.TELEPORT_CELL:
                             celda.dibujar_Color(g, Color.Gray, Color.Orange);
                             celda.dibujar_Celda_Id(this, g);
-                        break;
-
-                        case CeldaEstado.OBJETO_INTERACTIVO:
+                            break;
+                        case CeldaEstado.INTERACTIVE_OBJECT:
                             celda.dibujar_Color(g, Color.LightGoldenrodYellow, Color.LightGoldenrodYellow);
                             celda.dibujar_Celda_Id(this, g);
-                        break;
+                            break;
 
                         default:
                             celda.dibujar_Color(g, Color.Gray, Color.DarkGray);
-                        break;
+                            break;
                     }
 
-                    if(cuenta != null)
+                    if (cuenta != null)
                     {
                         if (celda.id == cuenta.Game.Character.Cell?.cellId && !animaciones.ContainsKey(cuenta.Game.Character.Id))
                             celda.dibujar_FillPie(g, Color.Blue, RealCellHeight / 2);
@@ -321,14 +316,13 @@ namespace Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa
         {
             switch (animacion.tipo_animacion)
             {
-                case TipoAnimaciones.PERSONAJE:
+                case TipoAnimaciones.CHARACTER:
                     return Color.Blue;
-
-                case TipoAnimaciones.GRUPO_MONSTRUOS:
+                case TipoAnimaciones.GROUP_MONSTERS:
                     return Color.DarkRed;
 
                 default:
-                return Color.FromArgb(81, 113, 202);
+                    return Color.FromArgb(81, 113, 202);
             }
         }
 
@@ -347,19 +341,16 @@ namespace Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa
             
             foreach (Cell celda in celdas_mapa)
             {
-                celdas[celda.cellId].estado = CeldaEstado.NO_CAMINABLE;
+                celdas[celda.cellId].estado = CeldaEstado.NON_WALKABLE;
 
                 if (celda.IsWalkable())
-                    celdas[celda.cellId].estado = CeldaEstado.CAMINABLE;
-
+                    celdas[celda.cellId].estado = CeldaEstado.WALKABLE;
                 if (celda.isInLineOfSight)
-                    celdas[celda.cellId].estado = CeldaEstado.OBSTACULO;
-
-                 if (celda.IsTeleportCell())
-                    celdas[celda.cellId].estado = CeldaEstado.CELDA_TELEPORT;
-
-                 if(celda.IsInteractiveCell())
-                    celdas[celda.cellId].estado = CeldaEstado.OBJETO_INTERACTIVO;
+                    celdas[celda.cellId].estado = CeldaEstado.OBSTACLE;
+                if (celda.IsTeleportCell())
+                    celdas[celda.cellId].estado = CeldaEstado.TELEPORT_CELL;
+                if(celda.IsInteractiveCell())
+                    celdas[celda.cellId].estado = CeldaEstado.INTERACTIVE_OBJECT;
             }
 
             animaciones_timer.Start();

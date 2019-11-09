@@ -23,15 +23,15 @@ namespace Bot_Dofus_1._29._1.Managers.Characters
 {
     public class Character : Entidad, IManager
     {
-        public int Id { get; set; } = 0;
+        public int Id { get; set; }
         public string nombre { get; set; }
-        public byte nivel { get; set; } = 0;
-        public byte sexo { get; set; } = 0;
-        public byte raza_id { get; set; } = 0;
+        public byte nivel { get; set; }
+        public byte sexo { get; set; }
+        public byte raza_id { get; set; }
         private Account cuenta;
         public InventoryClass inventario { get; private set; }
-        public int puntos_caracteristicas { get; set; } = 0;
-        public int kamas { get; private set; } = 0;
+        public int puntos_caracteristicas { get; set; }
+        public int kamas { get; private set; }
         public CharacterCharacteristics caracteristicas { get; set; }
         public Dictionary<short, Spell> hechizos { get; set; }//id_hechizo, hechizo
         public List<Job> oficios { get; private set; }

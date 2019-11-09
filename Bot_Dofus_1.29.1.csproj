@@ -120,11 +120,11 @@
       <DependentUpon>TabControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\Controles\TabControl\Pagina.cs" />
-    <Compile Include="UserInterface\Forms\GestionCuentas.cs">
+    <Compile Include="UserInterface\Forms\AccountManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserInterface\Forms\GestionCuentas.Designer.cs">
-      <DependentUpon>GestionCuentas.cs</DependentUpon>
+    <Compile Include="UserInterface\Forms\AccountManagement.Designer.cs">
+      <DependentUpon>AccountManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\Forms\Opciones.cs">
       <SubType>Form</SubType>
@@ -311,8 +311,8 @@
       <DependentUpon>TabControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserInterface\Forms\GestionCuentas.resx">
-      <DependentUpon>GestionCuentas.cs</DependentUpon>
+    <EmbeddedResource Include="UserInterface\Forms\AccountManagement.resx">
+      <DependentUpon>AccountManagement.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\Forms\Opciones.resx">

@@ -1,14 +1,14 @@
-﻿namespace Bot_Dofus_1._29._1.Controles.ControlMapa.Celdas
+﻿namespace Bot_Dofus_1._29._1.UserInterface.Controles.ControlMapa.Celdas
 {
     public enum CeldaEstado
     {
-        CAMINABLE,
-        NO_CAMINABLE,
-        PELEA_EQUIPO_AZUL,
-        PELEA_EQUIPO_ROJO,
-        CELDA_TELEPORT,
-        OBJETO_INTERACTIVO,
-        OBSTACULO,
+        WALKABLE,
+        NON_WALKABLE,
+        FIGHT_TEAM_BLUE,
+        FIGHT_TEAM_RED,
+        TELEPORT_CELL,
+        INTERACTIVE_OBJECT,
+        OBSTACLE,
         PATHFINDER
     }
 }

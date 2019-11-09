@@ -11,7 +11,7 @@ namespace Bot_Dofus_1._29._1.Scripts.Api
     {
         private Account cuenta;
         private ManejadorAcciones manejador_acciones;
-        private bool disposed = false;
+        private bool disposed;
 
         public MapaApi(Account _cuenta, ManejadorAcciones _manejador_acciones)
         {

@@ -65,8 +65,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
             foreach(HechizoPelea hechizo in cuenta.fightExtension.configuracion.hechizos)
             {
-                listView_hechizos_pelea.Items.Add(hechizo.id.ToString()).SubItems.AddRange(new string[4]
-                {
+                listView_hechizos_pelea.Items.Add(hechizo.id.ToString()).SubItems.AddRange(new[] {
                     hechizo.nombre, hechizo.focus.ToString(), hechizo.lanzamientos_x_turno.ToString(), hechizo.metodo_lanzamiento.ToString()
                 });
             }

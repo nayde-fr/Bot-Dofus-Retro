@@ -37,7 +37,7 @@ namespace Bot_Dofus_1._29._1.Scripts
         private List<Bandera> banderas;
         private int bandera_id;
         private API api;
-        private bool es_dung = false;
+        private bool es_dung;
         private bool disposed;
 
         public bool activado { get; set; }

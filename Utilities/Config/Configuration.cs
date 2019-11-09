@@ -13,10 +13,7 @@ namespace Bot_Dofus_1._29._1.Utilities.Config
     public class Configuration
     {
         public List<AccountConfig> Accounts { get; set; } = new List<AccountConfig>();
-
-        public bool DebugPackets { get; set; } = false;
-        
         public List<ServerInfo> ServerInfos { get; set; }
-
+        public bool DebugPackets { get; set; } = false;
     }
 }

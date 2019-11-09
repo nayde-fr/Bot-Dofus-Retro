@@ -4,7 +4,6 @@
     {
         public RealmInfo()
         {
-            
         }
 
         public RealmInfo(int id, string name)

@@ -12,10 +12,10 @@ namespace Bot_Dofus_1._29._1.Game.Character
 {
     public class CharacterStats : IManager
     {
-        public int base_personaje { get; set; } = 0;
-        public int equipamiento { get; set; } = 0;
-        public int dones { get; set; } = 0;
-        public int boost { get; set; } = 0;
+        public int base_personaje { get; set; }
+        public int equipamiento { get; set; }
+        public int dones { get; set; }
+        public int boost { get; set; }
 
         public int total_stats => base_personaje + equipamiento + dones + boost;
         public CharacterStats(int _base_personaje) => base_personaje = _base_personaje;

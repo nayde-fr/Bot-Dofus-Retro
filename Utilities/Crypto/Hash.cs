@@ -49,7 +49,7 @@ namespace Bot_Dofus_1._29._1.Utilities.Crypto
         public static int Decrypt_Port(char[] chars)
         {
             if (chars.Length != 3)
-                throw new ArgumentOutOfRangeException("The port must be 3-chars coded.");
+                throw new ArgumentOutOfRangeException(chars.ToString(), "The port must be 3-chars coded.");
 
             int port = 0;
             for (int i = 0; i < 2; i++)

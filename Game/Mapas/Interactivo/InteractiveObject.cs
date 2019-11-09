@@ -5,7 +5,7 @@
         public short Gfx { get; private set; }
         public Cell Cell { get; private set; }
         public InteractiveObjectModel Model { get; private set; }
-        public bool IsUsable { get; set; } = false;
+        public bool IsUsable { get; set; }
 
         public InteractiveObject(short _gfx, Cell cell)
         {

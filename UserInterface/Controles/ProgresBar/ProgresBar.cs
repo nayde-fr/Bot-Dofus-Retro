@@ -105,7 +105,7 @@ namespace Bot_Dofus_1._29._1.UserInterface.Controles.ProgresBar
             
             using (Pen p = new Pen(Color.Black))
             {
-                g.DrawLines(p, new Point[]
+                g.DrawLines(p, new[]
                 {
                     new Point(0, 0),
                     new Point(0, Height),

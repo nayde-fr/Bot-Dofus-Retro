@@ -15,24 +15,21 @@ namespace Bot_Dofus_1._29._1.Utilities.Config
     {
         public AccountConfig()
         {
-            
         }
 
         public AccountConfig(string username,string password,int serverId, int realmId, string characterName)
         {
             Username = username;
             Password = password;
-            ServerId = serverId;;
+            ServerId = serverId;
             RealmId = realmId;
             CharacterName = characterName;
         }
 
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public int ServerId { get; set; } = 0;
-
-        public int RealmId { get; set; } = 0;
-
+        public int ServerId { get; set; }
+        public int RealmId { get; set; }
         public string CharacterName { get; set; } = string.Empty;
 
         public ServerInfo GetChosenServer()
@@ -45,7 +42,6 @@ namespace Bot_Dofus_1._29._1.Utilities.Config
 
             return serverInfo;
         }
-
 
         public RealmInfo GetChosenRealm()
         {

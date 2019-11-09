@@ -13,7 +13,7 @@ namespace Bot_Dofus_1._29._1.Managers.Accounts
         public Character Character { get; private set; }
         public CharacterManager manager { get; private set; }
         public Pelea fight { get; private set; }
-        private bool _disposed = false;
+        private bool _disposed;
 
         internal AccountManager(Account prmAccount)
         {

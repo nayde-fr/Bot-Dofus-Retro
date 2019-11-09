@@ -10,9 +10,9 @@ namespace Bot_Dofus_1._29._1.Game.Mapas.Entidades
 {
     public class Personajes : Entidad
     {
-        public int Id { get; set; } = 0;
+        public int Id { get; set; }
         public string nombre { get; set; }
-        public byte sexo { get; set; } = 0;
+        public byte sexo { get; set; }
         public Cell Cell { get; set; }
         private bool disposed;
 
