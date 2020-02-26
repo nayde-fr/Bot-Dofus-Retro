@@ -25,7 +25,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginCuenta
 
             account.AccountState = AccountStates.CONNECTED;
             account.welcomeKey = prmPacket.Substring(2);
-            prmClient.SendPacket("1.30.14");
+            prmClient.SendPacket("1.31.2");
             prmClient.SendPacket(prmClient.account.accountConfig.accountUsername + "\n" + Hash.Crypt_Password(prmClient.account.accountConfig.accountPassword, prmClient.account.welcomeKey));
             prmClient.SendPacket("Af");
         }
@@ -44,7 +44,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginCuenta
             GameServer server = account.game.server;
             bool firstTime = true;
 
-            foreach(string sv in serverList)
+            foreach (string sv in serverList)
             {
                 string[] separator = sv.Split(';');
 
@@ -64,7 +64,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginCuenta
                 }
             }
 
-            if(!firstTime && server.serverState == ServerStates.ONLINE)
+            if (!firstTime && server.serverState == ServerStates.ONLINE)
                 prmClient.SendPacket("Ax");
         }
 
@@ -90,7 +90,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginCuenta
 
                 if (serverId == account.game.server.serverId)
                 {
-                    if(account.game.server.serverState == ServerStates.ONLINE)
+                    if (account.game.server.serverState == ServerStates.ONLINE)
                     {
                         picked = true;
                         account.game.character.evento_Servidor_Seleccionado();
@@ -101,7 +101,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginCuenta
                 counter++;
             }
 
-            if(picked)
+            if (picked)
                 prmClient.SendPacket($"AX{account.game.server.serverId}", true);
         }
 
@@ -110,6 +110,25 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginCuenta
         {
             prmClient.account.gameTicket = prmPacket.Substring(14);
             prmClient.account.SwitchToGameServer(Hash.Decrypt_IP(prmPacket.Substring(3, 8)), Hash.Decrypt_Port(prmPacket.Substring(11, 3).ToCharArray()));
+        }
+
+        [PaqueteAtributo("AYK")]
+        public void GetServerSelectionRemastered(TcpClient prmClient, string prmPacket)
+        {
+            string[] DataPackage = prmPacket.Substring(3).Split(';');
+
+            if (DataPackage.Length != 0)
+            {
+                prmClient.account.gameTicket = DataPackage[1];
+                prmClient.account.SwitchToGameServer(DataPackage[0], 443);
+                prmClient.account.Logger.LogInfo("[BOT]", "Connexion au world server");
+            }
+            else
+            {
+                prmClient.account.Logger.LogError("[BOT]", "Redirection world impossible");
+                prmClient.account.Disconnect();
+                prmClient.account.Logger.LogError("[BOT]", "Déconnexion effectuée");
+            }
         }
     }
 }
