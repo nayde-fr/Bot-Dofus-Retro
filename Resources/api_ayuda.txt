@@ -3,20 +3,20 @@ function delay(ms)
 	coroutine.yield()
 end
 
-mapa =
+map =
 {
-	enCelda = api.mapa.enCelda,
-	enMapa = api.mapa.enMapa,
-	actualMapa = api.mapa.actualMapa,
-	actualPosicion = api.mapa.actualPosicion,
+	isCell = api.mapa.enCelda,
+	isMap = api.mapa.enMapa,
+	currentMapId = api.mapa.actualMapa,
+	currentMap = api.mapa.actualPosicion,
 
-	moverCelda = function(celda_id)
+	moveTo = function(celda_id)
 		if api.mapa.moverCelda(celda_id) then
 			coroutine.yield()
 		end
 	end,
 
-	cambiarMapa = function(posicion)
+	changeMap = function(posicion)
 		if api.mapa.cambiarMapa(posicion) then
 			coroutine.yield()
 		end
@@ -25,49 +25,56 @@ mapa =
 
 npc =
 {
-	npcBanco = function(npc_id)
+	bank = function(npc_id)
 		if api.npc.npcBanco(npcId) then
 			coroutine.yield()
 		end
 	end,
 
-	hablarNpc = function(npc_id)
+	speak = function(npc_id)
 		if api.npc.hablarNpc(npc_id) then
 			coroutine.yield()
 		end
 	end,
 
-	responder = function(respuesta_id)
+	answer = function(respuesta_id)
 		api.npc.responder(respuesta_id)
 		coroutine.yield()
 	end
 }
 
-inventario =
+inventory =
 {
 	pods = api.inventario.pods,
-	podsMaximos = api.inventario.podsMaximos,
-	podsPorcentaje = api.inventario.podsPorcentaje,
-	tieneObjeto = api.inventario.tieneObjeto,
+	maximumPods = api.inventario.podsMaximos,
+	podsPercentage = api.inventario.podsPorcentaje,
+	hasObject = api.inventario.tieneObjeto,
+	objectCount = api.inventario.objectCount,
 
-	utilizar = function(modelo_id)
+	useObject = function(modelo_id)
 		if api.inventario.utilizar(modelo_id) then
 			coroutine.yield()
 		end
 	end,
 
-	equipar = function(modelo_id)
+	equip = function(modelo_id)
 		if api.inventario.equipar(modelo_id) then
+			coroutine.yield()
+		end
+	end,
+
+	craft = function(workbenchCellId, skillId, recipe, quantity)
+		if api.inventario.craft(workbenchCellId, skillId, recipe, quantity) then
 			coroutine.yield()
 		end
 	end
 }
 
-pelea =
+fight =
 {
-	puedePelear = api.pelea.puedePelear,
+	canFight = api.pelea.puedePelear,
 	
-	pelear = function(monstruos_minimos, monstruos_maximos, nivel_minimo, nivel_maximo, monstruos_prohibidos, monstruos_obligatorios)
+	fight = function(monstruos_minimos, monstruos_maximos, nivel_minimo, nivel_maximo, monstruos_prohibidos, monstruos_obligatorios)
 		if api.pelea.pelear(monstruos_minimos, monstruos_maximos, nivel_minimo, nivel_maximo, monstruos_prohibidos, monstruos_obligatorios) then
 			coroutine.yield()
 		end

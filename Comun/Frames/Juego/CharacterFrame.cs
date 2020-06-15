@@ -23,6 +23,9 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
     class CharacterFrame : Frame
     {
+        [PaqueteAtributo("AN")]
+        public void OnNewLevel(TcpClient client, string data) => client.account.game.character.NewLevel(data.Substring(2));
+
         [PaqueteAtributo("As")]
         public void get_Stats_Actualizados(TcpClient cliente, string paquete) => cliente.account.game.character.actualizar_Caracteristicas(paquete);
 

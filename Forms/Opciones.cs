@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using Bot_Dofus_1._29._1.Utilities.Config;
@@ -27,7 +28,12 @@ namespace Bot_Dofus_1._29._1.Forms
 
         private void boton_opciones_guardar_Click(object sender, EventArgs e)
         {
-            if (!IPAddress.TryParse(textBox_ip_servidor.Text, out IPAddress address))
+
+            try
+            {
+                Dns.GetHostEntry(textBox_ip_servidor.Text);
+            }
+            catch
             {
                 textBox_ip_servidor.BackColor = Color.Red;
                 return;

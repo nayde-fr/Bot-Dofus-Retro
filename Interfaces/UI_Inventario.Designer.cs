@@ -288,7 +288,7 @@
             this.tabPage_recursos.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage_recursos.Size = new System.Drawing.Size(782, 466);
             this.tabPage_recursos.TabIndex = 2;
-            this.tabPage_recursos.Text = "Recursos";
+            this.tabPage_recursos.Text = "Ressources";
             this.tabPage_recursos.UseVisualStyleBackColor = true;
             // 
             // dataGridView_recursos
@@ -374,7 +374,7 @@
             this.tabPage_mision.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage_mision.Size = new System.Drawing.Size(782, 466);
             this.tabPage_mision.TabIndex = 3;
-            this.tabPage_mision.Text = "Objetos de misión";
+            this.tabPage_mision.Text = "Objets de quête";
             this.tabPage_mision.UseVisualStyleBackColor = true;
             // 
             // imageList1

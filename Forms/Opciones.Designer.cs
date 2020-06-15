@@ -182,7 +182,7 @@
             // 
             this.textBox_ip_servidor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox_ip_servidor.Location = new System.Drawing.Point(168, 3);
-            this.textBox_ip_servidor.MaxLength = 35;
+            this.textBox_ip_servidor.MaxLength = 200;
             this.textBox_ip_servidor.Name = "textBox_ip_servidor";
             this.textBox_ip_servidor.Size = new System.Drawing.Size(199, 29);
             this.textBox_ip_servidor.TabIndex = 1;

@@ -123,7 +123,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             script_manager.Set_Global("api", api);
 
             //no necesita coroutines
-            script_manager.Set_Global("personnage", api.personaje);
+            script_manager.Set_Global("character", api.personaje);
 
             script_manager.Set_Global("message", new Action<string>((mensaje) => account.Logger.LogInfo("SCRIPT", mensaje)));
             script_manager.Set_Global("messageErreur", new Action<string>((mensaje) => account.Logger.LogError("SCRIPT", mensaje)));

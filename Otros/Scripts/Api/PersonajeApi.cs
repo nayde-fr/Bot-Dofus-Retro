@@ -1,4 +1,5 @@
 ﻿using MoonSharp.Interpreter;
+using System;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -22,6 +23,10 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Api
         public byte nivel() => cuenta.game.character.nivel;
         public int experiencia() => cuenta.game.character.porcentaje_experiencia;
         public int kamas() => cuenta.game.character.kamas;
+        public byte skillLevel(short skillId)
+        {
+            return Convert.ToByte(cuenta.game.character.oficios.Find(x => x.id == skillId)?.nivel);
+        }
 
         #region Zona Dispose
         ~PersonajeApi() => Dispose(false);

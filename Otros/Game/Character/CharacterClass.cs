@@ -104,18 +104,18 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Character
             var adieu = new string[] {"++","tchao","bonne soiree","bonne soirée","bon jeu","bon aprem","bonne aprem" };
             if (Bonjour.Any(words.Contains))
             {
-                reponse = "Yop  ";
+                reponse = "yo";
             }
             if (etat.Any(words.Contains))
             {
-                randomReponse = new Random().Next(0, 3);
+                randomReponse = new Random().Next(1, 4);
                 switch (randomReponse)
                 {
                     case 1:
                         reponse = reponse + "ca va merci pourquoi ?";
                         break;
                     case 2 :
-                        reponse = reponse + "Pépouse, je farm tranquil";
+                        reponse = reponse + "je farm trk";
                         break;
                     case 3:
                         reponse = reponse + "Ca va, on se connait ?";
@@ -125,17 +125,17 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Character
             }
             if (bot.Any(words.Contains))
             {
-                randomReponse = new Random().Next(0, 3);
+                randomReponse = new Random().Next(1, 4);
                 switch (randomReponse)
                 {
                     case 1:
-                            reponse = reponse + "Non je farm tranquillement avec un film à coté x)";
+                        reponse = reponse + "Non je farm tranquillement avec un film à coté x)";
                         break;
                     case 2:
-                        reponse = reponse + "Ca hard farm en pls c'est tout xD";
+                        reponse = reponse + "Ca hard farm c'est tout";
                         break;
                     case 3:
-                        reponse = reponse + "Je me  fait des kamas pour payer mes captures RN  en mode chill";
+                        reponse = reponse + "Je me fais des kamas pour payer mon stuff";
                         break;
                     default:
                         break;
@@ -143,7 +143,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Character
             }
             if (adieu.Any(words.Contains))
             {
-                randomReponse = new Random().Next(0, 3);
+                randomReponse = new Random().Next(1, 4);
                 switch (randomReponse)
                 {
                     case 1:
@@ -153,7 +153,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Character
                         reponse = reponse + "++";
                         break;
                     case 3:
-                        reponse = reponse + "See you soon !";
+                        reponse = reponse + "Saloute";
                         break;
                     default:
                         break;
@@ -161,17 +161,17 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Character
             }
             if (reponse == string.Empty)
             {
-                randomReponse = new Random().Next(0, 3);
+                randomReponse = new Random().Next(1, 4);
                 switch (randomReponse)
                 {
                     case 1:
-                        reponse = "Je full farm dsl jdesactive le canal privé";
+                        reponse = "Déso je farm à mort ^^";
                         break;
                     case 2:
-                        reponse = "Pas ltemps de répondre dsl  jfarm et téma un film :/";
+                        reponse = "Pas le temps de rép dsl, jefarm et j'téma un film en mm temps :/";
                         break;
                     case 3:
-                        reponse = "Lo siento, no entiendo francés. Buenas tardes";
+                        reponse = "j'up paysan dsl je suis oqp";
                         break;
                 }
                
@@ -181,8 +181,14 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Character
             _account.connexion.SendPacket("BM"+ sender+"|"+ reponse);
         }
 
-
         public void eliminar_Canal_Personaje(string simbolo_canal) => canales = canales.Replace(simbolo_canal, string.Empty);
+
+        public void NewLevel(string data)
+        {
+            nivel = byte.Parse(data);
+            _account.Logger.LogInfo("Personnage", $"Tu passes niveau {nivel}.");
+            _account.Logger.LogInfo("Personnage", "Tu gagnes 5 points pour faire évoluer tes caractéristiques et 1 point pour tes sorts.");
+        }
 
         #region Eventos
         public void evento_Pods_Actualizados() => pods_actualizados?.Invoke();
@@ -338,6 +344,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Character
         public Spell get_Hechizo(short id) => hechizos.FirstOrDefault(x => x.Key == id).Value;
         public bool get_Tiene_Skill_Id(int id) => oficios.FirstOrDefault(j => j.skills.FirstOrDefault(s => s.id == id) != null) != null;
         public IEnumerable<JobSkills> get_Skills_Disponibles() => oficios.SelectMany(oficio => oficio.skills.Select(skill => skill));
+        public IEnumerable<short> get_SkillsId_Disponibles() => oficios.SelectMany(oficio => oficio.skills.Select(skill => skill.id));
         public IEnumerable<short> get_Skills_Recoleccion_Disponibles() => oficios.SelectMany(oficio => oficio.skills.Where(skill => !skill.es_craft).Select(skill => skill.id));
 
         #region Zona Dispose

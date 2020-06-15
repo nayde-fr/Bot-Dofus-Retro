@@ -1,9 +1,11 @@
 ﻿using Bot_Dofus_1._29._1.Otros.Game.Character.Inventory;
 using Bot_Dofus_1._29._1.Otros.Game.Character.Inventory.Enums;
 using Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Inventario;
+using Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Interactive;
 using Bot_Dofus_1._29._1.Otros.Scripts.Manejadores;
 using MoonSharp.Interpreter;
-using System;
+using System.Linq;
+using System.Collections.Generic;
 
 /*
     Este archivo es parte del proyecto BotDofus_1.29.1
@@ -16,7 +18,7 @@ using System;
 namespace Bot_Dofus_1._29._1.Otros.Scripts.Api
 {
     [MoonSharpUserData]
-    public class InventarioApi : IDisposable
+    public class InventarioApi
     {
         private Account cuenta;
         private ActionsManager manejar_acciones;
@@ -32,6 +34,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Api
         public int podsMaximos() => cuenta.game.character.inventario.pods_maximos;
         public int podsPorcentaje() => cuenta.game.character.inventario.porcentaje_pods;
         public bool tieneObjeto(int modelo_id) => cuenta.game.character.inventario.get_Objeto_Modelo_Id(modelo_id) != null;
+        public int itemCount(int modelo_id) => cuenta.game.character.inventario.get_Objeto_Modelo_Id(modelo_id).cantidad;
 
         public bool utilizar(int modelo_id)
         {
@@ -52,6 +55,12 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Api
                 return false;
 
             manejar_acciones.enqueue_Accion(new EquiparItemAccion(modelo_id), true);
+            return true;
+        }
+
+        public bool craft(short workbenchCellId, short skillId, List<InventoryObject> recipe, int quantity)
+        {
+            manejar_acciones.enqueue_Accion(new CraftAction(workbenchCellId, skillId, recipe, quantity), true);
             return true;
         }
 

@@ -39,15 +39,15 @@ namespace Bot_Dofus_1._29._1.Interfaces
                 {
                     dataGridView_equipamientos.Rows.Clear();
                     foreach (InventoryObject obj in cuenta.game.character.inventario.equipamiento)
-                        dataGridView_equipamientos.Rows.Add(new object[] { obj.id_inventario, obj.id_modelo, obj.nombre, obj.cantidad, obj.posicion, obj.posicion == InventorySlots.NOT_EQUIPPED ? "Equipar" : "Desequipar", "Eliminar" });
+                        dataGridView_equipamientos.Rows.Add(new object[] { obj.id_inventario, obj.id_modelo, obj.nombre, obj.cantidad, obj.posicion, obj.posicion == InventorySlots.NOT_EQUIPPED ? "Equipar" : "Déséquiper", "Détruire" });
 
                     dataGridView_varios.Rows.Clear();
                     foreach (InventoryObject obj in cuenta.game.character.inventario.varios)
-                        dataGridView_varios.Rows.Add(new object[] { obj.id_inventario, obj.id_modelo, obj.nombre, obj.cantidad, obj.pods, "Eliminar" });
+                        dataGridView_varios.Rows.Add(new object[] { obj.id_inventario, obj.id_modelo, obj.nombre, obj.cantidad, obj.pods, "Détruire" });
 
                     dataGridView_recursos.Rows.Clear();
                     foreach (InventoryObject obj in cuenta.game.character.inventario.recursos)
-                        dataGridView_recursos.Rows.Add(new object[6] { obj.id_inventario, obj.id_modelo, obj.nombre, obj.cantidad, obj.pods, "Eliminar" });
+                        dataGridView_recursos.Rows.Add(new object[6] { obj.id_inventario, obj.id_modelo, obj.nombre, obj.cantidad, obj.pods, "Détruire" });
 
                     dataGridView_mision.Rows.Clear();
                     foreach (InventoryObject obj in cuenta.game.character.inventario.mision)
